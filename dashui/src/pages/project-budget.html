@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  @@include("../partials/head.html")
+  <title>Estadísticas Grupales | Neodogma</title>
+  <script>
+		console.log("Token en almacenamiento local:", localStorage.getItem("tokenUsuario"));
+        if (!localStorage.getItem("tokenUsuario")) {
+            window.location.href = 'pages/login.html';
+        }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body id="pagina-grupo">
+  <!-- Wrapper -->
+  <main id="main-wrapper" class="main-wrapper">
+    @@include("../partials/header.html")
+      <!-- navbar vertical -->
+      @@include('../partials/navbar-vertical.html', {
+
+      "page_group": "project",
+      "page_group_second": "projectSingle",
+      "page": "budget"
+      })
+
+
+    <!-- Page Content -->
+    <div id="app-content">
+      <div class="app-content-area">
+        <!-- Container fluid -->
+        <div class="container-fluid">
+          <div class="mx-n6 mt-n6 pt-6 mb-6 cabecera-personalizada">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-12">
+                <!-- Page header -->
+                <div class="d-lg-flex
+                align-items-center justify-content-between mb-6 px-6">
+                  <div class="mb-6 mb-lg-0">
+                    <div class="d-flex align-items-center">
+                      <img src="https://www.panel.neodogma.com/imagenes/logo-metricas-alumnos.png" alt="Image" class="icon-shape icon-md" style="height:3.5rem !important;line-height:3.5 !important;width:3.5rem !important;">
+                      <div class="ms-4">
+                        <h1 class="mb-0 h3 " id="headerGroupProgress" data-translate="Group-progress-header"><span id="nombreCentro"></span></h1>
+                        <h4 data-translate="Group-metrics-analysis">Análisis de métricas grupales</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+				  <!-- nav -->
+				  <ul class="nav nav-lb-tab px-6 d-flex justify-content-between align-items-center" style="flex-wrap: nowrap;">
+					<li class="nav-item mx-3">
+					  <a class="nav-link " href="project-files.html" data-translate="Students">Alumnos</a>
+					</li>
+					<li class="nav-item mx-3">
+					  <a class="nav-link active" href="project-budget.html" data-translate="Group">Grupo</a>
+					</li>
+					<li class="ms-auto d-flex">
+					  <a href="#" id="descargar-datos-grupo" class="btn btn-white me-2" data-translate="Download-data">Descargar Datos</a>
+					  <a href="#" id="actualizar-datos-grupo" class="btn btn-white" data-translate="Update-data">Actualizar Datos</a>
+					</li>
+					<div class="modal fade" id="modalConfirmacionActualizacionGrupo" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionActualizacionTitleGrupo" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="modalConfirmacionActualizacionTitleGrupo" data-translate="Update-complete">Actualización Completada</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body" data-translate="Metrics-group-successfully-updated">Las métricas de grupo <span id="popupGrupo"></span><br/>han sido actualizadas exitosamente.</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="Close">Cerrar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modalConfirmacionDescargaGrupo" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionDescargaTitleGrupo" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="modalConfirmacionDescargaTitleGrupo" data-translate="Download-completed">Descarga Completada</h5>
+									<button type="button" id="botonCerrarDescargarGrupo" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body" data-translate="Metrics-group-successfully-download">Las métricas de grupo <span id="popupGrupo2"></span><br/>han sido descargadas exitosamente.</div>
+								<div class="modal-footer">
+									<button type="button" id="boton2CerrarDescargarGrupo" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="Close">Cerrar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				  </ul>
+				</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- row -->
+          <div class="row">
+            <!-- col -->
+            <div>
+              <div class="mb-5">
+                <h4 id="estadisticasTodosAlumnosGrupo" style="padding-top:20px;padding-bottom:10px;" data-translate="Description-table-group"></h4>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mb-5">
+              <!-- card -->
+              <div class="card">
+                <!-- card body -->
+
+                <!-- row -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card-body border-bottom">
+                      <h3 class="mb-4" data-translate="Class-performance">Rendimiento de clase </h3>
+                      <div class="d-flex justify-content-between mb-3">
+                        <div style="display: flex;">
+							<span id="TextoSintetizadorpromedioalumnos" style="margin-right: 10px;" data-translate="Synthesizer-range"></span><span id="Rangopromedioalumnos"></span>
+                        </div>
+                      </div>
+                      <div class="progress" style="height: 8px;">
+                        <div id="progressBarGrupal" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- col -->
+                  <div class="col-lg-4 col-md-12 col-12">
+                    <div class="d-flex align-items-center justify-content-between p-4">
+                      <div class="mb-4 mb-lg-0">
+                        <h2 id="nivelactualpromedio" class="h1  mb-0"></h2>
+                        <p class="mb-0 " data-translate="Current-level">Nivel actual</p>
+                      </div>
+                      <div class="ms-3">
+                        <div class="icon-shape icon-lg bg-primary-soft text-primary rounded-circle">
+                          <i data-feather="list"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- col -->
+                  <div class="col-lg-4 col-md-12 col-12 border-start">
+                    <div class="d-flex align-items-center justify-content-between p-4">
+                      <div class="mb-4 mb-lg-0">
+                        <h2 id="tiempodiapositivas" class="h1  mb-0"></h2>
+                        <p class="mb-0 " data-translate="Slide-time">Tiempo en diapositivas</p>
+                      </div>
+                      <div class="ms-3">
+                        <div class="icon-shape icon-lg bg-success-soft text-success rounded-circle">
+                          <i data-feather="pie-chart"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- col -->
+                  <div class="col-lg-4 col-md-12 col-12 border-start">
+                    <div class="d-flex align-items-center justify-content-between p-4">
+                      <div class="mb-4 mb-lg-0">
+                        <h2 id="tasaPromedioGrupal" class="h1  mb-0"></h2>
+                        <p class="mb-0 " data-translate="Percentage-correct-questions">Porcentaje de acierto preguntas</p>
+                      </div>
+                      <div class="ms-3">
+                        <div class="icon-shape icon-lg bg-warning-soft text-warning rounded-circle">
+                          <i data-feather="trending-up"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+          <div class="row ">
+            <!-- col -->
+            <div class="col-lg-6 mb-5">
+              <div class="card h-100">
+                <div class="card-header">
+                  <h4 class="mb-0" data-translate="Group-balance">Balance de grupo</h4>
+                </div>
+                <div class="card-body">
+                  <div id="budgetExpenseChart"></div>				  
+                </div>
+              </div>
+            </div>
+            <!-- col -->
+            <div class="col-lg-6 mb-5">
+              <!-- card -->
+              <div class="card h-100">
+                <!-- card body -->
+                <!-- card header -->
+                <div class="card-header ">
+                  <h4 class="mb-0" data-translate="Categories-range">Categorías de rango</h4>
+                </div>
+                <!-- row -->
+
+                <!-- table -->
+                <div class="card-body">
+                  <div class="table-responsive table-card">
+                    <table class="table text-nowrap mb-0 table-centered">
+                      <thead class="table-light">
+                        <tr>
+                          <th data-translate="Range">Rango</th>
+                          <th data-translate="From">Desde</th>
+                          <th data-translate="Until">Hasta</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td data-translate="Iron-synthesizer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
+                              class="bi bi-square-fill text-warning me-2" viewBox="0 0 16 16">
+                              <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
+                            </svg>Sintetizador Hierro</td>
+                          <td>0</td>
+                          <td>20</td>
+                        </tr>
+                        <tr>
+                          <td data-translate="Bronze-synthesizer"> <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
+                              class="bi bi-square-fill text-info me-2" viewBox="0 0 16 16">
+                              <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
+                            </svg>Sintetizador Bronce</td>
+                          <td>21</td>
+                          <td>40</td>
+                        </tr>
+                        <tr>
+                          <td data-translate="Silver-synthesizer"> <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
+                              class="bi bi-square-fill text-danger me-2" viewBox="0 0 16 16">
+                              <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
+                            </svg>Sintetizador Plata</td>
+                          <td>41</td>
+                          <td>60</td>
+                        </tr>
+                        <tr>
+                          <td data-translate="Gold-synthesizer"> <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
+                              class="bi bi-square-fill text-primary me-2" viewBox="0 0 16 16">
+                              <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
+                            </svg>Sintetizador Oro</td>
+                          <td>61</td>
+                          <td>80</td>
+                        </tr>
+                        <tr>
+                          <td data-translate="Platinum-synthesizer"> <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
+                              class="bi bi-square-fill text-success me-2" viewBox="0 0 16 16">
+                              <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
+                            </svg>Sintetizador Platino</td>
+                          <td>81</td>
+                          <td>100</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+          <div class="row" style="padding-top: 1rem;">
+            <!-- col -->
+            <div class="col-12 mb-5">
+              <!-- card -->
+              <div class="card">
+                <!-- card header -->
+                <div class="card-header metricas-esenciales">
+                  <h4 class="mb-0" data-translate="Essential-metrics">Métricas Esenciales</h4>
+                </div>
+                <!-- table -->
+                <div class="card-body">
+                  <div class="table-responsive table-card">
+                    <table id="grupal-metricas-esenciales" class="table text-nowrap mb-0 table-centered">
+                      <thead class="table-light">
+                        <tr>
+                          <th style="text-align: center;" data-translate="Name">Nombre</th>
+                          <th style="text-align: center;" data-translate="Game-Time">Tiempo Juego</th>
+                          <th style="text-align: center;" data-translate="Range">Rango</th>
+                          <th style="text-align: center;" data-translate="Avatar">Avatar</th>
+                          <th style="text-align: center;" data-translate="Progress">Progreso</th>
+						  <th style="text-align: center;" data-translate="Correct-questions">Preguntas Acertadas</th>
+                          <th style="text-align: center;" data-translate="Failed-questions">Preguntas Falladas</th>
+						  <th style="text-align: center;" data-translate="Current-level">Nivel Actual</th>
+						  <th style="text-align: center;" data-translate="Survival-streak">Racha Supervivencia</th>
+						  <th style="text-align: center;" data-translate="Teaching-time">Tiempo Didáctico</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+		  <!-- row -->
+          <div class="row"  style="padding-top: 1rem;">
+            <!-- col -->
+            <div class="col-12 mb-5">
+              <!-- card -->
+              <div class="card">
+                <!-- card header -->
+                <div class="card-header metricas-preguntas">
+                  <h4 class="mb-0" data-translate="Categorized-metrics">Métricas Preguntas Categorizadas</h4>
+                </div>
+                <!-- table -->
+                <div class="card-body">
+                  <div class="table-responsive table-card">
+                    <table id="grupal-preguntas-categorizadas" class="table text-nowrap mb-0 table-centered">
+						<thead class="table-light">
+							<tr>
+								<th style="text-align: center;" data-translate="Biotec-bioetica-success">Biotec. y Bioética<br/>Acertadas</th>								
+								<th style="text-align: center;" data-translate="Molecular-genetic-success">Genética molecular<br/>Acertadas</th>								
+								<th style="text-align: center;" data-translate="Nucleic-acids-success">Ácidos nucleicos<br/>Acertadas</th>
+								<th style="text-align: center;" data-translate="Scientific-culture-success">Cultura científica<br/>Acertadas</th>
+								<th style="text-align: center;" data-translate="Genome-mutations-success">Genoma y mutaciones<br/>Acertadas</th>
+								<th style="text-align: center;" data-translate="Cells-cycles-phases-success">Célula, ciclo y fases<br/>Acertadas</th>
+							</tr>
+						</thead>
+						<tbody>
+                        
+						</tbody>
+						<thead class="table-light">
+							<tr>
+								<th style="text-align: center;" data-translate="Biotec-bioetica-failed">Biotec. y Bioética<br/>Falladas</th>
+								<th style="text-align: center;" data-translate="Molecular-genetic-failed">Genética molecular<br/>Falladas</th>
+								<th style="text-align: center;" data-translate="Nucleic-acids-failed">Ácidos nucleicos<br/>Falladas</th>						
+								<th style="text-align: center;" data-translate="Scientific-culture-failed">Cultura científica<br/>Falladas</th>					
+								<th style="text-align: center;" data-translate="Genome-mutations-failed">Genoma y mutaciones<br/>Falladas</th>					
+								<th style="text-align: center;" data-translate="Cells-cycles-phases-failed">Célula, ciclo y fases<br/>Falladas</th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						</tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+		  <!-- row -->
+          <div class="row"  style="padding-top: 1rem;padding-bottom: 1rem;">
+            <!-- col -->
+            <div class="col-12 mb-5">
+              <!-- card -->
+              <div class="card">
+                <!-- card header -->
+                <div class="card-header metricas-sintesis">
+                  <h4 class="mb-0" data-translate="Synthesis-metrics">Métricas de Síntesis</h4>
+                </div>
+                <!-- table -->
+                <div class="card-body">
+                  <div class="table-responsive table-card">
+                    <table id="grupal-metricas-sintesis" class="table text-nowrap mb-0 table-centered">
+                      <thead class="table-light">
+                        <tr>
+                          <th style="text-align: center;" data-translate="Wildcards-replication">Comodines replicación</th>
+                          <th style="text-align: center;" data-translate="Wildcards-transcription">Comodines transcripción</th>
+                          <th style="text-align: center;" data-translate="Wildcards-translation">Comodines traducción</th>
+                          <th style="text-align: center;" data-translate="Successful-plays">Jugadas acertadas</th>
+						  <th style="text-align: center;" data-translate="Failed-plays">Jugadas falladas</th>
+						  <th style="text-align: center;" data-translate="Total-plays">Jugadas totales</th>
+						  <th style="text-align: center;" data-translate="Survival-streak">Racha Supervivencia</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </main>
+    <!-- Scripts -->
+
+
+    @@include("../partials/scripts.html")
+    <script src="@@webRoot/node_modules/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="@@webRoot/assets/js/vendors/chart.js"></script>
+       <!-- popper js -->
+	<script src="@@webRoot/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+	<!-- tippy js -->
+	<script src="@@webRoot/node_modules/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+	<script src="@@webRoot/assets/js/vendors/tooltip.js"></script>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+		var fechaExpira = localStorage.getItem("fechaexpiracion");
+		var idCentro = parseInt(localStorage.getItem("idCentroProfe"));
+		var idClase = localStorage.getItem("idClaseProfe");
+		
+		const clases = {
+			"4a": { nombre: "4º ESO", grupo: " A" },
+			"4b": { nombre: "4º ESO", grupo: " B" },
+			"4c": { nombre: "4º ESO", grupo: " C" },
+			"4d": { nombre: "4º ESO", grupo: " D" },
+			"1BachA": { nombre: "1º Bachillerato", grupo: " A" },
+			"1BachB": { nombre: "1º Bachillerato", grupo: " B" },
+			"1BachC": { nombre: "1º Bachillerato", grupo: " C" },
+			"1BachD": { nombre: "1º Bachillerato", grupo: " D" },
+			"2BachA": { nombre: "2º Bachillerato", grupo: " A" },
+			"2BachB": { nombre: "2º Bachillerato", grupo: " B" },
+			"2BachC": { nombre: "2º Bachillerato", grupo: " C" },
+			"2BachD": { nombre: "2º Bachillerato", grupo: " D" },
+		};
+		
+		var claseInfo = clases[idClase];
+		var idclasenombre = claseInfo ? claseInfo.nombre : "Clase no encontrada";
+		var idclasegrupo = claseInfo ? claseInfo.grupo : "";
+		
+        if (licenciaProfe) {
+			document.getElementById("estadisticasTodosAlumnosGrupo").textContent = "Hola " + nombreProfe + ", estas son las estadísticas completas de tu clase en conjunto";
+			document.getElementById("nombreCentro").textContent = centroeducativoProfe + " | " + idclasenombre + " " + idclasegrupo;
+        }
+    </script>	
+	<script type="module" src="/dist/bundle.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			if (window.contarAlumnos) {
+				window.contarAlumnos();
+			}
+			if (window.calcularMediaPreguntasYTasaDeAcierto) {
+				window.calcularMediaPreguntasYTasaDeAcierto();
+			}
+			if (window.calcularTiempoPromedioDeDiapositivas) {
+				window.calcularTiempoPromedioDeDiapositivas();
+			}
+			if (window.calcularPromedioNivelActual) {
+				window.calcularPromedioNivelActual();
+			}
+			if (window.mostrarTodosLosAlumnosYCalcularMediaRango) {
+				window.mostrarTodosLosAlumnosYCalcularMediaRango().then((result) => {
+					if (result && !result.error) {
+						window.actualizarTablaGrupalTodosAlumnos(result);
+					}
+				});
+			}
+		});
+	</script>
+</body>
+
+</html>

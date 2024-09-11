@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\dist\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:dist\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\src\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\src\\pages\\project-budget.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\project-budget.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\dist\\pages\\project-budget.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:dist\\pages\\project-budget.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\src\\index.html",
+              "RelativeDocumentMoniker": "src\\index.html",
+              "ToolTip": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\src\\index.html",
+              "RelativeToolTip": "src\\index.html",
+              "ViewState": "AQIAALIAAAAAAAAAAAAWwMsAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-08-28T07:27:08.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\dist\\index.html",
+              "RelativeDocumentMoniker": "dist\\index.html",
+              "ToolTip": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\dist\\index.html",
+              "RelativeToolTip": "dist\\index.html",
+              "ViewState": "AQIAADYBAAAAAAAAAAAAAEQBAABZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-08-28T07:26:52.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "project-budget.html",
+              "DocumentMoniker": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\src\\pages\\project-budget.html",
+              "RelativeDocumentMoniker": "src\\pages\\project-budget.html",
+              "ToolTip": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\src\\pages\\project-budget.html",
+              "RelativeToolTip": "src\\pages\\project-budget.html",
+              "ViewState": "AQIAAIwAAAAAAAAAAAAWwKAAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-08-28T07:22:37.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "project-budget.html",
+              "DocumentMoniker": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\dist\\pages\\project-budget.html",
+              "RelativeDocumentMoniker": "dist\\pages\\project-budget.html",
+              "ToolTip": "C:\\Users\\Alejandro\\Downloads\\panel-neodogma\\dashui\\dist\\pages\\project-budget.html",
+              "RelativeToolTip": "dist\\pages\\project-budget.html",
+              "ViewState": "AQIAAC0BAAAAAAAAAAAEwD4BAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-08-28T07:21:49.244Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

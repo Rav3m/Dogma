@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Neodogma">
+
+	<!-- Libs CSS -->
+	<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+	<link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
+
+	<style>
+		.personalizadocheck {
+			transform: scale(1.5) !important; /* Ajusta este valor para cambiar el tamaño */
+			margin-right: 20px !important; /* Añade espacio alrededor del switch si es necesario */
+		}
+		.personalizadolabel {
+			font-size: 1.1rem !important; /* Aumenta el tamaño del texto de la etiqueta si es necesario */
+			vertical-align: middle !important; /* Alinea verticalmente el texto con el switch más grande */
+			margin-top: -2px !important;
+		}
+		.col-lg-4.col-12 {
+			position: relative;
+		}
+		.tarjeta {
+			min-height: 300px !important;
+			padding-left: 3% !important;
+			display: flex;
+			flex-direction: column;
+		}
+		.image-right-minijuegos {
+			position: absolute;
+			top: 50%;  /* Centra la imagen verticalmente */
+			right: 0;  /* Alinea la imagen a la derecha */
+			transform: translateY(-50%);  /* Asegura que el centro de la imagen esté alineado verticalmente */
+			padding-right: 15px;
+			width: 200px;
+			text-align: right;
+		}
+		.image-right-minijuegos img {
+			width: 100%;
+			height: auto;  /* Mantiene la proporción de la imagen */
+		}
+		/* Ajustes para pantallas más pequeñas */
+		@media (max-width: 1810px) {
+			.image-right-minijuegos img {
+				width: 90%;
+			}
+		}
+		@media (max-width: 1551px) {
+			.image-right-minijuegos img {
+				width: 80%;  /* Permite que la imagen se ajuste al contenedor */
+			}
+		}
+		@media (max-width: 1536px) {
+			.image-right-minijuegos img {
+				width: 70%;  /* Permite que la imagen se ajuste al contenedor */
+			}
+		}
+		@media (max-width: 1436px) {
+			.image-right-minijuegos img {
+				width: 60%;  /* Permite que la imagen se ajuste al contenedor */
+			}
+		}
+		@media (max-width: 1350px) {
+			.image-right-minijuegos {
+				position: static;  // Hace que la imagen sea parte del flujo normal
+				order: 1 !important;  // Esto moverá la imagen al final solo si .tarjeta es un contenedor flex
+				width: 100% !important;  // Asegura que la imagen ocupe todo el ancho disponible
+				text-align: center !important;  // Centra la imagen horizontalmente
+				padding: 0 !important;
+				margin-top: 100px !important;  // Añade un poco de espacio arriba de la imagen
+				box-sizing: border-box !important;  // Asegura que el padding no afecte el ancho total
+			}
+			.tarjeta {
+				height: 500px !important;
+			}
+		}
+		@media (max-width: 992px) {
+			.image-right-minijuegos {
+				order: 1 !important;  // Esto moverá la imagen al final solo si .tarjeta es un contenedor flex
+				width: 100% !important;  // Asegura que la imagen ocupe todo el ancho disponible
+				text-align: center !important;  // Centra la imagen horizontalmente
+				padding: 0 !important;
+				margin-top: 40% !important;  // Añade un poco de espacio arriba de la imagen
+				box-sizing: border-box !important;  // Asegura que el padding no afecte el ancho total
+			}
+			.tarjeta {
+				height: 80% !important;
+			}
+			.col-lg-4.col-12 {
+				height: 100% !important;
+			}
+		}
+		.form-check-input {
+			cursor: pointer;
+		}
+		.descripcion {
+			max-width: 58%;
+		}
+	</style>
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="../assets/css/theme.min.css">
+	<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Codescandy">
+
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="https://www.panel.neodogma.com/imagenes/dogma-logo-favicon.ico">
+
+
+<!-- Libs CSS -->
+<link href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="../node_modules/simplebar/dist/simplebar.min.css" rel="stylesheet">
+
+
+
+<!-- Theme CSS -->
+<!-- build:css ../assets/css/theme.min.css -->
+<link rel="stylesheet" href="../assets/css/theme.css">
+<!-- endbuild -->
+	<title>Desafíos | Neodogma</title>
+	<script>
+		console.log("Token en almacenamiento local:", localStorage.getItem("tokenUsuario"));
+		if (!localStorage.getItem("tokenUsuario")) {
+			window.location.href = 'pages/login.html';
+		}
+	 </script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+	<body>
+		<main id="main-wrapper" class="main-wrapper">
+		
+			<div class="header">
+  <!-- navbar -->
+  <div class="navbar-custom navbar navbar-expand-lg">
+    <div class="container-fluid px-0">
+		<a class="navbar-brand d-block d-md-none" href="../index.html">
+		  <img src="../assets/images/brand/logo/logo-2.svg" alt="Image">
+		</a>
+		<a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
+			<path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+		  </svg>
+		</a>
+
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+		<a href="#" class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
+			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+			<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		</a>
+		<div>
+            <a href="#" id="cerrar-sesion" class="btn btn-white" style="border: 1px solid #d0d0d0;margin-left: 10px;" data-translate="Logout">Cerrar Sesión</a>
+        </div>
+    </ul>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>
+			<!-- navbar vertical -->
+			 <!-- Sidebar -->
+
+<div class="navbar-vertical navbar nav-dashboard">
+    <div class="h-100" data-simplebar>
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="../index.html">
+            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+
+            <!-- Nav item -->
+            <li class="nav-item">
+                <a class="nav-link " 
+                    href="../index.html">
+					<i data-feather="home" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Home"> Inicio</span>
+                </a>
+            </li>
+            <!-- Nav item
+            <li class="nav-item">
+                <a class="nav-link has-arrow "
+                    href="../pages/calendar.html">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs" ></i> Calendario
+                </a>
+            </li>
+			<!-- Nav item -->
+			<li class="nav-item ">
+				<a
+					class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navProject"
+					aria-expanded="false"
+					aria-controls="navProject"
+				>
+					<i class="nav-icon me-2 icon-xxs" data-feather="file"></i>
+					<span data-translate="Statistics"> Estadísticas</span>
+				</a>
+				<div id="navProject" class="collapse  " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-files.html">
+								<span data-translate="Students">Alumnos</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-budget.html">
+								<span data-translate="Group">Grupo</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link has-arrow " href="../pages/profile-followers.html">
+					<i data-feather="edit" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Mini-games"> Desafíos</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navprofilePages"
+					aria-expanded="false"
+					aria-controls="navprofilePages"
+					>
+					<i data-feather="user" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Didactic-resources"> Recursos didácticos</span>
+				</a>
+				<div id="navprofilePages" class="collapse " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-files.html">
+								<span data-translate="Material">Material</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-overview.html">
+								<span data-translate="Information">Información</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link "
+					href="../pages/starter.html">
+                    <i data-feather="settings" class="nav-icon me-2 icon-xxs" ></i>
+					<span data-translate="Settings"> Ajustes</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+        </ul>
+    </div>
+</div>
+
+
+			<div id="app-content">
+				<div class="app-content-area">
+					<div class="container-fluid">
+						<div class="row align-items-center">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+								<!-- Bg -->
+								<div class="pt-20 rounded-top" style="background: url(../assets/images/background/profile-cover.jpg) no-repeat; background-size: cover;">
+								</div>
+								<div class="card rounded-bottom smooth-shadow-sm">
+									<div class="d-flex align-items-center justify-content-between pt-4 pb-6 px-4">
+										<div class="d-flex align-items-center">
+											<div class="avatar-xxl avatar-indicators avatar-online me-2 position-relative d-flex justify-content-end align-items-end mt-n10">
+												<img src="https://panel.neodogma.com/imagenes/avatares/avatar-profesor.png" class="avatar-xxl rounded-circle border border-2 " alt="Image">
+												<a href="#!" class="position-absolute top-0 right-0 me-2">
+													<img src="../assets/images/svg/checked-mark.svg" alt="Image" class="icon-sm">
+												</a>
+											</div>
+											<div class="lh-1">
+												<h2 class="mb-0" data-translate="Mini-games">Desafíos
+													<a href="#!" class="text-decoration-none"></a>
+												</h2>
+											</div>
+										</div>
+										<!-- <div>
+											<a href="profile-edit.html" class="btn btn-outline-primary d-none d-md-block">Edit Profile</a>
+										</div> -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="py-6">		  
+						<!-- row -->
+							<div class="row" style="margin-bottom: 30px">
+							<!-- col -->
+								<div>
+								<!-- search -->
+									<div class="mb-5">
+										<h4 id="info_minijuegos" style="padding-top:20px;" data-translate="welcome-minigames"></h4>
+										<h4 style="color:grey;padding-bottom:10px;" data-translate="Click-minigame">Haz clic en el interruptor de cada desafío para desbloquear/bloquear el acceso en los dispositivos de tus alumnos</h4>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 mb-5">
+									<div class="card mb-5 rounded-3 tarjeta" style="background-color: #D0C9FF; padding-left: 0px !important;">
+										<div class="card-body">
+											<h3 class="mb-4">LA CÉLULA</h3>
+											<div class="row">
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- <div>
+															<img src="../assets/images/background/profile-cover-1.jpg" alt="Image" class="img-fluid rounded-top">
+														</div> -->
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/batalla-perfil.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Cell">BATALLA CELULAR</h4>
+															<p class="descripcion" data-translate="Description-cell">Identifica los orgánulos celulares</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultBatalla" disabled>
+																		<label id="labelBatalla" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultBatalla" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/batalla-celular-minigame-image.png" alt="Imagen-aventura" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Cyclecell">FASES DEL CICLO CELULAR</h4>
+															<p class="descripcion" data-translate="Description-cyclecell">Conoce paso a paso el ciclo de las células</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultCicloCelular" disabled>
+																		<label id="labelCicloCelular" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultCicloCelular" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Celldivision">DIVISIÓN CELULAR</h4>
+															<p class="descripcion" data-translate="Description-Celldivision">Descifra cómo se dividen nuestras células</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultCelldivision" disabled>
+																		<label id="labelCelldivision" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultCelldivision" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+	
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 mb-5">
+									<div class="card mb-5 rounded-3 tarjeta" style="background-color: #c9f3ff; padding-left: 0px !important;">
+										<div class="card-body">
+											<h3 class="mb-4">GENÉTICA Y EVOLUCIÓN</h3>
+											<div class="row">
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/mendel-perfil.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Mendel">LEYES DE MENDEL</h4>
+															<p class="descripcion" data-translate="Description-mendel">Descubre los guisantes de Mendel</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultMendel">
+																		<label id="labelMendel" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultMendel">BLOQUEADO</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/mendel-minigame-image.png" alt="Imagen-Mendel" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/rh-perfil.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Blood">GRUPOS SANGUÍNEOS</h4>
+															<p class="descripcion" data-translate="Description-blood">Comprende el sistema AB0 y el factor Rh</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultSanguineo">
+																		<label id="labelSanguineo" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultSanguineo">BLOQUEADO</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/rh-2-minigame-image.png" alt="Imagen-RH" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/cromosomas-perfil.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Inheritance">HERENCIA LIGADA AL SEXO</h4>
+															<p class="descripcion" data-translate="Description-inheritance">Investiga la genética humana</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultCromosomas">
+																		<label id="labelCromosomas" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultCromosomas">BLOQUEADO</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/herencia-ligada-al-sexo.png" alt="Imagen-cromosomas" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Origin">EL ORIGEN DE LA VIDA</h4>
+															<p class="descripcion" data-translate="Description-origin">Descubre el inicio de todo</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultOrigenVida" disabled>
+																		<label id="labelOrigenVida" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultOrigenVida" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/aventura-perfil.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Evolution">AVENTURA EVOLUTIVA</h4>
+															<p class="descripcion" data-translate="Description-evolution">Adáptate a los cambios del entorno</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultAventura" disabled>
+																		<label id="labelAventura" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultAventura" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/aventura-evolutiva-minigame-image.png" alt="Imagen-aventura" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Phylogenetic">FILO AVENTURA</h4>
+															<p class="descripcion" data-translate="Description-phylogenetic">Construye tu propio árbol filogenético</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultFiloAventura" disabled>
+																		<label id="labelFiloAventura" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultFiloAventura" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/supervivencia-perfil.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Survival">SUPERVIVENCIA</h4>
+															<p class="descripcion" data-translate="Description-survival">Replica el ADN a toda velocidad</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultSupervivencia">
+																		<label id="labelSupervivencia" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultSupervivencia">BLOQUEADO</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/supervivencia-minigame-image.png" alt="Imagen-Supervivencia" class="img-fluid">
+														</div>
+													</div>
+												</div>
+											</div>	
+										</div>
+									</div>
+								</div>
+								<div class="col-12 mb-5">
+									<div class="card mb-5 rounded-3 tarjeta" style="background-color: #ffdbc9; padding-left: 0px !important;">
+										<div class="card-body">
+											<h3 class="mb-4">GEOLOGÍA</h3>
+											<div class="row">
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Seismicwaves">ONDAS SÍSMICAS</h4>
+															<p class="descripcion" data-translate="Descripcion-seismicwaves">Descifra las ondas sísmicas</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultOndasSismicas" disabled>
+																		<label id="labelOndasSismicas" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultOndasSismicas" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Earthcore">VIAJE HASTA EL NÚCLEO</h4>
+															<p class="descripcion" data-translate="Description-earthcore">Explora las profundidades de nuestro planeta</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultViajeTierra" disabled>
+																		<label id="labelViajeTierra" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultViajeTierra" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Tectonicplates">TECTÓNICA DE PLACAS</h4>
+															<p class="descripcion" data-translate="Description-tectonicplates">Mueve placas y modela la superficie terrestre</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultTectonicaPlacas" disabled>
+																		<label id="labelTectonicaPlacas" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultTectonicaPlacas" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												
+											</div>	
+										</div>
+									</div>
+								</div>
+								<div class="col-12 mb-5">
+									<div class="card mb-5 rounded-3 tarjeta" style="background-color: #fff9c9; padding-left: 0px !important;">
+										<div class="card-body">
+											<h3 class="mb-4">LA TIERRA EN EL UNIVERSO</h3>
+											<div class="row">
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Spaceadventure">AVENTURA ESPACIAL</h4>
+															<p class="descripcion" data-translate="Description-spaceadventure">Explora y conquista el espacio exterior</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultTierraUniverso" disabled>
+																		<label id="labelTierraUniverso" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultTierraUniverso" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Alignstars">ALINEA LOS ASTROS</h4>
+															<p class="descripcion" data-translate="Description-alignstars">Alinea el Sol, la Tierra y la Luna</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultAlineaAstros" disabled>
+																		<label id="labelAlineaAstros" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultAlineaAstros" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Inhabitplanet">HABITA EL PLANETA</h4>
+															<p class="descripcion" data-translate="Description-inhabitlanet">Haz que el planeta sea habitable</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultHabitaPlaneta" disabled>
+																		<label id="labelHabitaPlaneta" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultHabitaPlaneta" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												
+											</div>	
+										</div>
+									</div>
+								</div>
+								<div class="col-12 mb-5">
+									<div class="card mb-5 rounded-3 tarjeta" style="background-color: #c9ffd6; padding-left: 0px !important;">
+										<div class="card-body">
+											<h3 class="mb-4">SUPLEMENTARIO: BIOLOGÍA MOLECULAR</h3>
+											<div class="row">
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Viraldefense">DEFENSA VIRAL</h4>
+															<p class="descripcion" data-translate="Description-viraldefense">Neutraliza un virus letal</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultDefensaViral" disabled>
+																		<label id="labelDefensaViral" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultDefensaViral" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Editgenome">EDITANDO EL GENOMA</h4>
+															<p class="descripcion" data-translate="Description-editgenome">Corta y pega genético</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultEdicionGenoma" disabled>
+																		<label id="labelEdicionGenoma" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultEdicionGenoma" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4 col-12">
+													<!-- card -->
+													<div class="card mb-5 rounded-3 tarjeta">
+														<!-- avatar -->
+														<div class="avatar avatar-xl mt-n7 ms-4" style="margin-top: 7% !important;">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/Perfil-en-desarrollo.png" alt="Image" class="rounded-circle border-4 border-white-color-40">
+														</div>
+														<!-- card body -->
+														<div class="card-body">
+															<!-- Title -->
+															<h4 class="mb-1" data-translate="Amplifyinggenes">AMPLIFICANDO GENES</h4>
+															<p class="descripcion" data-translate="Description-Amplifyinggenes">Realiza la famosa PCR</p>
+															<div>
+																<!-- Dropdown -->
+																<div class="d-flex justify-content-between align-items-center">
+																	<!-- Switch -->
+																	<div class="form-check form-switch mb-2">
+																		<input class="form-check-input personalizadocheck" type="checkbox" role="switch" id="flexSwitchCheckDefaultAmplifyinggenes" disabled>
+																		<label id="labelAmplifyinggenes" class="form-check-label personalizadolabel" for="flexSwitchCheckDefaultAmplifyinggenes" data-translate="Soon">PRÓXIMAMENTE</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="image-right-minijuegos order-1 order-md-0">
+															<img src="https://panel.neodogma.com/imagenes/minijuegos/portada-en-desarrollo.png" alt="Imagen-En-Desarrollo" class="img-fluid">
+														</div>
+													</div>
+												</div>												
+											</div>	
+										</div>
+									</div>
+								</div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- Scripts -->
+		<!-- Libs JS -->
+		<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+		<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="../assets/libs/feather-icons/dist/feather.min.js"></script>
+		<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+		<!-- Theme JS -->
+		<script src="../assets/js/theme.min.js"></script>
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+		<script>
+			var licenciaProfe = localStorage.getItem("licenciaProfe");
+			var nombreProfe = localStorage.getItem("nombreProfe");
+			var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+			var emailProfe = localStorage.getItem("emailProfe");
+			var fechaExpira = localStorage.getItem("fechaexpiracion");
+			var idCentro = parseInt(localStorage.getItem("idCentroProfe"));
+			var idClase = localStorage.getItem("idClaseProfe");
+
+			const clases = {
+				"4a": { nombre: "4º ESO", grupo: " A" },
+				"4b": { nombre: "4º ESO", grupo: " B" },
+				"4c": { nombre: "4º ESO", grupo: " C" },
+				"4d": { nombre: "4º ESO", grupo: " D" },
+				"1BachA": { nombre: "1º Bachillerato", grupo: " A" },
+				"1BachB": { nombre: "1º Bachillerato", grupo: " B" },
+				"1BachC": { nombre: "1º Bachillerato", grupo: " C" },
+				"1BachD": { nombre: "1º Bachillerato", grupo: " D" },
+				"2BachA": { nombre: "2º Bachillerato", grupo: " A" },
+				"2BachB": { nombre: "2º Bachillerato", grupo: " B" },
+				"2BachC": { nombre: "2º Bachillerato", grupo: " C" },
+				"2BachD": { nombre: "2º Bachillerato", grupo: " D" },
+			};
+			
+			var claseInfo = clases[idClase];
+			var idclasenombre = claseInfo ? claseInfo.nombre : "Clase no encontrada";
+			var idclasegrupo = claseInfo ? claseInfo.grupo : "";
+			
+			if (licenciaProfe) {
+				document.getElementById("info_minijuegos").textContent = "¡Hola " + nombreProfe + "! desde aquí puedes decidir qué desafíos pueden ser cursados por los alumnos para adaptar los contenidos de Dogma a tu contenido didáctico";
+			}
+		</script>
+		
+		<script type="module" src="/dist/bundle.js"></script>
+	
+	</body>
+</html>

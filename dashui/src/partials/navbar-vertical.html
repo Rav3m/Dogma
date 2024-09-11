@@ -1,0 +1,100 @@
+ <!-- Sidebar -->
+
+<div class="navbar-vertical navbar nav-dashboard">
+    <div class="h-100" data-simplebar>
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="@@webRoot/index.html">
+            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+
+            <!-- Nav item -->
+            <li class="nav-item">
+                <a class="nav-link @@if (context.page === 'project') { active }" 
+                    href="@@webRoot/index.html">
+					<i data-feather="home" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Home"> Inicio</span>
+                </a>
+            </li>
+            <!-- Nav item
+            <li class="nav-item">
+                <a class="nav-link has-arrow @@if (context.page === 'calendar') { active }"
+                    href="@@webRoot/pages/calendar.html">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs" ></i> Calendario
+                </a>
+            </li>
+			<!-- Nav item -->
+			<li class="nav-item ">
+				<a
+					class="nav-link  @@if (context.page_group !== 'project') { collapsed } "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navProject"
+					aria-expanded="false"
+					aria-controls="navProject"
+				>
+					<i class="nav-icon me-2 icon-xxs" data-feather="file"></i>
+					<span data-translate="Statistics"> Estadísticas</span>
+				</a>
+				<div id="navProject" class="collapse @@if (context.page_group === 'project') { show } " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link @@if (context.page === 'files') { active }" href="@@webRoot/pages/project-files.html">
+								<span data-translate="Students">Alumnos</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link @@if (context.page === 'budget') { active }" href="@@webRoot/pages/project-budget.html">
+								<span data-translate="Group">Grupo</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link has-arrow @@if (context.page === 'profileFollowers') { active }" href="@@webRoot/pages/profile-followers.html">
+					<i data-feather="edit" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Mini-games"> Desafíos</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link  @@if (context.page_group !== 'profilePages') { collapsed } "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navprofilePages"
+					aria-expanded="false"
+					aria-controls="navprofilePages"
+					>
+					<i data-feather="user" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Didactic-resources"> Recursos didácticos</span>
+				</a>
+				<div id="navprofilePages" class="collapse @@if (context.page_group === 'profilePages') { show }" data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link @@if (context.page === 'profileFiles') { active }" href="@@webRoot/pages/profile-files.html">
+								<span data-translate="Material">Material</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link @@if (context.page === 'profileOverview') { active }" href="@@webRoot/pages/profile-overview.html">
+								<span data-translate="Information">Información</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link @@if (context.page === 'starter') { active }"
+					href="@@webRoot/pages/starter.html">
+                    <i data-feather="settings" class="nav-icon me-2 icon-xxs" ></i>
+					<span data-translate="Settings"> Ajustes</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+        </ul>
+    </div>
+</div>

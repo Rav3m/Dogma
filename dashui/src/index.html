@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    @@include("partials/head.html")
+    <title>NeoDogma | Panel de Control</title>
+	<script>
+		console.log("Token en almacenamiento local:", localStorage.getItem("tokenUsuario"));
+        if (!localStorage.getItem("tokenUsuario")) {
+            window.location.href = 'pages/login.html';
+        }
+    </script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <main id="main-wrapper" class="main-wrapper">
+
+        @@include("partials/header.html")
+        <!-- navbar vertical -->
+        <div class="app-menu">
+        @@include('partials/navbar-vertical.html', { "page": "project", "page_group": "pages" })
+        </div>
+
+
+        <!-- Page content -->
+        <div id="app-content">
+
+            <!-- Container fluid -->
+
+            <div class="app-content-area">
+                <div class="bg-primary pt-10 pb-21 mt-n6 mx-n4"></div>
+                <div class="container-fluid mt-n22 ">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <!-- Page header -->
+                            <div class="d-flex justify-content-between align-items-center mb-5">
+                                <div class="mb-2 mb-lg-0">
+                                    <h3 id="nombreprofesorInicio" class="mb-0  text-white" data-translate=""></h3>
+                                </div>
+								<div>
+                                    <a href="#" id="actualizar-datos" class="btn btn-white" data-translate="Update-data">Actualizar Datos</a>
+									<div class="modal fade" id="modalConfirmacionActualizacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionActualizacionTitle" aria-hidden="true">
+									  <div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+										  <div class="modal-header">
+											<h5 class="modal-title" id="modalConfirmacionActualizacionTitle" data-translate="Update-complete">Actualización Completada</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										  </div>
+										  <div class="modal-body" data-translate="Metrics-successfully-updated">
+											Las métricas han sido actualizadas exitosamente.
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="Close">Cerrar</button>
+										  </div>
+										</div>
+									  </div>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
+                            <!-- card -->
+                            <div class="card h-100 card-lift">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <!-- heading -->
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h4 class="mb-0" data-translate="Students">Alumn@s</h4>
+                                        </div>
+                                        <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
+                                            <i  data-feather="users" height="20" width="20"></i>
+                                        </div>
+                                    </div>
+                                    <div class="lh-1">
+                                        <h1 id="contador-alumnos" class=" mb-1 fw-bold"></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
+                            <!-- card -->
+                            <div class="card h-100 card-lift">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <!-- heading -->
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h4 class="mb-0" data-translate="Top-question">Top preguntas acertadas</h4>
+                                        </div>
+                                        <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
+											<i  data-feather="list" height="20" width="20"></i>
+                                        </div>
+                                    </div>
+                                    <div class="lh-1">
+                                        <h3 id="ranking" class="  mb-1 fw-bold"></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
+                            <!-- card -->
+                            <div class="card h-100 card-lift">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <!-- heading -->
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h4 class="mb-0" data-translate="Top-time">Top tiempo de uso</h4>
+                                        </div>
+                                        <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
+											<i  data-feather="clock" height="20" width="20"></i>
+                                        </div>
+                                    </div>
+                                    <div class="lh-1">
+                                        <h3 id="ranking-tiempo-de-juego" class="  mb-1 fw-bold"></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
+                            <!-- card -->
+                            <div class="card h-100 card-lift">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <!-- heading -->
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            <h4 class="mb-0" data-translate="Top-progress">Top progreso Creación</h4>
+                                        </div>
+                                        <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
+											<i  data-feather="target" height="20" width="20"></i>
+                                        </div>
+                                    </div>
+                                    <!-- project number -->
+                                    <div class="lh-1">
+                                        <h3 id="ranking-nivel-actual" class="  mb-1 fw-bold"></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-xl-8 col-12 mb-5">
+                            <!-- card  -->
+                            <div class="card">
+                                <!-- card header  -->
+                                <div class="card-header ">
+                                    <h4 class="mb-0" data-translate="Students">Alumn@s</h4>
+                                </div>
+                                <!-- table  -->
+                                <div class="card-body">
+                                <div class="table-responsive table-card">
+                                    <table id="tabla-alumnos" class="table text-nowrap mb-0 table-centered table-hover" >
+                                        <thead class="table-light">
+                                            <tr >
+                                                <th data-translate="Name">Nombre</th>
+                                                <th data-translate="Minutes">Minutos</th>
+                                                <th data-translate="Range">Rango</th>
+                                                <th data-translate="Avatar">Avatar</th>
+                                                <th data-translate="Progress">Progreso</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                <!-- card footer  -->
+                                <div class="card-footer text-center">
+                                    <a href="pages/project-files.html" class="btn btn-primary" data-translate="Show-students">Mostrar todos los alumnos</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xl-4 col-lg-12 col-md-12 col-12 mb-5 ">
+                            <!-- card  -->
+                            <div class="card h-100">
+                                <!-- card body  -->
+                                <div class="card-header d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h4 class="mb-0" data-translate="Group-performance">Rendimiento grupal </h4>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="align-content: center !important;">
+
+                                    <!-- chart  -->
+                                    <div class="mb-6">
+                                        <div id="perfomanceChart" style="min-height: 280px !mportant; margin-bottom: 50px !important;"></div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-around">
+                                        <div class="text-center">
+                                            <i class="icon-sm text-success" data-feather="check-circle"></i>
+                                            <h1 id="tasaPromedioGrupal" class="fs-2 mb-0 "></h1>
+                                            <p data-translate="Success-rate">Tasa acierto</p>
+                                        </div>
+                                        <div class="text-center">
+                                            <i class="icon-sm text-warning" data-feather="trending-up"></i>
+                                            <h1 id="media-progreso-creacion" class="fs-2 mb-0 "></h1>
+                                            <p data-translate="Creation-progress">Progeso Creación</p>
+                                        </div>
+                                        <div class="text-center">
+                                            <i class="icon-sm text-danger" data-feather="clock"></i>
+                                            <h1 id="tiempo-promedio-de-juego" class="fs-2 mb-0 "></h1>
+                                            <p data-translate="Game-Time">Tiempo juego</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+	@@include("partials/scripts.html")
+    <script src="@@webRoot/node_modules/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="@@webRoot/assets/js/vendors/chart.js"></script>
+	
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+		var fechaExpira = localStorage.getItem("fechaexpiracion");
+		var idCentro = parseInt(localStorage.getItem("idCentroProfe"));
+		var idClase = localStorage.getItem("idClaseProfe");
+		
+		const clases = {
+			"4a": { nombre: "4º ESO", grupo: " A" },
+			"4b": { nombre: "4º ESO", grupo: " B" },
+			"4c": { nombre: "4º ESO", grupo: " C" },
+			"4d": { nombre: "4º ESO", grupo: " D" },
+			"1BachA": { nombre: "1º Bachillerato", grupo: " A" },
+			"1BachB": { nombre: "1º Bachillerato", grupo: " B" },
+			"1BachC": { nombre: "1º Bachillerato", grupo: " C" },
+			"1BachD": { nombre: "1º Bachillerato", grupo: " D" },
+			"2BachA": { nombre: "2º Bachillerato", grupo: " A" },
+			"2BachB": { nombre: "2º Bachillerato", grupo: " B" },
+			"2BachC": { nombre: "2º Bachillerato", grupo: " C" },
+			"2BachD": { nombre: "2º Bachillerato", grupo: " D" },
+		};
+		
+		var claseInfo = clases[idClase];
+		console.log("Valor de idClase:", idClase);
+		var idclasenombre = claseInfo ? claseInfo.nombre : "Clase no encontrada";
+		var idclasegrupo = claseInfo ? claseInfo.grupo : "";
+        
+        if (licenciaProfe) {
+            document.getElementById("nombreprofesorInicio").textContent = "¡Hola " + nombreProfe + "! | " + centroeducativoProfe + " | " + idclasenombre + " " + idclasegrupo;
+        }
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>
+	<script type="module" src="external/dist/bundle.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			if (window.contarAlumnos) {
+				window.contarAlumnos();
+			}
+			if (window.mostrarRanking) {
+				window.mostrarRanking();
+			}
+			if (window.mostrarRankingTiempoDeJuego) {
+				window.mostrarRankingTiempoDeJuego();
+			}
+			if (window.mostrarRankingNivelActual) {
+				window.mostrarRankingNivelActual();
+			}
+			if (window.calcularMediaPreguntasYTasaDeAcierto) {
+				window.calcularMediaPreguntasYTasaDeAcierto();
+			}
+			if (window.calcularMediaProgresoCreacion) {
+				window.calcularMediaProgresoCreacion();
+			}
+			if (window.calcularTiempoPromedioDeJuego) {
+				window.calcularTiempoPromedioDeJuego();
+			}
+		});
+	</script>
+
+</body>
+
+</html>

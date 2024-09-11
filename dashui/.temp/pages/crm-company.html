@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Codescandy">
+
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="https://www.panel.neodogma.com/imagenes/dogma-logo-favicon.ico">
+
+
+<!-- Libs CSS -->
+<link href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="../node_modules/simplebar/dist/simplebar.min.css" rel="stylesheet">
+
+
+
+<!-- Theme CSS -->
+<!-- build:css ../assets/css/theme.min.css -->
+<link rel="stylesheet" href="../assets/css/theme.css">
+<!-- endbuild -->
+
+
+  <title>CRM Contacts | Dash UI - Responsive Bootstrap 5 Admin Dashboard</title>
+
+
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <main id="main-wrapper" class="main-wrapper">
+    <div class="header">
+  <!-- navbar -->
+  <div class="navbar-custom navbar navbar-expand-lg">
+    <div class="container-fluid px-0">
+		<a class="navbar-brand d-block d-md-none" href="../index.html">
+		  <img src="../assets/images/brand/logo/logo-2.svg" alt="Image">
+		</a>
+		<a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
+			<path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+		  </svg>
+		</a>
+
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+		<a href="#" class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
+			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+			<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		</a>
+		<div>
+            <a href="#" id="cerrar-sesion" class="btn btn-white" style="border: 1px solid #d0d0d0;margin-left: 10px;" data-translate="Logout">Cerrar Sesión</a>
+        </div>
+    </ul>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>
+    <!-- navbar vertical -->
+
+     <!-- Sidebar -->
+
+<div class="navbar-vertical navbar nav-dashboard">
+    <div class="h-100" data-simplebar>
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="../index.html">
+            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+
+            <!-- Nav item -->
+            <li class="nav-item">
+                <a class="nav-link " 
+                    href="../index.html">
+					<i data-feather="home" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Home"> Inicio</span>
+                </a>
+            </li>
+            <!-- Nav item
+            <li class="nav-item">
+                <a class="nav-link has-arrow "
+                    href="../pages/calendar.html">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs" ></i> Calendario
+                </a>
+            </li>
+			<!-- Nav item -->
+			<li class="nav-item ">
+				<a
+					class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navProject"
+					aria-expanded="false"
+					aria-controls="navProject"
+				>
+					<i class="nav-icon me-2 icon-xxs" data-feather="file"></i>
+					<span data-translate="Statistics"> Estadísticas</span>
+				</a>
+				<div id="navProject" class="collapse  " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-files.html">
+								<span data-translate="Students">Alumnos</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-budget.html">
+								<span data-translate="Group">Grupo</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link has-arrow " href="../pages/profile-followers.html">
+					<i data-feather="edit" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Mini-games"> Desafíos</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navprofilePages"
+					aria-expanded="false"
+					aria-controls="navprofilePages"
+					>
+					<i data-feather="user" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Didactic-resources"> Recursos didácticos</span>
+				</a>
+				<div id="navprofilePages" class="collapse " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-files.html">
+								<span data-translate="Material">Material</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-overview.html">
+								<span data-translate="Information">Información</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link "
+					href="../pages/starter.html">
+                    <i data-feather="settings" class="nav-icon me-2 icon-xxs" ></i>
+					<span data-translate="Settings"> Ajustes</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+        </ul>
+    </div>
+</div>
+
+
+
+    <!-- Page Content -->
+    <div id="app-content">
+      <!-- Container fluid -->
+      <div class="app-content-area">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <!-- Page header -->
+              <div class="mb-5">
+                <h3 class="mb-0 ">Company</h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            <!-- row -->
+            <div class="row">
+              <div class="col-xxl-9 col-lg-8 col-12">
+                <!-- card -->
+                <div class="card mb-4" id="list-of-records">
+                  <div class="card-header d-lg-flex justify-content-between ">
+                    <div class="d-grid d-lg-block">
+                      <a href="#!" class="btn btn-primary" id="add-edit-modal-button" data-bs-toggle="modal"
+                        data-bs-target="#add-edit-modal">+
+                        Add Company</a>
+                    </div>
+                    <div class="d-flex mt-3 mt-lg-0">
+                      <div class="position-relative">
+                        <form action="#">
+                          <div class="input-group ">
+                            <input class="form-control rounded-3 search" type="search" value="" id="searchInput"
+                              placeholder="Search">
+                            <span class="input-group-append">
+                              <button class="btn  ms-n10 rounded-0 rounded-end" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round" class="feather feather-search text-dark">
+                                  <circle cx="11" cy="11" r="8"></circle>
+                                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                              </button>
+                            </span>
+                          </div>
+                        </form>
+                      </div>
+                      <a href="#!" class="btn btn-outline-white ms-2">Import</a>
+                      <a href="#!" class="btn btn-danger-soft btn-icon ms-2 texttooltip" data-template="trashTwo">
+                        <i data-feather="trash-2" class="icon-xs"></i>
+                        <div id="trashTwo" class="d-none">
+                          <span>Delete</span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive table-card">
+                      <table class="table text-nowrap mb-0 table-centered">
+                        <thead class="table-light">
+                          <tr>
+                            <th class=" pe-0  ">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkAll">
+                                <label class="form-check-label" for="checkAll">
+                                </label>
+                              </div>
+                            </th>
+                            <th class="ps-1 sort" default-sort-order="asc" data-sort='company_name'>Comapny Name</th>
+                            <th class="sort" data-sort='owner'>Owner</th>
+                            <th class="sort" data-sort='category'>Category</th>
+                            <th class="sort" data-sort='rating'>Rating</th>
+                            <th class="sort" data-sort='location'>Location</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody class="list list-of-records-container">
+                          <tr>
+                            <td class=" pe-0">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="contactCheckbox2">
+                                <label class="form-check-label" for="contactCheckbox2">
+                                </label>
+                              </div>
+                            </td>
+                            <td class="id" style="display:none;">#001</td>
+                            <td class="ps-1">
+                              <div class="d-flex align-items-center">
+                                <a href="#!"><img src="../assets/images/svg/brand-logo-1.svg" alt="Image"
+                                    class="avatar avatar-sm logo_img"></a>
+                                <div class="ms-2">
+                                  <h5 class="mb-0"><a href="#!" class="text-inherit view-item-btn company_name">Godrej
+                                      Properties
+                                      Ltd</a></h5>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="owner">Mohit Malhotra </td>
+                            <td class="category">Real Estate</td>
+                            <td><span class="rating">3.9</span> <i class="mdi mdi-star text-warning fs-4"> </i></td>
+                            <td class="location">Ahmedabad, India</td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                  data-template="callOne">
+                                  <i data-feather="phone-call" class="icon-xs"></i>
+                                  <div id="callOne" class="d-none">
+                                    <span>Call</span>
+                                  </div>
+                                </a>
+                                <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                  data-template="messageOne">
+                                  <i data-feather="message-square" class="icon-xs"></i>
+                                  <div id="messageOne" class="d-none">
+                                    <span>Message</span>
+                                  </div>
+                                </a>
+                                <div class="dropdown">
+                                  <a class="btn btn-ghost btn-icon btn-sm rounded-circle" href="#!" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                  </a>
+
+                                  <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item d-flex align-items-center view-item-btn"
+                                        href="#!">View</a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center edit-item-btn"
+                                        href="#!">Edit</a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center remove-item-btn"
+                                        href="#!">Delete</a></li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="card-footer d-md-flex justify-content-between align-items-center ">
+                    <span id="pagination-status">Showing 1 to 8 of 12 entries</span>
+                    <nav class="mt-2 mt-md-0">
+                      <div class="d-flex justify-content-end mt-3">
+                        <div class="pagination-wrap hstack">
+                          <a class="page-item pagination-prev" href="#">
+                            Previous
+                          </a>
+                          <ul class="pagination listjs-pagination mb-0"></ul>
+                          <a class="page-item pagination-next" href="#">
+                            Next
+                          </a>
+                        </div>
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-3 col-lg-4">
+                <div class="card">
+                  <div class="card-body border-bottom">
+                    <div class="d-flex justify-content-between ">
+                      <div>
+                        <img src="../assets/images/svg/brand-logo-1.svg" alt="Image" class="icon-lg icon-shape"
+                          id="view-logo-image">
+                        <div class="mt-3">
+                          <h3 class="mb-0 fs-4" id="view-detail-company-name">Godrej Properties</h3>
+                          <small id="view-detail-owner">Mohit Malhotra </small>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="dropdown">
+                          <a class="btn btn-ghost btn-icon btn-sm rounded-circle" href="#!" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i data-feather="more-vertical" class="icon-xs"></i>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                            <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a></li>
+                            <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else here</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-5">
+                      <a href="#!" class="btn btn-light btn-icon rounded-circle texttooltip"
+                        data-template="voicecallOne">
+                        <i data-feather="phone-call" class="icon-xs"></i>
+                        <div id="voicecallOne" class="d-none">
+                          <span>Voice Call</span>
+                        </div>
+                      </a>
+                      <a href="#!" class="btn btn-light btn-icon rounded-circle texttooltip"
+                        data-template="messageEleven">
+                        <i data-feather="message-square" class="icon-xs"></i>
+                        <div id="messageEleven" class="d-none">
+                          <span>Message</span>
+                        </div>
+                      </a>
+                      <a href="#!" class="btn btn-light btn-icon rounded-circle texttooltip" data-template="mailOne">
+                        <i data-feather="mail" class="icon-xs"></i>
+                        <div id="mailOne" class="d-none">
+                          <span>Mail</span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="card-body ">
+                    <h4>About Company</h4>
+                    <p class="mb-0" id="view-detail-about-company">Take a look at these creative company profile
+                      examples to inspire you as you create
+                      a company profile that will attract and engage the right audience.</p>
+                    <div class="mt-4">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center ps-0"><span>Email
+                            ID:</span><span id="view-detail-email-id">
+                            danshutts@teleworm.us</span></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center ps-0">
+                          <span>Category:</span><span id="view-detail-category">
+                            Real Estate</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center ps-0">
+                          <span>Rating:</span><span><span id="view-detail-rating">3.9</span><i
+                              class="mdi mdi-star text-warning"></i></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center ps-0">
+                          <span>Location:</span><span id="view-detail-location">
+                            Ahmedabad, India</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Modal -->
+  <div class="modal fade" id="add-edit-modal" tabindex="-1" aria-labelledby="add-edit-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="add-edit-modal-label">Add New Contact</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+            id="btn-close-modal"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form>
+              <div>
+                <div class="d-flex align-items-center mb-4">
+                  <div>
+                    <img class="image  avatar avatar-lg" src="../assets/images/avatar/avatar-1.jpg" id="company-logo"
+                      alt="Image">
+                  </div>
+                  <div class="file-upload btn btn-outline-white ms-4">
+                    <input type="file" class="file-input opacity-0">Upload Photo
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="company-name-field">Company</label>
+                <input type="text" class="form-control" placeholder="Enter Company Name" id="company-name-field"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="company-owner-field">Owner's Name</label>
+                <input type="text" class="form-control" placeholder="Enter Owner's Name" id="company-owner-field"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="category-field">Category</label>
+                <input type="text" class="form-control" placeholder="Enter Category" id="category-field" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="rating-field">Rating</label>
+                <input type="number" step=".01" class="form-control" placeholder="Enter Rating" id="rating-field"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="email-field">Email</label>
+                <input type="email" class="form-control" placeholder="Enter Email" id="email-field" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="location-field">Location</label>
+                <input type="text" class="form-control" placeholder="Location" id="location-field" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="about-company-field">About Company</label>
+                <textarea type="text" class="form-control" placeholder="Enter About Company" id="about-company-field"
+                  required rows="3"></textarea>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary" id="add-btn">+ Add Company</button>
+                <button type="submit" class="btn btn-primary" id="update-btn">Update</button>
+                <input type="hidden" class="form-control" placeholder="ID" id="id-field">
+                <button class="btn btn-light ms-2" data-bs-dismiss="modal" aria-label="Close">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+
+
+  <!-- Libs JS -->
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/feather-icons/dist/feather.min.js"></script>
+<script src="../node_modules/simplebar/dist/simplebar.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<!-- build:js ../assets/js/theme.min.js -->
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/feather.js"></script>
+<script src="../assets/js/darkMode.js"></script>
+<!-- endbuild -->
+  <!-- popper js -->
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+  <!-- tippy js -->
+  <script src="../node_modules/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+  <script src="../assets/js/vendors/tooltip.js"></script>
+
+
+  <!-- Listjs required js scripts -->
+  <script src="../node_modules/list.js/dist/list.min.js"></script>
+  <script src="../node_modules/list.pagination.js/dist/list.pagination.min.js"></script>
+  <script src='https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js'></script>
+
+  <!-- CRM Company js -->
+  <script src="../assets/js/vendors/crm-company.init.js"></script>
+
+
+</body>
+
+</html>

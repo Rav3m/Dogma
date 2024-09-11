@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ 
+  <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Codescandy">
+
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="https://www.panel.neodogma.com/imagenes/dogma-logo-favicon.ico">
+
+
+<!-- Libs CSS -->
+<link href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="../node_modules/simplebar/dist/simplebar.min.css" rel="stylesheet">
+
+
+
+<!-- Theme CSS -->
+<!-- build:css ../assets/css/theme.min.css -->
+<link rel="stylesheet" href="../assets/css/theme.css">
+<!-- endbuild -->
+  <title>Environment Setup | Dash UI - Bootstrap 5 Admin Dashboard Template</title>
+
+</head>
+
+<body>
+  <!-- Main wrapper -->
+  <main id="main-wrapper" class="main-wrapper">
+    <!-- navbar vertical -->
+    <div class="app-menu">
+       <!-- Sidebar -->
+
+<div class="navbar-vertical navbar nav-dashboard">
+    <div class="h-100" data-simplebar>
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="../index.html">
+            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+
+            <!-- Nav item -->
+            <li class="nav-item">
+                <a class="nav-link " 
+                    href="../index.html">
+					<i data-feather="home" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Home"> Inicio</span>
+                </a>
+            </li>
+            <!-- Nav item
+            <li class="nav-item">
+                <a class="nav-link has-arrow "
+                    href="../pages/calendar.html">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs" ></i> Calendario
+                </a>
+            </li>
+			<!-- Nav item -->
+			<li class="nav-item ">
+				<a
+					class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navProject"
+					aria-expanded="false"
+					aria-controls="navProject"
+				>
+					<i class="nav-icon me-2 icon-xxs" data-feather="file"></i>
+					<span data-translate="Statistics"> Estadísticas</span>
+				</a>
+				<div id="navProject" class="collapse  " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-files.html">
+								<span data-translate="Students">Alumnos</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-budget.html">
+								<span data-translate="Group">Grupo</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link has-arrow " href="../pages/profile-followers.html">
+					<i data-feather="edit" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Mini-games"> Desafíos</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navprofilePages"
+					aria-expanded="false"
+					aria-controls="navprofilePages"
+					>
+					<i data-feather="user" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Didactic-resources"> Recursos didácticos</span>
+				</a>
+				<div id="navprofilePages" class="collapse " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-files.html">
+								<span data-translate="Material">Material</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-overview.html">
+								<span data-translate="Information">Información</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link "
+					href="../pages/starter.html">
+                    <i data-feather="settings" class="nav-icon me-2 icon-xxs" ></i>
+					<span data-translate="Settings"> Ajustes</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+        </ul>
+    </div>
+</div>
+
+    </div>
+    <div class="header">
+  <!-- navbar -->
+  <div class="navbar-custom navbar navbar-expand-lg">
+    <div class="container-fluid px-0">
+		<a class="navbar-brand d-block d-md-none" href="../index.html">
+		  <img src="../assets/images/brand/logo/logo-2.svg" alt="Image">
+		</a>
+		<a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
+			<path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+		  </svg>
+		</a>
+
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+		<a href="#" class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
+			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+			<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		</a>
+		<div>
+            <a href="#" id="cerrar-sesion" class="btn btn-white" style="border: 1px solid #d0d0d0;margin-left: 10px;" data-translate="Logout">Cerrar Sesión</a>
+        </div>
+    </ul>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>
+    <!-- Wrapper  -->
+    <!-- Page Content -->
+    <div id="app-content">
+
+
+
+      <!-- Container fluid -->
+      <div class="app-content-area">
+ 
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="offset-xxl-1 col-xxl-8 offset-xl-1 col-xl-7 col-md-12 col-sm-12 col-12 ">
+              <!-- Content -->
+              <div class="docs-content mx-xxl-9">
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="mb-8" id="intro">
+                      <h1 class="mb-2">Environment Setup</h1>
+                      <p class="mb-0 lead text-muted">
+                        To get started with Dash UI Theme, the only requirement is a Node Js,
+                        Gulp, SASS & Bootstrap environment.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-12">
+                    <div class="mb-6">
+                      <div class="alert alert-warning" role="alert">
+                        Please note: this step is absolutely optional. It aims for advanced user who want to speed up
+                        development process with professional grade Front-End toolset shiped with Dash UI. If you are
+                        not
+                        familiar with these tools and have no time to dive in you can still use plain HTML / CSS / JS to
+                        customize Dash UI. Files you need are located inside Dash UI/dist folder. In this case you can
+                        skip this and
+                        next sections. Happy coding :)
+                      </div>
+
+
+
+                    </div>
+                    <div class="mb-8">
+                      <h2 class="h3">Modern development toolset.</h2>
+                      <p class="mb-0">Below are the tools which we use to building a Dash UI theme. For more detail of
+                        the toolset, go
+                        to their official website.
+                      </p>
+                    </div>
+                    <div class="mb-8">
+
+                      <div class="row">
+                        <div class="col-lg-6 col-12">
+                          <div class="mb-6">
+                            <div class="mb-4">
+                              <img src="../assets/images/svg/nodejs.svg" alt="" class="avatar-md">
+                            </div>
+                            <h3 class="h4">Node Js </h3>
+                            <p><a href="https://nodejs.org/en/" target="_blank">Node.js</a> is an open-source,
+                              cross-platform,
+                              back-end JavaScript runtime environment that
+                              runs on the V8 engine and executes
+                              JavaScript code outside a web browser.</p>
+
+                          </div>
+
+                        </div>
+                        <div class="col-lg-6 col-12">
+                          <div class="mb-6">
+                            <div class="mb-4">
+                              <img src="../assets/images/svg/gulp.svg" alt="" class="avatar-md">
+                            </div>
+                            <h3 class="h4">Gulp Js </h3>
+                            <p> A toolkit to automate & enhance your
+                              workflow. <a href="https://gulpjs.com/" target="_blank">Gulp</a>is an open-source
+                              JavaScript
+                              toolkit used as a streaming build system in
+                              front-end web development.
+                            </p>
+                          </div>
+
+                        </div>
+                        <div class="col-lg-6 col-12">
+                          <div class="mb-6">
+                            <div class="mb-4">
+                              <img src="../assets/images/svg/sass.svg" alt="" class="avatar-md">
+                            </div>
+                            <h3 class="h4">SASS </h3>
+                            <p><a href="https://sass-lang.com/" target="_blank">Sass</a> (short for syntactically
+                              awesome style
+                              sheets) is a preprocessor scripting language
+                              that is interpreted or compiled into Cascading
+                              Style Sheets (CSS).
+                            </p>
+                          </div>
+
+
+                        </div>
+                        <div class="col-lg-6 col-12">
+                          <div class="mb-6">
+                            <div class="mb-4">
+                              <img src="../assets/images/svg/bootstrap-5.svg" alt="" class="avatar-md">
+                            </div>
+                            <h3 class="h4">Bootstrap 5</h3>
+                            <p><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> is a free and
+                              open-source CSS
+                              framework directed at responsive, mobile-first
+                              front-end web development. Dash UI is built on
+                              5 and heavily depends on it.
+                            </p>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12  d-none d-xl-block position-fixed end-0">
+              <!-- Sidebar nav fixed -->
+              <div class="sidebar-nav-fixed">
+                <span class="px-4 mb-2 d-block text-uppercase ls-md fw-semi-bold fs-6">Contents</span>
+
+                <ul class="list-unstyled">
+                  <li><a href="#intro" class="active">Introduction</a></li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <!-- Libs JS -->
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/feather-icons/dist/feather.min.js"></script>
+<script src="../node_modules/simplebar/dist/simplebar.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<!-- build:js ../assets/js/theme.min.js -->
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/feather.js"></script>
+<script src="../assets/js/darkMode.js"></script>
+<!-- endbuild -->
+</body>
+
+</html>

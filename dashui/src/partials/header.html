@@ -1,0 +1,46 @@
+<div class="header">
+  <!-- navbar -->
+  <div class="navbar-custom navbar navbar-expand-lg">
+    <div class="container-fluid px-0">
+		<a class="navbar-brand d-block d-md-none" href="@@webRoot/index.html">
+		  <img src="@@webRoot/assets/images/brand/logo/logo-2.svg" alt="Image">
+		</a>
+		<a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
+			<path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+		  </svg>
+		</a>
+
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+		<a href="#" class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
+			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+			<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		</a>
+		<div>
+            <a href="#" id="cerrar-sesion" class="btn btn-white" style="border: 1px solid #d0d0d0;margin-left: 10px;" data-translate="Logout">Cerrar Sesión</a>
+        </div>
+    </ul>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>

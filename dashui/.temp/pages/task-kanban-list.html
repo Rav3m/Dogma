@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- dragula -->
+    <link href="../node_modules/dragula/dist/dragula.min.css" rel="stylesheet">
+    <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Codescandy">
+
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="https://www.panel.neodogma.com/imagenes/dogma-logo-favicon.ico">
+
+
+<!-- Libs CSS -->
+<link href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="../node_modules/simplebar/dist/simplebar.min.css" rel="stylesheet">
+
+
+
+<!-- Theme CSS -->
+<!-- build:css ../assets/css/theme.min.css -->
+<link rel="stylesheet" href="../assets/css/theme.css">
+<!-- endbuild -->
+
+    <title>Kanban | Dash UI - Bootstrap 5 Admin Dashboard Template</title>
+</head>
+
+<body>
+    <main id="main-wrapper" class="main-wrapper">
+        <div class="header">
+  <!-- navbar -->
+  <div class="navbar-custom navbar navbar-expand-lg">
+    <div class="container-fluid px-0">
+		<a class="navbar-brand d-block d-md-none" href="../index.html">
+		  <img src="../assets/images/brand/logo/logo-2.svg" alt="Image">
+		</a>
+		<a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
+			<path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+		  </svg>
+		</a>
+
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+		<a href="#" class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
+			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+			<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		</a>
+		<div>
+            <a href="#" id="cerrar-sesion" class="btn btn-white" style="border: 1px solid #d0d0d0;margin-left: 10px;" data-translate="Logout">Cerrar Sesión</a>
+        </div>
+    </ul>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>
+            <!-- navbar vertical -->
+             <!-- Sidebar -->
+
+<div class="navbar-vertical navbar nav-dashboard">
+    <div class="h-100" data-simplebar>
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="../index.html">
+            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+
+            <!-- Nav item -->
+            <li class="nav-item">
+                <a class="nav-link " 
+                    href="../index.html">
+					<i data-feather="home" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Home"> Inicio</span>
+                </a>
+            </li>
+            <!-- Nav item
+            <li class="nav-item">
+                <a class="nav-link has-arrow "
+                    href="../pages/calendar.html">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs" ></i> Calendario
+                </a>
+            </li>
+			<!-- Nav item -->
+			<li class="nav-item ">
+				<a
+					class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navProject"
+					aria-expanded="false"
+					aria-controls="navProject"
+				>
+					<i class="nav-icon me-2 icon-xxs" data-feather="file"></i>
+					<span data-translate="Statistics"> Estadísticas</span>
+				</a>
+				<div id="navProject" class="collapse  " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-files.html">
+								<span data-translate="Students">Alumnos</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-budget.html">
+								<span data-translate="Group">Grupo</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link has-arrow " href="../pages/profile-followers.html">
+					<i data-feather="edit" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Mini-games"> Desafíos</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navprofilePages"
+					aria-expanded="false"
+					aria-controls="navprofilePages"
+					>
+					<i data-feather="user" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Didactic-resources"> Recursos didácticos</span>
+				</a>
+				<div id="navprofilePages" class="collapse " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-files.html">
+								<span data-translate="Material">Material</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-overview.html">
+								<span data-translate="Information">Información</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link "
+					href="../pages/starter.html">
+                    <i data-feather="settings" class="nav-icon me-2 icon-xxs" ></i>
+					<span data-translate="Settings"> Ajustes</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+        </ul>
+    </div>
+</div>
+
+
+
+        <!-- page content -->
+        <div id="app-content">
+            <div class="app-content-area">
+                <div class="container-fluid">
+                    <div>
+                        <div class="row mb-8 align-items-center">
+                            <div class="col-xxl-10 col-xl-8 col-lg-6 col-md-12 col-12 mb-3 mb-lg-0">
+                                <!-- heading -->
+                                <h3 class="mb-0">DashUI Design & Development</h3>
+                            </div>
+                            <div class="col-xxl-1 col-xl-2 col-lg-3 col-md-12 pe-lg-2">
+                                <!-- select -->
+                                <select class="form-select mb-2 mb-lg-0">
+                                    <option selected>Sort</option>
+                                    <option value="None">None</option>
+                                    <option value="Due Date">Due Date</option>
+                                    <option value="Assignee">Assignee</option>
+                                    <option value="Likes">Likes</option>
+                                    <option value="Alphabetical">Alphabetical</option>
+                                    <option value="Priority">Priority</option>
+                                </select>
+                            </div>
+                            <div class="col-xxl-1 col-xl-2 col-lg-3 col-md-12 ps-lg-2">
+                                <!-- select -->
+                                <select class="form-select">
+                                    <option selected>Filter</option>
+                                    <option value="Just my task">Just my task</option>
+                                    <option value="Due this week">Due this week</option>
+                                    <option value="Due next week">Due next week</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-6">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a class="text-dark fs-4 " data-bs-toggle="collapse" href="#taskCardOne"
+                                            aria-expanded="false" aria-controls="taskCardOne">
+                                            <i data-feather="chevron-down" class="icon-xs"></i> To Do <span
+                                                class="text-muted">(12)</span>
+                                        </a>
+                                        <!-- dropdown -->
+                                        <div class="dropdown dropstart">
+                                            <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#!"
+                                                id="dropdownTask11" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                <i data-feather="more-vertical" class="icon-xs"></i>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownTask11">
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="edit-2"></i>Edit this task
+                                                </a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="check-square"></i>Mark
+                                                    Complete</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="eye"></i>View
+                                                    Details
+                                                </a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="maximize-2"></i>Open in
+                                                    New Tab</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="copy"></i>Duplicate
+                                                    task</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="link"></i>Copy
+                                                    task link</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon
+                                        " data-feather="trash-2"></i>Delete task
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="collapse show" id="taskCardOne">
+                                        <div id="do" class="p-2 mt-4">
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox ">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck1">
+                                                            <label class="form-check-label" for="customCheck1">
+                                                                <span class="h5">Initial setup your design </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-11.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">30 Oct 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>3/12</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-danger-soft">High</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck2">
+                                                            <label class="form-check-label" for="customCheck2">
+                                                                <span class="h5">Invite your teammates and start
+                                                                    collaborating </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-2.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">15 Oct 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>8/16</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-warning-soft">Medium</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck3">
+                                                            <label class="form-check-label" for="customCheck3">
+                                                                <span class="h5">Start manage projects on the go </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-3.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">25 Nov 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>9/24</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-info-soft">Low</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-6">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a class="text-dark fs-4 " data-bs-toggle="collapse" href="#taskCardTwo"
+                                            aria-expanded="false" aria-controls="taskCardTwo">
+                                            <i data-feather="chevron-down" class="icon-xs"></i> Doing
+                                        </a>
+                                        <!-- dropdown -->
+                                        <div class="dropdown dropstart">
+                                            <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#!"
+                                                id="dropdownTask2" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                <i data-feather="more-vertical" class="icon-xs"></i>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownTask2">
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="edit-2"></i>Edit this task
+                                                </a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="check-square"></i>Mark
+                                                    Complete</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="eye"></i>View
+                                                    Details
+                                                </a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="maximize-2"></i>Open in
+                                                    New Tab</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="copy"></i>Duplicate
+                                                    task</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="link"></i>Copy
+                                                    task link</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon
+                                        " data-feather="trash-2"></i>Delete task
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="collapse show" id="taskCardTwo">
+                                        <div id="progress" class="p-2 mt-4">
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox ">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck4">
+                                                            <label class="form-check-label" for="customCheck4">
+                                                                <span class="h5">Website launch planning </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-4.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">15 Sept 2020</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>7/24</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-warning-soft">Meidum</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck5">
+                                                            <label class="form-check-label" for="customCheck5">
+                                                                <span class="h5">Start prototyping in framer </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-5.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">17 Oct 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>8/16</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-info-soft">Low</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck7">
+                                                            <label class="form-check-label" for="customCheck7">
+                                                                <span class="h5">Create a UI / UX designer team </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-6.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">30 Sept 2020</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>23/24</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-danger-soft">High</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox ">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck8">
+                                                            <label class="form-check-label" for="customCheck8">
+                                                                <span class="h5">Initial setup your design </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-8.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">30 Oct 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>3/12</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-danger-soft">High</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck9">
+                                                            <label class="form-check-label" for="customCheck9">
+                                                                <span class="h5">Invite your teammates and start
+                                                                    collaborating </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-2.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">15 Oct 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>8/16</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-warning-soft">Medium</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-6">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a class="text-dark fs-4 chevron-arrow" data-bs-toggle="collapse"
+                                            href="#taskCardThree" aria-expanded="false" aria-controls="taskCardThree">
+                                            <i data-feather="chevron-down" class="icon-xs"></i> Done
+                                        </a>
+                                        <!-- dropdown -->
+                                        <div class="dropdown dropstart">
+                                            <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#!"
+                                                id="dropdownTask3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                <i data-feather="more-vertical" class="icon-xs"></i>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownTask3">
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="edit-2"></i>Edit this task
+                                                </a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="check-square"></i>Mark
+                                                    Complete</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="eye"></i>View
+                                                    Details
+                                                </a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="maximize-2"></i>Open in
+                                                    New Tab</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="copy"></i>Duplicate
+                                                    task</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon"
+                                                        data-feather="link"></i>Copy
+                                                    task link</a>
+                                                <a class="dropdown-item
+                                      d-flex
+                                      align-items-center" href="#!"><i class="dropdown-item-icon
+                                        " data-feather="trash-2"></i>Delete task
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="collapse show" id="taskCardThree">
+                                        <div id="done" class="p-2 mt-4">
+
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck12">
+                                                            <label class="form-check-label" for="customCheck12">
+                                                                <span class="h5">Create a UI / UX designer team </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-6.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">30 Sept 2020</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>23/24</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-danger-soft">High</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox ">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck13">
+                                                            <label class="form-check-label" for="customCheck13">
+                                                                <span class="h5">Initial setup your design </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-8.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">30 Oct 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>3/12</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-danger-soft">High</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox ">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck10">
+                                                            <label class="form-check-label" for="customCheck10">
+                                                                <span class="h5">Website launch planning </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-4.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">15 Sept 2020</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>7/24</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-warning-soft">Meidum</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck11">
+                                                            <label class="form-check-label" for="customCheck11">
+                                                                <span class="h5">Start prototyping in framer </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-5.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">17 Oct 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>8/16</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-info-soft">Low</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 border-bottom pb-2 g-0">
+                                                <div class="col-lg-6">
+                                                    <div class="d-flex">
+                                                        <div class="me-2"><i class="mdi mdi-drag"></i></div>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="customCheck14">
+                                                            <label class="form-check-label" for="customCheck14">
+                                                                <span class="h5">Invite your teammates and start
+                                                                    collaborating </span>
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 ms-5 ms-lg-0 mt-2 mt-lg-0">
+                                                    <div class="d-flex justify-content-between">
+                                                        <img src="../assets/images/avatar/avatar-2.jpg" alt="Image"
+                                                            class="avatar avatar-xs rounded-2">
+                                                        <span class="ms-4">15 Oct 2023</span>
+                                                        <span class="ms-6"><i class="me-1 icon-xs"
+                                                                data-feather="check-square"></i>8/16</span>
+                                                        <span class="ms-6"><span
+                                                                class="badge badge-warning-soft">Medium</span></span>
+                                                        <span class="me-6"><i data-feather="chevron-right"
+                                                                class="icon-xs"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Scripts -->
+    <!-- dragula -->
+    <script src="../node_modules/dragula/dist/dragula.min.js"></script>
+
+    <!-- Libs JS -->
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/feather-icons/dist/feather.min.js"></script>
+<script src="../node_modules/simplebar/dist/simplebar.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<!-- build:js ../assets/js/theme.min.js -->
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/feather.js"></script>
+<script src="../assets/js/darkMode.js"></script>
+<!-- endbuild -->
+
+
+
+</body>
+
+</html>

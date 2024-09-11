@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+
+	<head>
+	  <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Codescandy">
+
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="https://www.panel.neodogma.com/imagenes/dogma-logo-favicon.ico">
+
+
+<!-- Libs CSS -->
+<link href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="../node_modules/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="../node_modules/simplebar/dist/simplebar.min.css" rel="stylesheet">
+
+
+
+<!-- Theme CSS -->
+<!-- build:css ../assets/css/theme.min.css -->
+<link rel="stylesheet" href="../assets/css/theme.css">
+<!-- endbuild -->
+		<title> Panel Neodogma | Contacto </title>
+		<script>
+			console.log("Token en almacenamiento local:", localStorage.getItem("tokenUsuario"));
+			if (!localStorage.getItem("tokenUsuario")) {
+				window.location.href = 'pages/login.html';
+			}
+		</script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	</head>
+
+  <body>
+    <main id="main-wrapper" class="main-wrapper">
+      <div class="header">
+  <!-- navbar -->
+  <div class="navbar-custom navbar navbar-expand-lg">
+    <div class="container-fluid px-0">
+		<a class="navbar-brand d-block d-md-none" href="../index.html">
+		  <img src="../assets/images/brand/logo/logo-2.svg" alt="Image">
+		</a>
+		<a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
+			<path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+		  </svg>
+		</a>
+
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+		<a href="#" class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
+			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+			<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		</a>
+		<div>
+            <a href="#" id="cerrar-sesion" class="btn btn-white" style="border: 1px solid #d0d0d0;margin-left: 10px;" data-translate="Logout">Cerrar Sesión</a>
+        </div>
+    </ul>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>
+      <!-- navbar vertical -->
+       <!-- Sidebar -->
+
+<div class="navbar-vertical navbar nav-dashboard">
+    <div class="h-100" data-simplebar>
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="../index.html">
+            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+
+            <!-- Nav item -->
+            <li class="nav-item">
+                <a class="nav-link " 
+                    href="../index.html">
+					<i data-feather="home" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Home"> Inicio</span>
+                </a>
+            </li>
+            <!-- Nav item
+            <li class="nav-item">
+                <a class="nav-link has-arrow "
+                    href="../pages/calendar.html">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs" ></i> Calendario
+                </a>
+            </li>
+			<!-- Nav item -->
+			<li class="nav-item ">
+				<a
+					class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navProject"
+					aria-expanded="false"
+					aria-controls="navProject"
+				>
+					<i class="nav-icon me-2 icon-xxs" data-feather="file"></i>
+					<span data-translate="Statistics"> Estadísticas</span>
+				</a>
+				<div id="navProject" class="collapse  " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-files.html">
+								<span data-translate="Students">Alumnos</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-budget.html">
+								<span data-translate="Group">Grupo</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link has-arrow " href="../pages/profile-followers.html">
+					<i data-feather="edit" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Mini-games"> Desafíos</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link   "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navprofilePages"
+					aria-expanded="false"
+					aria-controls="navprofilePages"
+					>
+					<i data-feather="user" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Didactic-resources"> Recursos didácticos</span>
+				</a>
+				<div id="navprofilePages" class="collapse  show " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-files.html">
+								<span data-translate="Material">Material</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link  active " href="../pages/profile-overview.html">
+								<span data-translate="Information">Información</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link "
+					href="../pages/starter.html">
+                    <i data-feather="settings" class="nav-icon me-2 icon-xxs" ></i>
+					<span data-translate="Settings"> Ajustes</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+        </ul>
+    </div>
+</div>
+
+
+
+      <!-- page content -->
+      <div id="app-content">
+
+        <!-- Container fluid -->
+        <div class="app-content-area">
+          <div class="container-fluid">
+
+
+            <div class="row align-items-center">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                <!-- Bg -->
+                <div
+                  class="pt-20 rounded-top"
+                  style="
+                    background: url(../assets/images/background/profile-cover.jpg)
+                      no-repeat;
+                    background-size: cover;
+                  "
+                ></div>
+                <div class="card rounded-bottom rounded-0 smooth-shadow-sm mb-5">
+                  <div
+                    class="d-flex align-items-center justify-content-between pt-4 pb-6 px-4"
+                  >
+                    <div class="d-flex align-items-center">
+                      <!-- avatar -->
+                      <div
+                        class="avatar-xxl avatar-indicators avatar-online me-2 position-relative d-flex justify-content-end align-items-end mt-n10"
+                      >
+                      <img src="https://panel.neodogma.com/imagenes/avatares/avatar-contacto.png"
+                      class="avatar-xxl
+                      rounded-circle border border-2 "
+                      alt="Image">
+                    <a href="#!" class="position-absolute top-0 right-0 me-2"
+                    >
+                      <img src="../assets/images/svg/checked-mark.svg" alt="Image"
+                        class="icon-sm">
+                    </a>
+                      </div>
+                      <!-- text -->
+                      <div class="lh-1">
+                        <h2 class="mb-0" data-translate="Teaching-innovation">
+                          Neodogma | Innovación Docente
+                          <a href="#!" class="text-decoration-none"></a>
+                        </h2>
+                        <p class="mb-0 d-block"><a href="https://www.instagram.com/neo.dogma/" target="_blank">@neo.dogma</a></p>
+                      </div>
+                    </div>
+                    <div>
+                      <a href="https://www.neodogma.com/contacto/" class="btn btn-outline-primary d-none d-md-block" data-translate="Contact">Contactar</a>
+                    </div>
+                  </div>
+                  <!-- nav -->
+                  <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link" href="profile-files.html" data-translate="Material">Material</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="profile-overview.html" data-translate="Information">Información</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- content -->
+            <div >
+              <!-- row -->
+              <div class="row">
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-5">
+                  <!-- card -->
+                  <div class="card h-100">
+                    <!-- card body -->
+                    <div class="card-header">
+                      <h4 class="mb-0" data-translate="About-us">Sobre Nosotros</h4>
+                    </div>
+                    <div class="card-body">
+                      <!-- text -->
+                      <p class="mt-2 mb-6" data-translate="Description-about-us">
+                        En NeoDogma desarrollamos herramientas pedagógicas con el objetivo de ayudar a la hora de enseñar y aprender ciencia. Creemos firmemente en que el sector educativo debe incorporar las nuevas tecnologías con el objetivo de mejorar la atención y la calidad educativa. Si quieres saber más sobre cómo podemos ayudarte, consulta nuestra web <a href="https://www.neodogma.com/" target="_blank">www.neodogma.com</a>
+						<br/><br/>
+						Puedes saber más de nosotros también en nuestras redes sociales <a href="https://www.instagram.com/neo.dogma/" target="_blank">@neo.dogma</a>
+                      </p>
+                      <!-- row -->
+                      <div class="row">
+                        <div class="col-12 mb-5">
+                          <!-- text -->
+                          <h5 class="text-uppercase">Powered By</h5>
+                          <p class="mb-0"><a href="https://www.kodigopc.com" target="_blank">Kodigo PC</a> || <a href="https://www.youmu.es" target="_blank">Youmu</a></p>
+                        </div>
+                        <div class="col-6 mb-5">
+                          <h5 class="text-uppercase" data-translate="Phone">Teléfono</h5>
+                          <p class="mb-0"><a href="tel:+34676895776">676 895 776</a></p>
+                        </div>
+                        <div class="col-6 mb-5">
+                          <h5 class="text-uppercase" data-translate="Objetive">Objetivo</h5>
+                          <p class="mb-0" data-translate="Description-objetive">Apoyo enseñanza didáctica</p>
+                        </div>
+                        <div class="col-6">
+                          <h5 class="text-uppercase" data-translate="Mail">Email</h5>
+                          <p class="mb-0"><a href="mailto:info@neodogma.com">info@neodogma.com</a> || <a href="mailto:soporte@neodogma.com">soporte@neodogma.com</a></p>
+                        </div>
+                        <div class="col-6">
+                          <h5 class="text-uppercase" data-translate="Province">Provincia</h5>
+                          <p class="mb-0">Murcia, España</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+				<div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-5">
+                  <!-- card -->
+                  <div class="card h-100">
+                    <!-- card body -->
+                    <div class="card-header">
+                      <h4 class="mb-0" data-translate="About-Panel">Sobre el Panel</h4>
+                    </div>
+                    <div class="card-body">
+                      <!-- text -->
+                      <p class="mt-2 mb-6" data-translate="Description-about-Panel">
+                        <b><span id="nombreprofesor"></span></b> Nos encanta saber que este proyecto educativo te está gustando. En este panel de control tendrás acceso a material didáctico extra y podrás conocer las métricas de tus alumnos y su ritmo de progreso. Todo el contenido está enfocado a que tú puedes centrarte en lo que verdaderamente importa, impartir sabiduría.
+						<br/><br/>
+						Recuerda que si tienes alguna duda puedes contactarnos a <a href="mailto:info@neodogma.com">info@neodogma.com</a> o directamente al <a href="tel:+34676895776">676895776</a>.
+						<br/><br/>
+						NeoDogma.
+                      </p>
+                      <!-- row -->
+                      <div class="row">
+                        <div class="col-6 mb-5">
+                          <!-- text -->
+                          <h5 class="text-uppercase" data-translate="Current-Subject">Materia Actual</h5>
+                          <p class="mb-0" data-translate="Molecular-biology">Biología Molecular</p>
+                        </div>
+						<div class="col-6">
+                          <!-- text -->
+                          <h5 class="text-uppercase" data-translate="Current-course">Curso Actual</h5>
+                          <p id="cursoactual" class="mb-0"></p>
+                        </div>
+						<div class="col-6 mb-5">
+                          <!-- text -->
+                          <h5 class="text-uppercase" data-translate="License-expiration-date">Fecha expiración licencias</h5>
+                          <p class="mb-0" id="fechaexpiracion"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-5">
+                  <!-- card -->
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="mb-0" data-translate="Other-subjects">Otras Materias</h4>
+                    </div>
+                    <!-- card body -->
+                    <div class="card-body">
+                      <!-- card title -->
+
+                      <div class="d-md-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center">
+                          <div>
+                            <div>
+                              <img src="../assets/images/svg/brand-logo-1.svg" alt="Image">
+                            </div>
+                          </div>
+                          <!-- text -->
+                          <div class="ms-3">
+                            <h5 class="mb-1">
+                              <a href="#!" class="text-inherit" data-translate="Math">Matemáticas</a>
+                            </h5>
+                            <p class="mb-0 fs-5 text-muted" data-translate="Upcoming-subjects">Próximamente...</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="d-md-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center">
+                          <div>
+                            <!-- icon shape -->
+                            <div>
+                              <img src="../assets/images/svg/brand-logo-2.svg" alt="Image">
+                            </div>
+                          </div>
+                          <!-- text -->
+                          <div class="ms-3">
+                            <h5 class="mb-1">
+                              <a href="#!" class="text-inherit" data-translate="Geography-history">Geografía e Historia</a>
+                            </h5>
+                            <p class="mb-0 fs-5 text-muted" data-translate="Upcoming-subjects">Próximamente...</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="d-md-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center">
+                          <div>
+                            <!-- icon shape -->
+                            <div>
+                              <img src="../assets/images/svg/brand-logo-3.svg" alt="Image">
+                            </div>
+                          </div>
+                          <!-- text -->
+                          <div class="ms-3">
+                            <h5 class="mb-1">
+                              <a href="#!" class="text-inherit" data-translate="Language-literature">Lengua y Literatura</a>
+                            </h5>
+                            <p class="mb-0 fs-5 text-muted" data-translate="Upcoming-subjects">Próximamente...</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-md-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center">
+                          <!-- icon shape -->
+                          <div>
+                            <div>
+                              <img src="../assets/images/svg/brand-logo-4.svg" alt="Image">
+                            </div>
+                          </div>
+                          <!-- text -->
+                          <div class="ms-3">
+                            <h5 class="mb-1">
+                              <a href="#!" class="text-inherit" data-translate="English">Inglés</a>
+                            </h5>
+                            <p class="mb-0 fs-5 text-muted" data-translate="Upcoming-subjects">Próximamente...</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-md-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center">
+                          <!-- icon shape -->
+                          <div>
+                            <div>
+                              <img src="../assets/images/svg/brand-logo-5.svg" alt="Image">
+                            </div>
+                          </div>
+                          <!-- text -->
+                          <div class="ms-3">
+                            <h5 class="mb-1">
+                              <a href="#!" class="text-inherit" data-translate="Physics-chemistry">Física y Química</a>
+                            </h5>
+                            <p class="mb-0 fs-5 text-muted" data-translate="Upcoming-subjects">Próximamente...</p>
+                          </div>
+                        </div>
+                      </div>
+					  <div class="d-md-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                          <!-- icon shape -->
+                          <div>
+                            <div>
+                              <img src="../assets/images/svg/brand-logo-6.svg" alt="Image">
+                            </div>
+                          </div>
+                          <!-- text -->
+                          <div class="ms-3">
+                            <h5 class="mb-1">
+                              <a href="#!" class="text-inherit" data-translate="Latin">Latín</a>
+                            </h5>
+                            <p class="mb-0 fs-5 text-muted" data-translate="Upcoming-subjects">Próximamente...</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+	
+    <!-- Scripts -->
+
+    <!-- Libs JS -->
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/feather-icons/dist/feather.min.js"></script>
+<script src="../node_modules/simplebar/dist/simplebar.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<!-- build:js ../assets/js/theme.min.js -->
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/feather.js"></script>
+<script src="../assets/js/darkMode.js"></script>
+<!-- endbuild -->
+    <!-- popper js -->
+	<script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+	<!-- tippy js -->
+	<script src="../node_modules/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+	<script src="../assets/js/vendors/tooltip.js"></script>
+
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+		var fechaExpiraSeconds = localStorage.getItem("fechaExpiraSeconds")
+		var fechaExpira = localStorage.getItem("fechaexpiracion");
+		var idCentro = parseInt(localStorage.getItem("idCentroProfe"));
+		var idClase = localStorage.getItem("idClaseProfe");
+		
+		const clases = {
+			"4a": { nombre: "4º ESO", grupo: " A" },
+			"4b": { nombre: "4º ESO", grupo: " B" },
+			"4c": { nombre: "4º ESO", grupo: " C" },
+			"4d": { nombre: "4º ESO", grupo: " D" },
+			"1BachA": { nombre: "1º Bachillerato", grupo: " A" },
+			"1BachB": { nombre: "1º Bachillerato", grupo: " B" },
+			"1BachC": { nombre: "1º Bachillerato", grupo: " C" },
+			"1BachD": { nombre: "1º Bachillerato", grupo: " D" },
+			"2BachA": { nombre: "2º Bachillerato", grupo: " A" },
+			"2BachB": { nombre: "2º Bachillerato", grupo: " B" },
+			"2BachC": { nombre: "2º Bachillerato", grupo: " C" },
+			"2BachD": { nombre: "2º Bachillerato", grupo: " D" },
+		};
+		
+		var claseInfo = clases[idClase];
+		var idclasenombre = claseInfo ? claseInfo.nombre : "Clase no encontrada";
+		var idclasegrupo = claseInfo ? claseInfo.grupo : "";
+        
+		if (licenciaProfe) {
+			document.getElementById("nombreprofesor").textContent = "¡Hola " + nombreProfe + "!";
+
+			if (fechaExpiraSeconds) {
+				var date = new Date(parseInt(fechaExpiraSeconds) * 1000);
+				
+				let options = {
+					year: 'numeric', month: 'long', day: 'numeric',
+					hour: 'numeric', minute: 'numeric', second: 'numeric',
+					hourCycle: 'h23',
+					timeZone: 'Europe/Madrid'
+				};
+
+				let formatter = new Intl.DateTimeFormat('es-ES', options);
+				let formattedDate = formatter.format(date);
+
+				document.getElementById("fechaexpiracion").textContent = formattedDate;
+				document.getElementById("fechaexpiracion").style.color = "blue";
+			} else {
+				console.error('No se encontró "fechaExpiraSeconds" en localStorage');
+			}
+			
+			document.getElementById("cursoactual").textContent = idclasenombre + " " + idclasegrupo
+			document.getElementById("cursoactual").style.color = "blue";
+		}
+    </script>
+	<script type="module" src="/dist/bundle.js"></script>
+  </body>
+</html>
