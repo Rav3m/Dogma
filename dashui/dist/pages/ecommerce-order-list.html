@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Codescandy">
+
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="https://www.panel.neodogma.com/imagenes/dogma-logo-favicon.ico">
+
+
+<!-- Libs CSS -->
+<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
+
+
+
+<!-- Theme CSS -->
+<link rel="stylesheet" href="../assets/css/theme.min.css">
+  <title>Order List | Dash UI - Bootstrap 5 Admin Dashboard Template</title>
+</head>
+
+<body>
+  <main id="main-wrapper" class="main-wrapper">
+    <div class="header">
+  <!-- navbar -->
+  <div class="navbar-custom navbar navbar-expand-lg">
+    <div class="container-fluid px-0">
+		<a class="navbar-brand d-block d-md-none" href="../index.html">
+		  <img src="../assets/images/brand/logo/logo-2.svg" alt="Image">
+		</a>
+		<a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
+			<path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+		  </svg>
+		</a>
+
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+		<a href="#" class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
+			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+			<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		</a>
+		<div>
+            <a href="#" id="cerrar-sesion" class="btn btn-white" style="border: 1px solid #d0d0d0;margin-left: 10px;" data-translate="Logout">Cerrar Sesión</a>
+        </div>
+    </ul>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>
+    <!-- navbar vertical -->
+     <!-- Sidebar -->
+
+<div class="navbar-vertical navbar nav-dashboard">
+    <div class="h-100" data-simplebar>
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="../index.html">
+            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+
+            <!-- Nav item -->
+            <li class="nav-item">
+                <a class="nav-link " 
+                    href="../index.html">
+					<i data-feather="home" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Home"> Inicio</span>
+                </a>
+            </li>
+            <!-- Nav item
+            <li class="nav-item">
+                <a class="nav-link has-arrow "
+                    href="../pages/calendar.html">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs" ></i> Calendario
+                </a>
+            </li>
+			<!-- Nav item -->
+			<li class="nav-item ">
+				<a
+					class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navProject"
+					aria-expanded="false"
+					aria-controls="navProject"
+				>
+					<i class="nav-icon me-2 icon-xxs" data-feather="file"></i>
+					<span data-translate="Statistics"> Estadísticas</span>
+				</a>
+				<div id="navProject" class="collapse  " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-files.html">
+								<span data-translate="Students">Alumnos</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-budget.html">
+								<span data-translate="Group">Grupo</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link has-arrow " href="../pages/profile-followers.html">
+					<i data-feather="edit" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Mini-games"> Desafíos</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navprofilePages"
+					aria-expanded="false"
+					aria-controls="navprofilePages"
+					>
+					<i data-feather="user" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Didactic-resources"> Recursos didácticos</span>
+				</a>
+				<div id="navprofilePages" class="collapse " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-files.html">
+								<span data-translate="Material">Material</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-overview.html">
+								<span data-translate="Information">Información</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link "
+					href="../pages/starter.html">
+                    <i data-feather="settings" class="nav-icon me-2 icon-xxs" ></i>
+					<span data-translate="Settings"> Ajustes</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+        </ul>
+    </div>
+</div>
+
+
+
+       <!-- Page Content -->
+       <div id="app-content">
+
+        <!-- Container fluid -->
+        <div class="app-content-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <!-- Page header -->
+                    <div class="mb-5">
+                        <h3 class="mb-0 ">Orders</h3>
+
+                    </div>
+                </div>
+            </div>
+            <div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-12">
+                        <!-- card -->
+                        <div class="card mb-4">
+                            <div class="card-header  ">
+                                <div class="row">
+                                    <div class=" col-lg-3 col-md-6">
+                                        <input type="search" class="form-control " placeholder="Search Files...">
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 d-flex align-items-center mt-3 mt-md-0">
+                                        <label class="form-label me-2 mb-0">Status</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Shipped</option>
+                                        <option value="1">In Progress</option>
+                                        <option value="2">Delivered</option>
+                                      </select>
+                                    </div>
+
+
+
+
+                                <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+
+                                    <a href="#!" class="btn btn-primary me-2">+ Add New Order</a>
+                                    <a href="#!" class="btn btn-light " >Export</a>
+                                </div>
+                            </div>
+                            </div>
+                  <div class="card-body">
+                    <div class="table-responsive table-card">
+                        <table class="table text-nowrap mb-0 table-centered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class=" pe-0  ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="checkAll">
+                                            <label class="form-check-label" for="checkAll">
+
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th class="ps-1">Order ID</th>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Payment Status</th>
+                                    <th>Total</th>
+                                    <th>Order Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox2">
+                                            <label class="form-check-label" for="contactCheckbox2">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00017</a>
+                                    </td>
+                                    <td>Harold Gonzalez </td>
+                                    <td>3 Oct, 2023 10:02 PM</td>
+                                    <td><span class="badge bg-success">Paid</span></td>
+                                    <td>$120.00</td>
+                                    <td><span class="badge badge-info-soft">Shipped</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox3">
+                                            <label class="form-check-label" for="contactCheckbox3">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00016</a>
+                                    </td>
+                                    <td>Anthony Anderson </td>
+                                    <td>19 August, 2023 6:22 PM</td>
+                                    <td><span class="badge bg-success">Paid</span></td>
+                                    <td>$220.00</td>
+                                    <td><span class="badge badge-warning-soft text-warning">In Progress</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox4">
+                                            <label class="form-check-label" for="contactCheckbox4">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00015</a>
+                                    </td>
+                                    <td>Gary Faulkner</td>
+                                    <td>8 August, 2023 8:13 AM</td>
+                                    <td><span class="badge bg-success">Paid</span></td>
+                                    <td>$113.42</td>
+                                    <td><span class="badge badge-info-soft">In Shipped</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox5">
+                                            <label class="form-check-label" for="contactCheckbox5">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00014</a>
+                                    </td>
+                                    <td>Steve Nelson</td>
+                                    <td>26 July, 2023 10:19 AM</td>
+                                    <td><span class="badge bg-success">Paid</span></td>
+                                    <td>$425.31</td>
+                                    <td><span class="badge badge-success-soft text-success">Delivered</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox6">
+                                            <label class="form-check-label" for="contactCheckbox6">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00013</a>
+                                    </td>
+                                    <td>Kimberly Sullivan</td>
+                                    <td>18 July, 2023 9:52 PM</td>
+                                    <td><span class="badge bg-secondary">Refunded</span></td>
+                                    <td>$113.00</td>
+                                    <td><span class="badge badge-success-soft text-success">Delivered</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox7">
+                                            <label class="form-check-label" for="contactCheckbox7">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00012</a>
+                                    </td>
+                                    <td>Susan Pugh</td>
+                                    <td>2 July, 2023 8:00 AM</td>
+                                    <td><span class="badge bg-success">Paid</span></td>
+                                    <td>$831.99</td>
+                                    <td><span class="badge badge-success-soft text-success">Delivered</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox8">
+                                            <label class="form-check-label" for="contactCheckbox8">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00011</a>
+                                    </td>
+                                    <td>Elliott Potts</td>
+                                    <td>23 June, 2023 8:14 PM</td>
+                                    <td><span class="badge bg-danger">Cancel</span></td>
+                                    <td>$113.00</td>
+                                    <td><span class="badge badge-success-soft text-success">Delivered</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox9">
+                                            <label class="form-check-label" for="contactCheckbox9">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00010</a>
+                                    </td>
+                                    <td>Richard Beaudry</td>
+                                    <td>13 June, 2023 4:12 PM</td>
+                                      <td><span class="badge bg-success">Paid</span></td>
+                                    <td>$582.99</td>
+                                    <td><span class="badge badge-success-soft text-success">Delivered</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox10">
+                                            <label class="form-check-label" for="contactCheckbox10">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00009</a>
+                                    </td>
+                                    <td>Henry Saxton</td>
+                                    <td>5 May, 2023 12:02 PM</td>
+                                      <td><span class="badge bg-success">Paid</span></td>
+                                    <td>$00.00</td>
+                                    <td><span class="badge badge-success-soft text-success">Delivered</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="contactCheckbox11">
+                                            <label class="form-check-label" for="contactCheckbox11">
+
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="ps-1">
+                                        <a href="#!">#DU00008</a>
+                                    </td>
+                                    <td>Juanita Diener</td>
+                                    <td>4 April, 2023 5:02 PM</td>
+                                      <td><span class="badge bg-success">Paid</span></td>
+                                    <td>$25.23</td>
+                                    <td><span class="badge badge-success-soft text-success">Delivered</span></td>
+                                    <td>
+
+
+                                            <div class="dropdown">
+                                                <a class="btn btn-icon btn-sm btn-ghost rounded-circle" href="#!" role="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i data-feather="more-vertical" class="icon-xs"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Action</a></li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Another action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item d-flex align-items-center" href="#!">Something else
+                                                            here</a></li>
+                                                </ul>
+                                            </div>
+
+                                    </td>
+                                </tr>
+
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                            <div
+                                class="card-footer d-md-flex justify-content-between align-items-center">
+                                <span>Showing 1 to 8 of 12 entries</span>
+                                <nav class="mt-2 mt-md-0">
+                                    <ul class="pagination mb-0">
+                                        <li class="page-item"><a class="page-link" href="#!">Previous</a></li>
+                                        <li class="page-item"><a class="page-link active" href="#!">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#!">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</main>
+
+        <!-- Scripts -->
+
+        <!-- Libs JS -->
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<script src="../assets/js/theme.min.js"></script>
+
+
+
+</body>
+
+</html>

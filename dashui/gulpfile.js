@@ -1,6 +1,6 @@
 
 // Load plugins
-const { src, dest, watch, parallel, series } = require("gulp");
+const { src, dest, watch, parallel, series, gulp } = require("gulp");
 const sass = require('gulp-sass')(require('sass'))
 const gulpautoprefixer = require('gulp-autoprefixer');
 const browsersync = require("browser-sync").create();
@@ -163,14 +163,18 @@ function cleanDist(callback) {
 function browsersyncServe(callback){
   browsersync.init({
     server: {
-      baseDir: [paths.temp.basetemp, paths.src.basesrc, paths.base.base]
-    }
+        baseDir: [paths.temp.basetemp, paths.src.basesrc, paths.base.base]
+     },
+     sync: false,
+     instance: true,
+     ghostMode: false,
+     notify: false
   });
   callback();
 }
 
 
-// SyncReload
+//syncReload
 function syncReload(callback){
   browsersync.reload();
   callback();
@@ -180,13 +184,15 @@ function syncReload(callback){
 // Watch Task
 function watchTask(){
   watch(paths.src.html, series( fileincludeTask, syncReload));
+  
   watch([paths.src.images, paths.src.fonts, paths.src.vendorJs, paths.src.vendorjson], series(images, fonts, vendorJs, vendorjson));
   watch([paths.src.scss], series(scss, syncReload));
+  
 }
-
 
 // Default Task Preview
 exports.default = series( fileincludeTask, browsersyncServe, watchTask );
+
 
 
 // Build Task for Dist

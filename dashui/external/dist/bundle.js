@@ -22747,21 +22747,36 @@
         registerVersion(w, "4.4.1", "esm2017");
     }();
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////INICIO MAIN.JS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////INICIO MAIN.JS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////INICIO MAIN.JS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////INICIO MAIN.JS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // Import the functions you need from the SDKs you need
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyCRrl0uJNQZgiKJtwsl7ptReZ6SNi3ZKng",
+    //   authDomain: "api-neodogma.firebaseapp.com",
+    //   projectId: "api-neodogma",
+    //   storageBucket: "api-neodogma.appspot.com",
+    //   messagingSenderId: "958771024888",
+    //   appId: "1:958771024888:web:769e42c6aa13b01c9c7c0d",
+    //   measurementId: "G-766BFT9DJJ"
+    // };
+
     const firebaseConfig = {
-      apiKey: "AIzaSyCRrl0uJNQZgiKJtwsl7ptReZ6SNi3ZKng",
-      authDomain: "api-neodogma.firebaseapp.com",
-      projectId: "api-neodogma",
-      storageBucket: "api-neodogma.appspot.com",
-      messagingSenderId: "958771024888",
-      appId: "1:958771024888:web:769e42c6aa13b01c9c7c0d",
-      measurementId: "G-766BFT9DJJ"
-    };
+        apiKey: "AIzaSyCI72vp89kkN9qEoQOgIXCdg1D1xfssjjk",
+        authDomain: "neodogma-c6825.firebaseapp.com",
+        projectId: "neodogma-c6825",
+        storageBucket: "neodogma-c6825.appspot.com",
+        messagingSenderId: "581242057549",
+        appId: "1:581242057549:web:18e57c1fc953ccf8233d04",
+        measurementId: "G-V4M643D2S7"
+};
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -22769,6 +22784,7 @@
     const db = getFirestore(app);
 
     console.log("El script main.js se está cargando y ejecutando.");
+    console.log("--------------------------usando bundle.js -------------------------.");
 
 
     async function contarAlumnos() {
@@ -23271,7 +23287,7 @@
 
             const usuarios = await Promise.all(promesasUsuarios);
             const lang = localStorage.getItem('selectedLanguage') || 'es';
-            const translations = await $.getJSON(`/translation/${lang}.json`);
+            const translations = await $.getJSON(`/external/translation/${lang}.json`);
 
             actualizarTablaTodosAlumnos(usuarios, translations);
     		return usuarios;
@@ -23607,7 +23623,7 @@
 
             const mediaRango = contadorUsuarios > 0 ? Math.round(sumaRangos / contadorUsuarios) : 0;
             const lang = localStorage.getItem('selectedLanguage') || 'es';
-            const translations = await $.getJSON(`/translation/${lang}.json`);
+            const translations = await $.getJSON(`/external/translation/${lang}.json`);
             const textoMediaRango = getSynthesizerRangeTranslation(mediaRango, translations);
             
             window.textoMediaRango = textoMediaRango;
@@ -23678,7 +23694,7 @@
 
     async function actualizarGraficoRadarGrupal(db) {
     	const lang = localStorage.getItem('selectedLanguage') || 'es';
-        const translations = await $.getJSON(`/translation/${lang}.json`);
+        const translations = await $.getJSON(`/external/translation/${lang}.json`);
         const categories = getRadarCategoriesTranslations(translations);
     	
         try {
@@ -24098,7 +24114,7 @@
                     const rangoAlumno = Math.round(rango);
 
                     const lang = localStorage.getItem('selectedLanguage') || 'es';
-                    const translations = await $.getJSON(`/translation/${lang}.json`);
+                    const translations = await $.getJSON(`/external/translation/${lang}.json`);
 
                     const textoRangoAlumno = getSynthesizerRangeTranslation(rangoAlumno, translations);
     				
@@ -24185,7 +24201,7 @@
 
     async function actualizarGraficoRadarAlumno(db, nombreAlumno, apellidoAlumno) {
     	const lang = localStorage.getItem('selectedLanguage') || 'es';
-        const translations = await $.getJSON(`/translation/${lang}.json`);
+        const translations = await $.getJSON(`/external/translation/${lang}.json`);
         const categories = getRadarCategoriesTranslations(translations);
     	
         try {
@@ -24477,7 +24493,7 @@
 
     async function actualizarTablaEspecificaMetricasMinijuegos(datosUsuario) {
         const lang = localStorage.getItem('selectedLanguage') || 'es';
-        const translations = await $.getJSON(`/translation/${lang}.json`);
+        const translations = await $.getJSON(`/external/translation/${lang}.json`);
 
         let minijuegoSupervivencia = datosUsuario.rachasupervivencia;
         let estiloSupervivencia = "color: red;";
@@ -24523,9 +24539,12 @@
     function iniciarSesion(email, licencia, rememberme) {
 
         const docRef = doc(db, "profesores", licencia);
-
+        
         getDoc(docRef)
             .then((docSnap) => {
+
+                console.log("--..--..--..--");
+                console.log(docSnap.data());
 
                 if (docSnap.exists()) {
 
@@ -24880,11 +24899,11 @@
         const languageMap = {
             'es': {
                 name: 'Español',
-                flag: '/imagenes/banderas/es.jpg'
+                flag: '/external/imagenes/banderas/es.jpg'
             },
             'en': {
                 name: 'English',
-                flag: '/imagenes/banderas/en.jpg'
+                flag: '/external/imagenes/banderas/en.jpg'
             }
         };
 
@@ -24955,11 +24974,11 @@
         const languageMap = {
             'es': {
                 name: 'Español',
-                flag: '/imagenes/banderas/es.jpg'
+                flag: '/external/imagenes/banderas/es.jpg'
             },
             'en': {
                 name: 'English',
-                flag: '/imagenes/banderas/en.jpg'
+                flag: '/external/imagenes/banderas/en.jpg'
             }
         };
         const currentLang = languageMap[lang];
@@ -25017,7 +25036,7 @@
 
     function changePanelLanguage(lang) {
         console.log("Cambiar el idioma del panel a: ", lang);
-        $.getJSON(`/translation/${lang}.json`, function(translations) {
+        $.getJSON(`/external/translation/${lang}.json`, function(translations) {
             console.log("Traducciones cargadas: ", translations);
             $('[data-translate]').each(function() {
                 var key = $(this).attr('data-translate');

@@ -9,15 +9,15 @@ import { getFirestore } from 'firebase/firestore';
 // VIEJA CONFIGURACION ---------------------------------
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCRrl0uJNQZgiKJtwsl7ptReZ6SNi3ZKng",
-  authDomain: "api-neodogma.firebaseapp.com",
-  projectId: "api-neodogma",
-  storageBucket: "api-neodogma.appspot.com",
-  messagingSenderId: "958771024888",
-  appId: "1:958771024888:web:769e42c6aa13b01c9c7c0d",
-  measurementId: "G-766BFT9DJJ"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCRrl0uJNQZgiKJtwsl7ptReZ6SNi3ZKng",
+//   authDomain: "api-neodogma.firebaseapp.com",
+//   projectId: "api-neodogma",
+//   storageBucket: "api-neodogma.appspot.com",
+//   messagingSenderId: "958771024888",
+//   appId: "1:958771024888:web:769e42c6aa13b01c9c7c0d",
+//   measurementId: "G-766BFT9DJJ"
+//};
 // VIEJA CONFIGURACION ---------------------------------
 
 
@@ -39,5 +39,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
+console.log("--------------------------Usando el main.js -------------------------.");
 export { app, db, auth, onAuthStateChanged };

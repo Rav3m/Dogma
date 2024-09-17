@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Codescandy">
+
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="https://www.panel.neodogma.com/imagenes/dogma-logo-favicon.ico">
+
+
+<!-- Libs CSS -->
+<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
+
+
+
+<!-- Theme CSS -->
+<link rel="stylesheet" href="../assets/css/theme.min.css">
+  <title>Calendario | Neodogma</title>
+  <script>
+		console.log("Token en almacenamiento local:", localStorage.getItem("tokenUsuario"));
+        if (!localStorage.getItem("tokenUsuario")) {
+            window.location.href = 'pages/login.html';
+        }
+  </script>
+</head>
+
+<body>
+  <main id="main-wrapper" class="main-wrapper">
+    <div class="header">
+  <!-- navbar -->
+  <div class="navbar-custom navbar navbar-expand-lg">
+    <div class="container-fluid px-0">
+		<a class="navbar-brand d-block d-md-none" href="../index.html">
+		  <img src="../assets/images/brand/logo/logo-2.svg" alt="Image">
+		</a>
+		<a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-text-indent-left text-muted" viewBox="0 0 16 16">
+			<path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+		  </svg>
+		</a>
+
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-lg-auto d-flex nav-top-wrap align-items-center ms-4 ms-lg-0">
+		<a href="#" class="form-check form-switch theme-switch btn btn-ghost btn-icon rounded-circle mb-0 ">
+			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+			<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+		</a>
+		<div>
+            <a href="#" id="cerrar-sesion" class="btn btn-white" style="border: 1px solid #d0d0d0;margin-left: 10px;" data-translate="Logout">Cerrar Sesión</a>
+        </div>
+    </ul>
+    </div>
+  </div>
+</div>
+
+    <script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>
+	<script>
+		function cerrarSesion() {
+			localStorage.removeItem("tokenUsuario");
+			window.location.href = 'pages/login.html';
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var botonCerrarSesion = document.getElementById('cerrar-sesion');
+			if (botonCerrarSesion) {
+				botonCerrarSesion.addEventListener('click', cerrarSesion);
+			}
+		});
+	</script>
+    <!-- navbar vertical -->
+
+     <!-- Sidebar -->
+
+<div class="navbar-vertical navbar nav-dashboard">
+    <div class="h-100" data-simplebar>
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="../index.html">
+            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+        </a>
+        <!-- Navbar nav -->
+        <ul class="navbar-nav flex-column" id="sideNavbar">
+
+            <!-- Nav item -->
+            <li class="nav-item">
+                <a class="nav-link " 
+                    href="../index.html">
+					<i data-feather="home" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Home"> Inicio</span>
+                </a>
+            </li>
+            <!-- Nav item
+            <li class="nav-item">
+                <a class="nav-link has-arrow  active "
+                    href="../pages/calendar.html">
+                    <i data-feather="calendar" class="nav-icon me-2 icon-xxs" ></i> Calendario
+                </a>
+            </li>
+			<!-- Nav item -->
+			<li class="nav-item ">
+				<a
+					class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navProject"
+					aria-expanded="false"
+					aria-controls="navProject"
+				>
+					<i class="nav-icon me-2 icon-xxs" data-feather="file"></i>
+					<span data-translate="Statistics"> Estadísticas</span>
+				</a>
+				<div id="navProject" class="collapse  " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-files.html">
+								<span data-translate="Students">Alumnos</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/project-budget.html">
+								<span data-translate="Group">Grupo</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link has-arrow " href="../pages/profile-followers.html">
+					<i data-feather="edit" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Mini-games"> Desafíos</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link   collapsed  "
+					href="#!"
+					data-bs-toggle="collapse"
+					data-bs-target="#navprofilePages"
+					aria-expanded="false"
+					aria-controls="navprofilePages"
+					>
+					<i data-feather="user" class="nav-icon me-2 icon-xxs"></i>
+					<span data-translate="Didactic-resources"> Recursos didácticos</span>
+				</a>
+				<div id="navprofilePages" class="collapse " data-bs-parent="#sideNavbar">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-files.html">
+								<span data-translate="Material">Material</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="../pages/profile-overview.html">
+								<span data-translate="Information">Información</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<!-- Nav item -->
+			<li class="nav-item">
+				<a class="nav-link "
+					href="../pages/starter.html">
+                    <i data-feather="settings" class="nav-icon me-2 icon-xxs" ></i>
+					<span data-translate="Settings"> Ajustes</span>
+				</a>
+			</li>
+			<!-- Nav item -->
+        </ul>
+    </div>
+</div>
+
+    <!-- page content -->
+    <div id="app-content">
+      <!-- Container fluid -->
+      <div class="app-content-area">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <!-- Page header -->
+              <div class="mb-5">
+                <h3 class="mb-0 ">Calendario Académico</h3>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+              <!-- Card -->
+              <div class="card">
+                <div class="row g-0">
+                  <div class="col-lg-2 border-end">
+                    <div class="p-5">
+                      <div class="d-grid mb-4">
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-edit-event-modal"
+                          id="create-new-event-btn">+ Crear Nuevo Evento</a>
+                      </div>
+                      <h5 class="mb-0">Eventos</h5>
+                      <p>Establece tus eventos Dogma Académicos</p>
+                      <div id='external-events'>
+                        <div class='external-event fc-event text-primary bg-primary-soft' data-class="bg-primary-soft ">
+                          <div>Juego Creación</div>
+                        </div>
+                        <div class='external-event fc-event text-success bg-success-soft' data-class="bg-success-soft">
+                          <div>Quiz</div>
+                        </div>
+                        <div class='external-event fc-event text-danger bg-danger-soft' data-class="bg-danger-soft">
+                          <div>Test</div>
+                        </div>
+                        <div class='external-event fc-event text-warning bg-warning-soft' data-class="bg-warning-soft">
+                          <div>Examen</div>
+                        </div>
+						<div class='external-event fc-event text-info bg-info-soft' data-class="bg-info-soft">
+                          <div>Lo que sea</div>
+                        </div>
+						<div class='external-event fc-event text-dark bg-dark-soft' data-class="bg-dark-soft">
+                          <div>Lo que sea</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-10">
+                    <div id='calendar'></div>
+                  </div>
+                </div>
+                <!-- Calendar -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add or Edit Event Modal -->
+  <div class="modal fade" id="add-edit-event-modal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="add-edit-event-modal-title">Añadir Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form name="add-event-form" id="add-event-form">
+            <div class="mb-3">
+              <label class="form-label">Título Evento</label>
+              <input type="text" placeholder="Event Title" name="event-title" id="event-title" required
+                class="form-control" value="Testing title">
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Selecciona Categoria</label>
+              <select class="form-select" name="event-category" id="event-category">
+                <option selected value="bg-primary">Primary</option>
+                <option value="bg-danger">Danger</option>
+                <option value="bg-success">Success</option>
+                <option value="bg-info">Info</option>
+                <option value="bg-dark">Dark</option>
+                <option value="bg-warning">Warning</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Evento Empieza</label>
+              <div class="input-group">
+                <input class="form-control " id="eventStart" placeholder="Selecciona Fecha" data-enabletime=true>
+                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Evento Termina</label>
+              <div class="input-group">
+                <input class="form-control " id="eventEnd" placeholder="Selecciona Fecha" data-enabletime=true>
+                <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Localización</label>
+              <input class="form-control " id="event-location" placeholder="Localización del Evento" value="Ahmebadad">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Descripción</label>
+              <textarea class="form-control" id="event-description" placeholder="Introduce Descripción del Evento" rows="3"
+                spellcheck="false">testing....descripción</textarea>
+            </div>
+
+            <div class="">
+              <button type="submit" class="btn btn-primary" id="add-new-event-btn">Añadir Evento</button>
+              <button type="submit" class="btn btn-primary" id="update-event-btn">Actualizar Evento</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <input type="hidden" id="event-id" name="eventid" value="" />
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- View Event Modal -->
+  <div class="modal fade" id="view-event-modal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="view-event-modal-title">Título Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="event-details">
+            <div class="mt-0">
+              <h5 class="mb-0 text-800"><i class="bi bi-info-square me-2"></i> Descripción</h5>
+              <p class="mb-1 mt-2"  id="view-event-description"></p>          
+            </div>
+
+            <div class="mt-4">
+              <h5 class="mb-0 text-800"><i class="bi bi-calendar3 me-2"></i> Fecha y Hora</h5>
+              <p class="mb-1 mt-2"  id="view-event-dates"></p>          
+            </div>
+            <div class="my-4">
+              <h5 class="mb-0 text-800"><i class="bi bi-geo-alt me-2"></i> Localización</h5>
+              <p class="mb-1 mt-2"  id="view-event-location"></p>          
+            </div>            
+          </div>
+          <div>
+            <button type="button" class="btn btn-outline-danger" id="btn-delete-event"><i class="bi bi-x"></i>
+              Borrar</button>
+            <button type="submit" class="btn btn-outline-secondary" id="btn-edit-event"><i class="bi bi-pencil"></i>
+              Editar Evento</button>
+            <input type="hidden" id="selected-event-id" name="selectedeventid" value="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libs JS -->
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<script src="../assets/js/theme.min.js"></script>
+
+  <script src="../assets/libs/fullcalendar/main.min.js"></script>
+  <script src='https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js'></script>
+  <script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+  <script src="../assets/js/vendors/calendar.init.js"></script>
+  
+	<script>
+        var licenciaProfe = localStorage.getItem("licenciaProfe");
+		var nombreProfe = localStorage.getItem("nombreProfe");
+		var centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
+		var emailProfe = localStorage.getItem("emailProfe");
+    </script>	
+	<script type="module" src="/external/dist/bundle.js"></script>
+</body>
+
+</html>

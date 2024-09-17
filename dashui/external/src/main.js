@@ -1,6 +1,6 @@
 console.log("El script main.js se está cargando y ejecutando.");
 
-import { db } from '../firebase-config.js';
+import { db } from '/external/firebase-config.js';
 import { getFirestore, doc, getDoc, collection, query, where, getDocs, updateDoc, orderBy } from 'firebase/firestore';
 
 
@@ -504,7 +504,7 @@ async function mostrarTodosLosAlumnos() {
 
         const usuarios = await Promise.all(promesasUsuarios);
         const lang = localStorage.getItem('selectedLanguage') || 'es';
-        const translations = await $.getJSON(`/translation/${lang}.json`);
+        const translations = await $.getJSON(`/external/translation/${lang}.json`);
 
         actualizarTablaTodosAlumnos(usuarios, translations);
 		return usuarios;
@@ -512,6 +512,7 @@ async function mostrarTodosLosAlumnos() {
         console.error("Error al obtener los alumnos:", error);
     }
 }
+
 
 
 function actualizarTablaTodosAlumnos(usuarios, translations) {
