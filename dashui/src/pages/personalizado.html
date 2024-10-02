@@ -107,7 +107,8 @@
                       <h3 class="mb-4" data-translate="Student-performance">Rendimiento individual</h3>
                       <div class="d-flex justify-content-between mb-3">
                         <div style="display: flex;">
-							<span id="TextoSintetizadorAlumno" style="margin-right: 10px;" data-translate="Synthesizer-range-student"></span><span id="Rangoalumno"></span>
+							<span id="TextoSintetizadorAlumno" style="margin-right: 10px;" data-translate="Synthesizer-range-student">
+                             <!-- </span><span id="Rangoalumno"></span> -->
                         </div>
                       </div>
                       <div class="progress" style="height: 8px;">
@@ -121,8 +122,8 @@
                   <div class="col-lg-4 col-md-12 col-12">
                     <div class="d-flex align-items-center justify-content-between p-4">
                       <div class="mb-4 mb-lg-0">
-                        <h2 id="nivelactualAlumno" class="h1  mb-0"></h2>
-                        <p class="mb-0 " data-translate="Current-level">Nivel actual</p>
+                        <h2 id="nivelactualAlumno" class="h1  mb-0" style="display: inline-flex;"></h2>
+                        <p class="mb-0 " data-translate="Current-level">Estrellas totales</p>
                       </div>
                       <div class="ms-3">
                         <div class="icon-shape icon-lg bg-primary-soft text-primary rounded-circle">
@@ -137,7 +138,7 @@
                       <div class="mb-4 mb-lg-0">
 
                         <h2 id="tiempodiapositivasAlumno" class="h1  mb-0"></h2>
-                        <p class="mb-0 " data-translate="Slide-time">Tiempo en diapositivas</p>
+                        <p class="mb-0 " data-translate="Slide-time">Tiempo total.</p>
                       </div>
                       <div class="ms-3">
                         <div class="icon-shape icon-lg bg-success-soft text-success rounded-circle">
@@ -153,7 +154,7 @@
                     <div class="d-flex align-items-center justify-content-between p-4">
                       <div class="mb-4 mb-lg-0">
                         <h2 id="tasaAciertoAlumno" class="h1  mb-0"></h2>
-                        <p class="mb-0 " data-translate="Percentage-correct-questions">Porcentaje de acierto preguntas</p>
+                        <p class="mb-0 " data-translate="Percentage-correct-questions">Progreso</p>
                       </div>
                       <div class="ms-3">
                         <div class="icon-shape icon-lg bg-warning-soft text-warning rounded-circle">
@@ -212,41 +213,41 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                               class="bi bi-square-fill text-secondary me-2" viewBox="0 0 16 16">
                               <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
-                            </svg>Sintetizador Hierro</td>
-                          <td>0</td>
-                          <td>20</td>
+                            </svg>Rango Hierro</td>
+                          <td>1</td>
+                          <td>4</td>
                         </tr>
                         <tr>
                           <td data-translate="Bronze-synthesizer"> <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                               class="bi bi-square-fill text-danger me-2" viewBox="0 0 16 16">
                               <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
-                            </svg>Sintetizador Bronce</td>
-                          <td>21</td>
-                          <td>40</td>
+                            </svg>Rango Bronce</td>
+                          <td>5</td>
+                          <td>8</td>
                         </tr>
                         <tr>
                           <td data-translate="Silver-synthesizer"> <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                               class="bi bi-square-fill text-info me-2" viewBox="0 0 16 16">
                               <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
-                            </svg>Sintetizador Plata</td>
-                          <td>41</td>
-                          <td>60</td>
+                            </svg>Rango Plata</td>
+                          <td>9</td>
+                          <td>12</td>
                         </tr>
                         <tr>
                           <td data-translate="Gold-synthesizer"> <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                               class="bi bi-square-fill text-warning me-2" viewBox="0 0 16 16">
                               <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
-                            </svg>Sintetizador Oro</td>
-                          <td>61</td>
-                          <td>80</td>
+                            </svg>Rango Oro</td>
+                          <td>13</td>
+                          <td>16</td>
                         </tr>
                         <tr>
                           <td data-translate="Platinum-synthesizer"> <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                               class="bi bi-square-fill text-success me-2" viewBox="0 0 16 16">
                               <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
-                            </svg>Sintetizador Platino</td>
-                          <td>81</td>
-                          <td>100</td>
+                            </svg>Rango Platino</td>
+                          <td>17</td>
+                          <td>20</td>
                         </tr>
                       </tbody>
                     </table>
@@ -263,13 +264,13 @@
               <!-- card -->
               <div class="card">
                 <!-- card header -->
-                <div class="card-header metricas-esenciales">
+                <div class="card-header metricas-esenciales" style="background: #c0dbca";>
                   <h4 class="mb-0" data-translate="Essential-metrics">Métricas Esenciales</h4>
                 </div>
                 <!-- table -->
                 <div class="card-body">
                   <div class="table-responsive table-card">
-                    <table id="individual-metricas-esenciales" class="table text-nowrap mb-0 table-centered">
+                    <table id="individual-metricas-esenciales" class="table text-nowrap mb-0 table-centered" >
                       <thead class="table-light">
                         <tr>
                           <th style="text-align: center;" data-translate="Name">Nombre</th>
@@ -280,7 +281,6 @@
 						  <th style="text-align: center;" data-translate="Correct-questions">Preguntas Acertadas</th>
                           <th style="text-align: center;" data-translate="Failed-questions">Preguntas Falladas</th>
 						  <th style="text-align: center;" data-translate="Current-level">Nivel Actual</th>
-						  <th style="text-align: center;" data-translate="Survival-streak">Racha Supervivencia</th>
 						  <th style="text-align: center;" data-translate="Teaching-time">Tiempo Didáctico</th>
                         </tr>
                       </thead>
@@ -301,7 +301,7 @@
               <!-- card -->
               <div class="card">
                 <!-- card header -->
-                <div class="card-header metricas-preguntas">
+                <div class="card-header metricas-preguntas"style="background: #ffecc1"; >
                   <h4 class="mb-0" data-translate="Categorized-metrics">Métricas Preguntas Categorizadas</h4>
                 </div>
                 <!-- table -->
@@ -310,25 +310,26 @@
                     <table id="individual-preguntas-categorizadas" class="table text-nowrap mb-0 table-centered">
 						<thead class="table-light">
 							<tr>
-								<th style="text-align: center;" data-translate="Biotec-bioetica-success">Biotec. y Bioética<br/>Acertadas</th>								
-								<th style="text-align: center;" data-translate="Molecular-genetic-success">Genética molecular<br/>Acertadas</th>								
+								<th style="text-align: center;" data-translate="Biotec-bioetica-success">La Tierra en el Universo<br/>Acertadas</th>								
+								<th style="text-align: center;" data-translate="Molecular-genetic-success">Geología<br/>Acertadas</th>								
 								<th style="text-align: center;" data-translate="Nucleic-acids-success">Ácidos nucleicos<br/>Acertadas</th>
-								<th style="text-align: center;" data-translate="Scientific-culture-success">Cultura científica<br/>Acertadas</th>
-								<th style="text-align: center;" data-translate="Genome-mutations-success">Genoma y mutaciones<br/>Acertadas</th>
-								<th style="text-align: center;" data-translate="Cells-cycles-phases-success">Célula, ciclo y fases<br/>Acertadas</th>
+								<th style="text-align: center;" data-translate="Scientific-culture-success">La Célula<br/>Acertadas</th>
+								<th style="text-align: center;" data-translate="Genome-mutations-success">Genética Molecular<br/>Acertadas</th>
+								<th style="text-align: center;" data-translate="Cells-cycles-phases-success">Herencia y Alteraciones Genéticas<br/>Acertadas</th>
 							</tr>
 						</thead>
 						<tbody>
-                        
+                    
+
 						</tbody>
 						<thead class="table-light">
 							<tr>
-								<th style="text-align: center;" data-translate="Biotec-bioetica-failed">Biotec. y Bioética<br/>Falladas</th>
-								<th style="text-align: center;" data-translate="Molecular-genetic-failed">Genética molecular<br/>Falladas</th>
-								<th style="text-align: center;" data-translate="Nucleic-acids-failed">Ácidos nucleicos<br/>Falladas</th>					
-								<th style="text-align: center;" data-translate="Scientific-culture-failed">Cultura científica<br/>Falladas</th>				
-								<th style="text-align: center;" data-translate="Genome-mutations-failed">Genoma y mutaciones<br/>Falladas</th>				
-								<th style="text-align: center;" data-translate="Cells-cycles-phases-failed">Célula, ciclo y fases<br/>Falladas</th>
+								<th style="text-align: center;" data-translate="Biotec-bioetica-failed"><br/>Falladas</th>
+								<th style="text-align: center;" data-translate="Molecular-genetic-failed"><br/>Falladas</th>
+								<th style="text-align: center;" data-translate="Nucleic-acids-failed"><br/>Falladas</th>					
+								<th style="text-align: center;" data-translate="Scientific-culture-failed"><br/>Falladas</th>				
+								<th style="text-align: center;" data-translate="Genome-mutations-failed"><br/>Falladas</th>				
+								<th style="text-align: center;" data-translate="Cells-cycles-phases-failed"><br/>Falladas</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -348,22 +349,54 @@
               <!-- card -->
               <div class="card">
                 <!-- card header -->
-                <div class="card-header metricas-sintesis">
-                  <h4 class="mb-0" data-translate="Synthesis-metrics">Métricas de Síntesis</h4>
+                <div class="card-header metricas-sintesis" style="background: #d0c9fd";>
+                  <h4 class="mb-0" data-translate="Synthesis-metrics">Zona de Entrenamiento</h4>
                 </div>
                 <!-- table -->
+
                 <div class="card-body">
                   <div class="table-responsive table-card">
                     <table id="individual-metricas-sintesis" class="table text-nowrap mb-0 table-centered">
                       <thead class="table-light">
                         <tr>
-                          <th style="text-align: center;" data-translate="Wildcards-replication">Comodines replicación</th>
-                          <th style="text-align: center;" data-translate="Wildcards-transcription">Comodines transcripción</th>
-                          <th style="text-align: center;" data-translate="Wildcards-translation">Comodines traducción</th>
-                          <th style="text-align: center;" data-translate="Successful-plays">Jugadas acertadas</th>
-						  <th style="text-align: center;" data-translate="Failed-plays">Jugadas falladas</th>
-						  <th style="text-align: center;" data-translate="Total-plays">Jugadas totales</th>
-						  <th style="text-align: center;" data-translate="Survival-streak">Racha Supervivencia</th>
+                          <th style="text-align: center;" data-translate="Wildcards-replication">La Tierra en el Universo</th>
+                          <th style="text-align: center;" data-translate="Wildcards-transcription">Geología</th>
+                          <th style="text-align: center;" data-translate="Wildcards-translation">Origen y Evolución</th>
+                          <th style="text-align: center;" data-translate="Successful-plays">La Célula</th>
+                          <th style="text-align: center;" data-translate="Failed-plays">Genética Molecular</th>
+                          <th style="text-align: center;" data-translate="Total-plays">Herencia y Alteraciones Genéticas</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    
+
+                    
+                      <thead class="table-light">
+                        <tr>
+                          <th style="text-align: center;" data-translate="Control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="Control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="Control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="Control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="Control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="Control">Nota Control</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    
+
+                   
+                      <thead class="table-light">
+                        <tr>
+                          <th style="text-align: center;" data-translate="attempts-control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="attempts-control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="attempts-control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="attempts-control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="attempts-control">Nota Control</th>
+                          <th style="text-align: center;" data-translate="attempts-control">Nota Control</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -383,21 +416,34 @@
               <!-- card -->
               <div class="card">
                 <!-- card header -->
-                <div class="card-header metricas-minijuegos">
-                  <h4 class="mb-0" data-translate="Mini-games">Desafíos</h4>
+                <div class="card-header metricas-minijuegos" style="background: #fea3c2";>
+                  <h4 class="mb-0" data-translate="Mini-games">Métricas Desafíos</h4>
                 </div>
                 <!-- table -->
                 <div class="card-body">
                   <div class="table-responsive table-card">
                     <table id="individual-metricas-minijuegos" class="table text-nowrap mb-0 table-centered">
+                     
                       <thead class="table-light">
                         <tr>
-                          <th style="text-align: center;" data-translate="Survival">Supervivencia</th>
-                          <th style="text-align: center;" data-translate="Mendel">Leyes de Mendel</th>
-                          <th style="text-align: center;" data-translate="Blood">Grupos Sanguíneos</th>
-                          <th style="text-align: center;" data-translate="Inheritance">Herencia Ligada al Sexo</th>
-						  <th style="text-align: center;" data-translate="Evolution">Aventura Evolutiva</th>
-						  <th style="text-align: center;" data-translate="Cell">Batalla Celular</th>
+                          <th style="text-align: center;" data-translate="Survival">Los Guidantes de Mendel</th>
+                          <th style="text-align: center;" data-translate="Mendel">Grupos sanguíneos</th>
+                          <th style="text-align: center;" data-translate="Blood">Herencia Ligada al Sexo</th>
+                          <th style="text-align: center;" data-translate="Inheritance">Replicando el ADN</th>
+						              <th style="text-align: center;" data-translate="Evolution">Transcripción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+
+                      <thead class="table-light">
+                        <tr>
+                          <th style="text-align: center;" data-translate="Survival">Sintetizando Proteínas</th>
+                          <th style="text-align: center;" data-translate="Mendel">Ondas sísmicas</th>
+                          <th style="text-align: center;" data-translate="Blood">Cortes geológicos</th>
+                          <th style="text-align: center;" data-translate="Inheritance">Viaje al interior de la tierra</th>
+						              <th style="text-align: center;" data-translate="Evolution">Aventura espacial</th>
                         </tr>
                       </thead>
                       <tbody>

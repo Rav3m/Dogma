@@ -72,7 +72,7 @@
 	<script>
 		function cerrarSesion() {
 			localStorage.removeItem("tokenUsuario");
-			window.location.href = 'pages/login.html';
+			window.location.href = '/src/pages/login.html';
 		}
 
 		document.addEventListener('DOMContentLoaded', function() {
@@ -90,7 +90,7 @@
     <div class="h-100" data-simplebar>
         <!-- Brand logo -->
         <a class="navbar-brand" href="./index.html">
-            <img id="logopanel" src="https://panel.neodogma.com/imagenes/Logo_Retro1_Neodogma.png" alt="dash ui - bootstrap 5 admin dashboard template">
+            <img id="logopanel" src="/src/assets/images/brand/logo/NeoDogma_Logo.png" alt="dash ui - bootstrap 5 admin dashboard template">
         </a>
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
@@ -295,7 +295,7 @@
                                     <!-- heading -->
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <div>
-                                            <h4 class="mb-0" data-translate="Top-progress">Top progreso Creación</h4>
+                                            <h4 class="mb-0" data-translate="Top-progress">Top Estrellas</h4>
                                         </div>
                                         <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
 											<i  data-feather="target" height="20" width="20"></i>
@@ -324,10 +324,10 @@
                                         <thead class="table-light">
                                             <tr >
                                                 <th data-translate="Name">Nombre</th>
-                                                <th data-translate="Minutes">Minutos</th>
+                                                <th data-translate="Minutes">Avatar</th>
                                                 <th data-translate="Range">Rango</th>
-                                                <th data-translate="Avatar">Avatar</th>
-                                                <th data-translate="Progress">Progreso</th>
+                                                <th data-translate="Avatar">Estrellas</th>
+                                                <th data-translate="Progress">Tiempo de Uso</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -362,17 +362,17 @@
                                         <div class="text-center">
                                             <i class="icon-sm text-success" data-feather="check-circle"></i>
                                             <h1 id="tasaPromedioGrupal" class="fs-2 mb-0 "></h1>
-                                            <p data-translate="Success-rate">Tasa acierto</p>
+                                            <p data-translate="Success-rate">Estrellas Totales</p>
                                         </div>
                                         <div class="text-center">
                                             <i class="icon-sm text-warning" data-feather="trending-up"></i>
                                             <h1 id="media-progreso-creacion" class="fs-2 mb-0 "></h1>
-                                            <p data-translate="Creation-progress">Progeso Creación</p>
+                                            <p data-translate="Creation-progress">Progreso Medio</p>
                                         </div>
                                         <div class="text-center">
                                             <i class="icon-sm text-danger" data-feather="clock"></i>
                                             <h1 id="tiempo-promedio-de-juego" class="fs-2 mb-0 "></h1>
-                                            <p data-translate="Game-Time">Tiempo juego</p>
+                                            <p data-translate="Game-Time">Experiencia Total</p>
                                         </div>
                                     </div>
                                 </div>

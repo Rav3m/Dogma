@@ -22818,6 +22818,7 @@
 
 
     async function mostrarRanking() {
+        console.log("Function --> mostrarRanking");
         const idcentroDelProfesor = parseInt(localStorage.getItem("idCentroProfe"));
     	const idclaseProfesor = localStorage.getItem("idClaseProfe");
         if (!idcentroDelProfesor || !idclaseProfesor) {
@@ -22826,6 +22827,7 @@
         }
 
         const usuariosRef = collection(db, "usuarios");
+        
         const qUsuarios = query(usuariosRef,
     		where("idCentro", "==", idcentroDelProfesor),
     		where("idClase", "==", idclaseProfesor));
@@ -22837,11 +22839,11 @@
                 const nombreUsuario = docUsuario.data().nombre;
     			const apellidoUsuario = docUsuario.data().apellido;
 
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
-                    const preguntasAcertadas = datosUsuarioSnap.data().preguntasacertadas;
+                    const preguntasAcertadas = datosUsuarioSnap.data().preguntasAcertadas;
                     const nombreCompleto = `${nombreUsuario} ${apellidoUsuario}`;
                     return { nombre: nombreCompleto, preguntasAcertadas };
                 }
@@ -22881,11 +22883,11 @@
                 const nombreUsuario = docUsuario.data().nombre;
     			const apellidoUsuario = docUsuario.data().apellido;
 
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
-                    const tiempodejuegoSegundos = datosUsuarioSnap.data().tiempodejuego;
+                    const tiempodejuegoSegundos = datosUsuarioSnap.data().tiempoDeJuego;
                     const tiempodejuegoMinutos = Math.round(tiempodejuegoSegundos / 60);
     				const nombreCompleto = `${nombreUsuario} ${apellidoUsuario}`;
                     return { nombre: nombreCompleto, tiempodejuego: tiempodejuegoMinutos };
@@ -22926,24 +22928,24 @@
                 const nombreUsuario = docUsuario.data().nombre;
     			const apellidoUsuario = docUsuario.data().apellido;
 
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
-                    const nivelactual = datosUsuarioSnap.data().nivelactual;
-                    const porcentajeProgreso = Math.round((nivelactual / 15) * 100);
+                    const nivelactual = datosUsuarioSnap.data().EstrellasTotales || 0;
+                    // const porcentajeProgreso = Math.round((nivelactual / 15) * 100);
     				const nombreCompleto = `${nombreUsuario} ${apellidoUsuario}`;
-                    return { nombre: nombreCompleto, porcentajeProgreso};
+                    return { nombre: nombreCompleto, nivelactual};
                 }
             });
 
             const ranking = (await Promise.all(rankingPromesas)).filter(Boolean);
-            ranking.sort((a, b) => b.porcentajeProgreso - a.porcentajeProgreso);
+            ranking.sort((a, b) => b.nivelactual - a.nivelactual);
             const top3 = ranking.slice(0, 3);
 
             const rankingDiv = document.getElementById("ranking-nivel-actual");
             rankingDiv.innerHTML = top3.map((usuario, index) => 
-                `<div>${index + 1}. ${usuario.nombre} : ${usuario.porcentajeProgreso}%</div>`
+                `<div>${index + 1}. ${usuario.nombre} : ${usuario.nivelactual}</div>`
             ).join('');
         } catch (error) {
             console.error("Error al obtener el ranking:", error);
@@ -22969,28 +22971,24 @@
             let promesasUsuarios = usuariosSnapshot.docs.map(async (docUsuario) => {
                 const usuario = docUsuario.data();
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 let minutos = 0;
                 let progreso = 0;
     			let rango = "Sin rango";
-    			let avatarUrl = "https://www.panel.neodogma.com/imagenes/avatares/avatar-defecto.png";
+    			let avatarUrl = "/external/imagenes/avatares/avatar-0.png";
     			
                 if (datosUsuarioSnap.exists()) {
                     const datosUsuario = datosUsuarioSnap.data();
-                    minutos = datosUsuario.tiempodejuego ? Math.round(datosUsuario.tiempodejuego / 60) : 0;
-                    progreso = datosUsuario.nivelactual ? Math.round((datosUsuario.nivelactual / 15) * 100) : 0;
-    				rango = datosUsuario.rangousuario || "Sin rango";
-    				
-                    if (datosUsuario.avatarID) {
-                        const avatarRef = doc(db, "avatarID", datosUsuario.avatarID.toString());
-                        const avatarSnap = await getDoc(avatarRef);
-                        if (avatarSnap.exists()) {
-                            avatarUrl = avatarSnap.data().url;
-                        }
+                    minutos = datosUsuario.tiempoDeJuego ? Math.round(datosUsuario.tiempoDeJuego / 60) : 0;
+                    progreso = datosUsuario.EstrellasTotales || 0;
+    				rango = datosUsuario.rangoUsuario || "Sin rango";
+                    let avatarId = datosUsuario.avatarID || 0;
+    				avatarUrl = "/external/imagenes/avatares/avatar-" + avatarId +".png"
+                                      
                     }
-                }
+                
 
                 return {
                     nombreCompleto: `${usuario.nombre} ${usuario.apellido}`,
@@ -23015,11 +23013,11 @@
 
     function actualizarTabla(seleccionados, translations) {
     	const rangoTranslations = {
-            "Sintetizador Hierro": translations['Iron-synthesizer'],
-            "Sintetizador Bronce": translations['Bronze-synthesizer'],
-            "Sintetizador Plata": translations['Silver-synthesizer'],
-            "Sintetizador Oro": translations['Gold-synthesizer'],
-            "Sintetizador Platino": translations['Platinum-synthesizer'],
+            "Rango Hierro": translations['Iron-synthesizer'],
+            "Rango Bronce": translations['Bronze-synthesizer'],
+            "Rango Plata": translations['Silver-synthesizer'],
+            "Rango Oro": translations['Gold-synthesizer'],
+            "Rango Platino": translations['Platinum-synthesizer'],
             "Sin rango": translations['No-range'] || 'Sin rango'
         };
     	
@@ -23027,10 +23025,10 @@
         tbody.innerHTML = seleccionados.map(alumno => `
         <tr>
             <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill text-primary me-2" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>${alumno.nombreCompleto}</td>
-            <td>${alumno.minutos}</td>
-            <td>${rangoTranslations[alumno.rango]}</td>
             <td><img src="${alumno.avatar}" style="width: 50px; height: 50px;"></td>
-            <td>${alumno.progreso}%</td>
+            <td>${rangoTranslations[alumno.rango]}</td>
+            <td><img src="/src/assets/images/png/Icon_Star.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 0px;">${alumno.progreso}</td>
+            <td>${alumno.minutos} horas</td>
         </tr>
     `).join('');
     }
@@ -23052,23 +23050,26 @@
             const usuariosSnapshot = await getDocs(qUsuarios);
             let sumaPreguntasAcertadas = 0;
             let sumaPreguntasTotales = 0;
+            let sumaProgresos = 0;
             let contadorAlumnos = 0;
 
             for (const docUsuario of usuariosSnapshot.docs) {
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
-                    const preguntasAcertadas = datosUsuarioSnap.data().preguntasacertadas || 0;
-                    const preguntasTotales = datosUsuarioSnap.data().preguntastotales || 0;
-                    sumaPreguntasAcertadas += preguntasAcertadas;
-                    sumaPreguntasTotales += preguntasTotales;
+                    // const preguntasAcertadas = datosUsuarioSnap.data().Progreso || 0;
+                    // const preguntasTotales = datosUsuarioSnap.data().preguntastotales || 0;
+                    const progreso = datosUsuarioSnap.data().EstrellasTotales || 0;
+                    sumaProgresos += progreso;
+                    // sumaPreguntasTotales += preguntasTotales;
                     contadorAlumnos++;
                 }
             }
 
-            const tasaDeAciertoPromedio = sumaPreguntasTotales > 0 ? Math.round(sumaPreguntasAcertadas * 100 / sumaPreguntasTotales) : 0;
+            // const tasaDeAciertoPromedio = sumaPreguntasTotales > 0 ? Math.round(sumaPreguntasAcertadas * 100 / sumaPreguntasTotales) : 0;
+            const tasaDeAciertoPromedio = Math.round((sumaProgresos / (300*contadorAlumnos))*100);
 
             const tasaDeAciertoPromedioDiv = document.getElementById("tasaPromedioGrupal");
             tasaDeAciertoPromedioDiv.innerHTML = `<div>${tasaDeAciertoPromedio}%</div>`;
@@ -23102,17 +23103,17 @@
             for (const docUsuario of usuariosSnapshot.docs) {
                 const usuarioId = docUsuario.id;
 
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
-                    const nivelActual = datosUsuarioSnap.data().nivelactual || 0;
+                    const nivelActual = datosUsuarioSnap.data().Progreso || 0;
                     sumaNivelesActuales += nivelActual;
                     contadorAlumnos++;
                 }
             }
 
-            const mediaProgresoCreacion = contadorAlumnos > 0 ? Math.round((sumaNivelesActuales / contadorAlumnos) / 15 * 100) : 0;
+            const mediaProgresoCreacion = contadorAlumnos > 0 ? Math.round((sumaNivelesActuales / contadorAlumnos)*100) : 0;
 
             const mediaProgresoCreacionDiv = document.getElementById("media-progreso-creacion");
             mediaProgresoCreacionDiv.innerHTML = `<div>${mediaProgresoCreacion}%</div>`;
@@ -23145,20 +23146,20 @@
             for (const docUsuario of usuariosSnapshot.docs) {
                 const usuarioId = docUsuario.id;
 
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
-                    const tiempodejuego = datosUsuarioSnap.data().tiempodejuego || 0;
+                    const tiempodejuego = datosUsuarioSnap.data().TotalExperiencia || 0;
                     sumaTiempoDeJuego += tiempodejuego;
                     contadorAlumnos++;
                 }
             }
 
-            const tiempoPromedioDeJuego = contadorAlumnos > 0 ? Math.round((sumaTiempoDeJuego / contadorAlumnos) / 60) : 0;
+            const tiempoPromedioDeJuego = contadorAlumnos > 0 ? Math.round((sumaTiempoDeJuego / (115000 * contadorAlumnos))*100) : 0;
 
             const tiempoPromedioDeJuegoDiv = document.getElementById("tiempo-promedio-de-juego");
-            tiempoPromedioDeJuegoDiv.innerHTML = `<div>${tiempoPromedioDeJuego} min.</div>`;
+            tiempoPromedioDeJuegoDiv.innerHTML = `<div>${tiempoPromedioDeJuego} %</div>`;
             
     		return tiempoPromedioDeJuego;
         } catch (error) {
@@ -23180,9 +23181,9 @@
         if (window.chart) {
             
             console.log("Datos de la serie:", [
-              { name: "Tasa de Acierto Promedio", data: [tasaDeAciertoPromedioValida] },
-              { name: "Media Progreso Creacion", data: [mediaProgresoCreacionValida] },
-              { name: "Tiempo Promedio De Juego", data: [tiempoPromedioDeJuegoValido] }
+              { name: "Total Estrellas", data: [tasaDeAciertoPromedioValida] },
+              { name: "Progreso Medio", data: [mediaProgresoCreacionValida] },
+              { name: "Experiencia Total", data: [tiempoPromedioDeJuegoValido] }
             ].map(serie => serie.data));
 
     		window.chart.updateSeries([tasaDeAciertoPromedioValida, mediaProgresoCreacionValida, tiempoPromedioDeJuegoValido]);
@@ -23237,7 +23238,7 @@
             let promesasUsuarios = usuariosSnapshot.docs.map(async (docUsuario) => {
                 const usuario = docUsuario.data();
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 let minutos = 0;
@@ -23247,27 +23248,27 @@
                 let preguntasAcertadas = 0;
                 let preguntasFalladas = 0;
                 let nivelActual = 0;
+                let estrellasTotales = 0;
                 let rachaSupervivencia = 0;
                 let tiempoDidactico = 0;
+                let avatarId = 0;
                 
                 if (datosUsuarioSnap.exists()) {
                     const datosUsuario = datosUsuarioSnap.data();
-                    minutos = datosUsuario.tiempodejuego ? Math.round(datosUsuario.tiempodejuego / 60) : 0;
-                    progreso = datosUsuario.nivelactual ? Math.round((datosUsuario.nivelactual / 15) * 100) : 0;
-                    rango = datosUsuario.rangousuario || "Sin rango";
-    				preguntasAcertadas = datosUsuario.preguntasacertadas || 0;
-                    preguntasFalladas = datosUsuario.preguntasfalladas || 0;
+                    minutos = datosUsuario.tiempodejuego ? Math.round(datosUsuario.tiempoDeJuego / 60) : 0;
+                    // progreso = datosUsuario.nivelactual ? Math.round((datosUsuario.nivelactual / 15) * 100) : 0;
+                    progreso = datosUsuario.Progreso || 0;
+                    rango = datosUsuario.rangoUsuario || "Sin rango";
+    				preguntasAcertadas = datosUsuario.preguntasAcertadas || 0;
+                    preguntasFalladas = datosUsuario.preguntasFalladas || 0;
                     nivelActual = datosUsuario.nivelactual || 0;
+                    estrellasTotales = datosUsuario.EstrellasTotales || 0;
                     rachaSupervivencia = datosUsuario.rachasupervivencia || 0;
-                    tiempoDidactico = datosUsuario.tiempodidactico ? Math.round(datosUsuario.tiempodidactico / 60) : 0;
+                    tiempoDidactico = datosUsuario.tiempodidactico ? Math.round(datosUsuario.tiempoDidactico / 60) : 0;
+                    avatarId = datosUsuario.avatarID || 0;
+
+                    avatarUrl = "/external/imagenes/avatares/avatar-" + avatarId +".png"
                     
-                    if (datosUsuario.avatarID) {
-                        const avatarRef = doc(db, "avatarID", datosUsuario.avatarID.toString());
-                        const avatarSnap = await getDoc(avatarRef);
-                        if (avatarSnap.exists()) {
-                            avatarUrl = avatarSnap.data().url;
-                        }
-                    }
                 }
 
                 return {
@@ -23277,6 +23278,7 @@
                     rango: rango,
                     avatar: avatarUrl,
                     progreso: progreso,
+                    estrellasTotales: estrellasTotales,
     				preguntasAcertadas: preguntasAcertadas,
                     preguntasFalladas: preguntasFalladas,
                     nivelActual: nivelActual,
@@ -23327,7 +23329,13 @@
             
             const tdRango = document.createElement('td');
             tdRango.style.textAlign = 'center';
-            tdRango.textContent = rangoTranslations[alumno.rango];
+            tdRango.textContent = alumno.rango;
+            // tdRango.textContent = rangoTranslations[alumno.rango];
+            
+            const tdEstrellasTotales = document.createElement('td');
+            tdEstrellasTotales.style.textAlign = 'center';
+            tdEstrellasTotales.textContent = alumno.estrellasTotales;
+            tdEstrellasTotales.innerHTML = `<img src="/src/assets/images/png/Icon_Star.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 0px;"> <label>${alumno.estrellasTotales}</label>`;
 
             const tdAvatar = document.createElement('td');
             tdAvatar.style.textAlign = 'center';
@@ -23358,15 +23366,16 @@
             tdTiempoDidactico.textContent = `${alumno.tiempoDidactico} min.`;
 
             tr.appendChild(tdNombre);
-            tr.appendChild(tdMinutos);
-            tr.appendChild(tdRango);
             tr.appendChild(tdAvatar);
+            tr.appendChild(tdRango);
+            tr.appendChild(tdEstrellasTotales); //cambiar por estresllas
             tr.appendChild(tdProgreso);
+            tr.appendChild(tdMinutos);
+            tr.appendChild(tdTiempoDidactico);
             tr.appendChild(tdPreguntasAcertadas);
             tr.appendChild(tdPreguntasFalladas);
-            tr.appendChild(tdNivelActual);
-            tr.appendChild(tdRachaSupervivencia);
-            tr.appendChild(tdTiempoDidactico);
+            // tr.appendChild(tdNivelActual);
+            // tr.appendChild(tdRachaSupervivencia);
 
             tbody.appendChild(tr);
         });
@@ -23510,20 +23519,21 @@
             for (const docUsuario of usuariosSnapshot.docs) {
                 const usuarioId = docUsuario.id;
 
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
-                    const tiempodidactico = datosUsuarioSnap.data().tiempodidactico || 0;
+                    const tiempodidactico = datosUsuarioSnap.data().tiempoDeJuego || 0;
                     sumaTiempoDidactico += tiempodidactico;
                     contadorAlumnos++;
                 }
             }
 
-            const tiempoPromedioDeJuegoDidactico = contadorAlumnos > 0 ? Math.round((sumaTiempoDidactico / contadorAlumnos) / 60) : 0;
-
+            const tiempoPromedioDeJuegoDidactico = contadorAlumnos > 0 ? Math.round(sumaTiempoDidactico / 60)/60 : 0;
+            //const tiempoPromedioDeJuegoDidactico = sumaTiempoDidactico;
+            
             const tiempoPromedioDeJuegoDidacticoDiv = document.getElementById("tiempodiapositivas");
-            tiempoPromedioDeJuegoDidacticoDiv.innerHTML = `<div>${tiempoPromedioDeJuegoDidactico} min.</div>`;
+            tiempoPromedioDeJuegoDidacticoDiv.innerHTML = `<div>${tiempoPromedioDeJuegoDidactico} h.</div>`;
             
     		return tiempoPromedioDeJuegoDidactico;
         } catch (error) {
@@ -23554,20 +23564,21 @@
             for (const docUsuario of usuariosSnapshot.docs) {
                 const usuarioId = docUsuario.id;
 
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
-                    const nivelactual = datosUsuarioSnap.data().nivelactual || 0;
+                    const nivelactual = datosUsuarioSnap.data().EstrellasTotales || 0;
                     sumaNivelActualAlumnos += nivelactual;
                     contadorAlumnos++;
                 }
             }
 
-            const PromedioNivelActual = contadorAlumnos > 0 ? Math.round(sumaNivelActualAlumnos / contadorAlumnos) : 0;
+            // const PromedioNivelActual = contadorAlumnos > 0 ? Math.round(sumaNivelActualAlumnos / contadorAlumnos) : 0;
+            const PromedioNivelActual = sumaNivelActualAlumnos;
 
             const tiempoPromedioDeJuegoDidacticoDiv = document.getElementById("nivelactualpromedio");
-            tiempoPromedioDeJuegoDidacticoDiv.innerHTML = `<div>${PromedioNivelActual}</div>`;
+            tiempoPromedioDeJuegoDidacticoDiv.innerHTML = `<div>${PromedioNivelActual}</div><img src="/src/assets/images/png/Icon_Star.png" style="width: 30px; height: 30px; margin: 11px 8px 4px 15px;">`;
             
     		return PromedioNivelActual;
         } catch (error) {
@@ -23600,28 +23611,36 @@
             let promesasUsuarios = usuariosSnapshot.docs.map(async (docUsuario) => {
                 const usuario = docUsuario.data();
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
+                // if (datosUsuarioSnap.exists()) {
+                //     const datosUsuario = datosUsuarioSnap.data();
+                //     const nivelActual = datosUsuario.nivelactual || 0;
+                //     const preguntasAcertadas = datosUsuario.preguntasacertadas || 0;
+                //     const preguntasTotales = (datosUsuario.preguntasacertadas || 0) + (datosUsuario.preguntasfalladas || 0);
+                //     const tiempoDiapositivas = datosUsuario.tiempodidactico || 0;
+                    
+                //     const rango = 70 * (nivelActual / 15) +
+                //                   20 * ((preguntasTotales > 0 ? preguntasAcertadas / preguntasTotales : 0)) +
+                //                   10 * (tiempoDiapositivas / 500);
+                    
+                //     sumaRangos += rango;
+                //     contadorUsuarios++;
+                // }
+
                 if (datosUsuarioSnap.exists()) {
-                    const datosUsuario = datosUsuarioSnap.data();
-                    const nivelActual = datosUsuario.nivelactual || 0;
-                    const preguntasAcertadas = datosUsuario.preguntasacertadas || 0;
-                    const preguntasTotales = (datosUsuario.preguntasacertadas || 0) + (datosUsuario.preguntasfalladas || 0);
-                    const tiempoDiapositivas = datosUsuario.tiempodidactico || 0;
-                    
-                    const rango = 70 * (nivelActual / 15) +
-                                  20 * ((preguntasTotales > 0 ? preguntasAcertadas / preguntasTotales : 0)) +
-                                  10 * (tiempoDiapositivas / 500);
-                    
-                    sumaRangos += rango;
-                    contadorUsuarios++;
-                }
+                        const datosUsuario = datosUsuarioSnap.data();
+                        const nivelActual = datosUsuario.NivelJugador || 0;
+                                                                     
+                        sumaRangos += nivelActual;
+                        contadorUsuarios++;
+                    }
             });
 
             await Promise.all(promesasUsuarios);
 
-            const mediaRango = contadorUsuarios > 0 ? Math.round(sumaRangos / contadorUsuarios) : 0;
+            const mediaRango = contadorUsuarios > 0 ? Math.round(sumaRangos/contadorUsuarios) : 0;
             const lang = localStorage.getItem('selectedLanguage') || 'es';
             const translations = await $.getJSON(`/external/translation/${lang}.json`);
             const textoMediaRango = getSynthesizerRangeTranslation(mediaRango, translations);
@@ -23668,7 +23687,7 @@
             
             const promesasUsuarios = usuariosSnapshot.docs.map(async (docUsuario) => {
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
@@ -23692,18 +23711,33 @@
 
 
 
+            // translations['Molecular-genetic'] || 'Genética molecular',
+            // translations['Nucleic-acids'] || 'Ácidos nucleicos',
+            // translations['Biotech-bioethics'] || 'Biotecnología y Bioética',
+            // translations['Scientific-culture'] || 'Cultura científica',
+            // translations['Genome-mutations'] || 'Genoma y mutaciones',
+            // translations['Cells-cycles-phases'] || 'Células, ciclos y fases'
+  
+            //nuevas
+            // translations['The Earth in the Universe'] || 'La Tierra en el Universo',
+            // translations['Geology'] || 'Geología',
+            // translations['Origin and Evolution'] || 'Origen y Evolución',
+            // translations['The Cell'] || 'La Célula',
+            // translations['Molecular Genetics'] || 'Genética Molecular',
+            // translations['Heredity and Genetic Alterations'] || 'Herencia y Alteraciones Genéticas'
+
     async function actualizarGraficoRadarGrupal(db) {
     	const lang = localStorage.getItem('selectedLanguage') || 'es';
         const translations = await $.getJSON(`/external/translation/${lang}.json`);
         const categories = getRadarCategoriesTranslations(translations);
     	
         try {
-            const geneticamoleculargrupal = await calcularValorGrupal(db, "preguntasgeneticabien", "preguntasgeneticamal");
-            const acidosnucleicosgrupal = await calcularValorGrupal(db, "preguntasacidonucleicobien", "preguntasacidonucleicomal");
-            const biotecnologiagrupal = await calcularValorGrupal(db, "preguntasbiotecnologiabien", "preguntasbiotecnologiamal");
-            const culturacientificagrupal = await calcularValorGrupal(db, "preguntasculturabien", "preguntasculturamal");
-            const genomaymutacionesgrupal = await calcularValorGrupal(db, "preguntasgenomabien", "preguntasgenomamal");
-            const celulasyorganulosgrupal = await calcularValorGrupal(db, "preguntascelulabien", "preguntascelulamal");
+            const geneticamoleculargrupal = await calcularValorGrupal(db, "preguntasTierraBien", "preguntasTierraMal");
+            const acidosnucleicosgrupal = await calcularValorGrupal(db, "preguntasGeologiaBien", "preguntasGeologiaMal");
+            const biotecnologiagrupal = await calcularValorGrupal(db, "preguntasEvolucionBien", "preguntasEvolucionMal");
+            const culturacientificagrupal = await calcularValorGrupal(db, "preguntasCelulaBien", "preguntasCelulaMal");
+            const genomaymutacionesgrupal = await calcularValorGrupal(db, "preguntasGeneticaBien", "preguntasGeneticaMal");
+            const celulasyorganulosgrupal = await calcularValorGrupal(db, "preguntasHerenciaBien", "preguntasHerenciaMal");
 
             if (window.budgetExpenseChart) {
                 window.budgetExpenseChart.updateSeries([{
@@ -23746,7 +23780,7 @@
             let promesasUsuarios = usuariosSnapshot.docs.map(async (docUsuario) => {
                 const usuario = docUsuario.data();
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
@@ -23852,7 +23886,7 @@
             let promesasUsuarios = usuariosSnapshot.docs.map(async (docUsuario) => {
                 const usuario = docUsuario.data();
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
@@ -23932,7 +23966,7 @@
             let promesasUsuarios = usuariosSnapshot.docs.map(async (docUsuario) => {
                 const usuario = docUsuario.data();
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
@@ -24096,43 +24130,50 @@
             if (!usuariosSnapshot.empty) {
                 const docUsuario = usuariosSnapshot.docs[0];
                 const usuarioId = docUsuario.id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
                     const datosUsuario = datosUsuarioSnap.data();
-                    const nivelActual = datosUsuario.nivelactual || 0;
-                    const preguntasAcertadas = datosUsuario.preguntasacertadas || 0;
-                    const preguntasTotales = (datosUsuario.preguntasacertadas || 0) + (datosUsuario.preguntasfalladas || 0);
-                    const tiempoDiapositivas = datosUsuario.tiempodidactico || 0;
+                    const nivelActual = datosUsuario.EstrellasTotales || 0;
+                    const preguntasAcertadas = datosUsuario.preguntasAcertadas || 0;
+                    const preguntasTotales = (datosUsuario.preguntasAcertadas || 0) + (datosUsuario.preguntasFalladas || 0);
+                    const tiempoDiapositivas = datosUsuario.tiempoDeJuego || 0;
+                    const expTotal = datosUsuario.TotalExperiencia || 0;
+                    const progreso = Math.round((expTotal/151000)*100);
     				const tiempoDiapositivasAlumnos = Math.round(tiempoDiapositivas / 60);				
     				const tasaDeAciertoAlumno = preguntasTotales > 0 ? Math.round(preguntasAcertadas * 100 / preguntasTotales) : 0;
                     const rango = 70 * (nivelActual / 15) +
                                   20 * ((preguntasTotales > 0 ? preguntasAcertadas / preguntasTotales : 0)) +
                                   10 * (tiempoDiapositivas / 500);
                     
-                    const rangoAlumno = Math.round(rango);
+                    const rangoAlumno = datosUsuario.NivelJugador;
 
                     const lang = localStorage.getItem('selectedLanguage') || 'es';
                     const translations = await $.getJSON(`/external/translation/${lang}.json`);
 
                     const textoRangoAlumno = getSynthesizerRangeTranslation(rangoAlumno, translations);
-    				
+    				// const textoRangoAlumno = datosUsuario.rangoUsuario || "Sin Rango";
+
     				window.textoRangoAlumno = textoRangoAlumno;
 
-                    document.getElementById("Rangoalumno").textContent = `(${rangoAlumno})`;
+                    // document.getElementById("Rangoalumno").textContent = `(${rangoAlumno})`;
                     document.getElementById("TextoSintetizadorAlumno").textContent = textoRangoAlumno;
-    				document.getElementById("nivelactualAlumno").textContent = nivelActual;
+    				document.getElementById("nivelactualAlumno").innerHTML = `<div>${nivelActual}</div><img src="/src/assets/images/png/Icon_Star.png" style="width: 30px; height: 30px; margin: 11px 8px 4px 15px;">`;
     				document.getElementById("tiempodiapositivasAlumno").textContent = tiempoDiapositivasAlumnos + " min.";
-    				document.getElementById("tasaAciertoAlumno").textContent = tasaDeAciertoAlumno + "%";
+    				document.getElementById("tasaAciertoAlumno").textContent = progreso + "%";
     				
     				const progressBarAlumno = document.getElementById('progressBarAlumno');
-    				progressBarAlumno.style.width = rangoAlumno + '%';
-    				progressBarAlumno.setAttribute('aria-valuenow', rangoAlumno);
+    				progressBarAlumno.style.width = progreso + '%';
+    				progressBarAlumno.setAttribute('aria-valuenow', progreso);
+
+                    // const progressBarAlumno = document.getElementById('progressBarAlumno');
+    				// progressBarAlumno.style.width = rangoAlumno + '%';
+    				// progressBarAlumno.setAttribute('aria-valuenow', rangoAlumno);
                     
                     return { rangoAlumno, textoRangoAlumno };
                 } else {
-                    console.log('No se encontraron datos del usuario especificado en datosusuario');
+                    console.log('No se encontraron datos del usuario especificado en datosUsuario');
                 }
             } else {
                 console.log('No se encontró el alumno especificado en usuarios');
@@ -24162,7 +24203,7 @@
             const usuariosSnapshot = await getDocs(qUsuario);
             if (!usuariosSnapshot.empty) {
                 const usuarioId = usuariosSnapshot.docs[0].id;
-                const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+                const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
                 const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
                 if (datosUsuarioSnap.exists()) {
@@ -24173,7 +24214,7 @@
                     
                     return porcentajeAcierto;
                 } else {
-                    console.log('No se encontraron datos del usuario especificado en datosusuario');
+                    console.log('No se encontraron datos del usuario especificado en datosUsuario');
                     return 0;
                 }
             } else {
@@ -24189,12 +24230,12 @@
 
     function getRadarCategoriesTranslations(translations) {
         return [
-            translations['Molecular-genetic'] || 'Genética molecular',
-            translations['Nucleic-acids'] || 'Ácidos nucleicos',
-            translations['Biotech-bioethics'] || 'Biotecnología y Bioética',
-            translations['Scientific-culture'] || 'Cultura científica',
-            translations['Genome-mutations'] || 'Genoma y mutaciones',
-            translations['Cells-cycles-phases'] || 'Células, ciclos y fases'
+            translations['The Earth in the Universe'] || 'La Tierra en el Universo',
+            translations['Geology'] || 'Geología',
+            translations['Origin and Evolution'] || 'Origen y Evolución',
+            translations['The Cell'] || 'La Célula',
+            translations['Molecular Genetics'] || 'Genética Molecular',
+            translations['Heredity and Genetic Alterations'] || 'Herencia y Alteraciones Genéticas'
         ];
     }
 
@@ -24205,12 +24246,12 @@
         const categories = getRadarCategoriesTranslations(translations);
     	
         try {
-            const geneticamolecularalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasgeneticabien", "preguntasgeneticamal");
-            const acidosnucleicosalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasacidonucleicobien", "preguntasacidonucleicomal");
-            const biotecnologiaalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasbiotecnologiabien", "preguntasbiotecnologiamal");
-            const culturacientificaalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasculturabien", "preguntasculturamal");
-            const genomaymutacionesalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasgenomabien", "preguntasgenomamal");
-            const celulasyorganulosalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntascelulabien", "preguntascelulamal");
+            const geneticamolecularalumno = await calcularValorAlumno(db,nombreAlumno, apellidoAlumno, "preguntasTierraBien", "preguntasTierraMal");
+            const acidosnucleicosalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasGeologiaBien", "preguntasGeologiaMal");
+            const biotecnologiaalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasEvolucionBien", "preguntasEvolucionMal");
+            const culturacientificaalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasCelulaBien", "preguntasCelulaMal");
+            const genomaymutacionesalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasGeneticaBien", "preguntasGeneticaMal");
+            const celulasyorganulosalumno = await calcularValorAlumno(db, nombreAlumno, apellidoAlumno, "preguntasHerenciaBien", "preguntasHerenciaMal");
 
             if (window.budgetExpenseChart) {
                 window.budgetExpenseChart.updateSeries([{
@@ -24261,50 +24302,54 @@
             const docUsuario = usuariosSnapshot.docs[0];
             const usuarioId = docUsuario.id;
 
-            const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+            const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
             const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
             if (!datosUsuarioSnap.exists()) {
-                console.log('No se encontraron datos del usuario especificado en datosusuario');
+                console.log('No se encontraron datos del usuario especificado en datosUsuario');
                 return;
             }
 
             const datosUsuario = datosUsuarioSnap.data();
-            const minutos = datosUsuario.tiempodejuego ? Math.round(datosUsuario.tiempodejuego / 60) : 0;
-            const progreso = datosUsuario.nivelactual ? Math.round((datosUsuario.nivelactual / 15) * 100) : 0;
-            const preguntasAcertadas = datosUsuario.preguntasacertadas || 0;
-            const preguntasFalladas = datosUsuario.preguntasfalladas || 0;
-            const nivelActual = datosUsuario.nivelactual || 0;
+            const minutos = datosUsuario.tiempoDeJuego ? Math.round(datosUsuario.tiempoDeJuego / 60) : 0;
+            const expTotal = datosUsuario.TotalExperiencia || 0;
+            const progreso = Math.round((expTotal/151000)*100);
+            const preguntasAcertadas = datosUsuario.preguntasAcertadas || 0;
+            const preguntasFalladas = datosUsuario.preguntasFalladas || 0;
+            const nivelActual = datosUsuario.NivelJugador || 0;
             const rachaSupervivencia = datosUsuario.rachasupervivencia || 0;
-            const tiempoDidactico = datosUsuario.tiempodidactico ? Math.round(datosUsuario.tiempodidactico / 60) : 0;
-    		let avatarUrl = "https://www.panel.neodogma.com/imagenes/avatares/avatar-defecto.png";
-            if (datosUsuario.avatarID) {
-                const avatarRef = doc(db, "avatarID", datosUsuario.avatarID.toString());
-                const avatarSnap = await getDoc(avatarRef);
-                if (avatarSnap.exists()) {
-                    avatarUrl = avatarSnap.data().url;
-                }
-            }
+            const tiempoDidactico = datosUsuario.tiempoDidactico ? Math.round(datosUsuario.tiempoDidactico / 60) : 0;
+            const avatarId = datosUsuario.avatarID || 0;
+    		const avatarUrl = "/external/imagenes/avatares/avatar-" + avatarId +".png"
+            const lang = localStorage.getItem('selectedLanguage') || 'es';
+            const translations = await $.getJSON(`/external/translation/${lang}.json`);
+            const rango = getSynthesizerRangeTranslation(datosUsuario.NivelJugador, translations);
+            // if (datosUsuario.avatarID) {
+            //     const avatarRef = doc(db, "avatarID", datosUsuario.avatarID.toString());
+            //     const avatarSnap = await getDoc(avatarRef);
+            //     if (avatarSnap.exists()) {
+            //         avatarUrl = avatarSnap.data().url;
+            //     }
+            // }
 
-            actualizarMetricasEsencialesAlumno(nombreAlumno, apellidoAlumno, minutos, progreso, preguntasAcertadas, preguntasFalladas, nivelActual, rachaSupervivencia, tiempoDidactico, avatarUrl);
+            actualizarMetricasEsencialesAlumno(nombreAlumno, apellidoAlumno, rango, minutos, progreso, preguntasAcertadas, preguntasFalladas, nivelActual,  tiempoDidactico, avatarUrl);
         } catch (error) {
             console.error("Error al obtener los datos del alumno:", error);
         }
     }
 
-    function actualizarMetricasEsencialesAlumno(nombreAlumno, apellidoAlumno, minutos, progreso, preguntasAcertadas, preguntasFalladas, nivelActual, rachaSupervivencia, tiempoDidactico, avatarUrl) {
+    function actualizarMetricasEsencialesAlumno(nombreAlumno, apellidoAlumno,rango, minutos, progreso, preguntasAcertadas, preguntasFalladas, nivelActual, tiempoDidactico, avatarUrl) {
         const tbody = document.querySelector("#individual-metricas-esenciales tbody");
         tbody.innerHTML = `
         <tr>
             <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill text-primary me-2" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>${nombreAlumno} ${apellidoAlumno}</td>
             <td style="text-align: center;">${minutos} min.</td>
-			<td style="text-align: center;">${window.textoRangoAlumno}</td>
+			<td style="text-align: center;">${rango}</td>
             <td style="text-align: center;"><img src="${avatarUrl}" style="width: 50px; height: 50px;"></td>
 			<td style="text-align: center;">${progreso}%</td>
             <td style="text-align: center;">${preguntasAcertadas}</td>
             <td style="text-align: center;">${preguntasFalladas}</td>
             <td style="text-align: center;">${nivelActual}</td>
-            <td style="text-align: center;">${rachaSupervivencia}</td>
             <td style="text-align: center;">${tiempoDidactico} min.</td>
         </tr>
     `;
@@ -24341,11 +24386,11 @@
             const docUsuario = usuariosSnapshot.docs[0];
             const usuarioId = docUsuario.id;
 
-            const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+            const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
             const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
             if (!datosUsuarioSnap.exists()) {
-                console.log('No se encontraron datos del usuario especificado en datosusuario');
+                console.log('No se encontraron datos del usuario especificado en datosUsuario');
                 return;
             }
 
@@ -24357,27 +24402,28 @@
         }
     }
 
+    
     function actualizarTablaEspecificaPreguntasCategorizadasAlumno(datosUsuario) {
         const tbody1 = document.querySelector("#individual-preguntas-categorizadas tbody:first-of-type");
     	const tbody2 = document.querySelector("#individual-preguntas-categorizadas tbody:last-of-type");
         tbody1.innerHTML = `
         <tr>
-            <td style="text-align: center;">${datosUsuario.preguntasbiotecnologiabien || 0}</td>
-            <td style="text-align: center;">${datosUsuario.preguntasgeneticabien || 0}</td>
-            <td style="text-align: center;">${datosUsuario.preguntasacidonucleicobien || 0}</td>
-			<td style="text-align: center;">${datosUsuario.preguntasculturabien || 0}</td>
-			<td style="text-align: center;">${datosUsuario.preguntasgenomabien || 0}</td>
-            <td style="text-align: center;">${datosUsuario.preguntascelulabien || 0}</td>
+            <td style="text-align: center;">${datosUsuario.preguntasTierraBien || 0}</td>
+            <td style="text-align: center;">${datosUsuario.preguntasGeologiaBien || 0}</td>
+            <td style="text-align: center;">${datosUsuario.preguntasEvolucionBien || 0}</td>
+			<td style="text-align: center;">${datosUsuario.preguntasCelulaBien || 0}</td>
+			<td style="text-align: center;">${datosUsuario.preguntasGeneticaBien || 0}</td>
+            <td style="text-align: center;">${datosUsuario.preguntasHerenciaBien || 0}</td>
 		</tr>
 	`;
     	tbody2.innerHTML = `
 		<tr>
-			<td style="text-align: center;">${datosUsuario.preguntasbiotecnologiamal || 0}</td>
-			<td style="text-align: center;">${datosUsuario.preguntasgeneticamal || 0}</td>
-			<td style="text-align: center;">${datosUsuario.preguntasacidonucleicomal || 0}</td>
-            <td style="text-align: center;">${datosUsuario.preguntasculturamal || 0}</td>            
-            <td style="text-align: center;">${datosUsuario.preguntasgenomamal || 0}</td>            
-            <td style="text-align: center;">${datosUsuario.preguntascelulamal || 0}</td>
+			<td style="text-align: center;">${datosUsuario.preguntasTierraMal || 0}</td>
+			<td style="text-align: center;">${datosUsuario.preguntasGeologiaMal || 0}</td>
+			<td style="text-align: center;">${datosUsuario.preguntasEvolucionMal || 0}</td>
+            <td style="text-align: center;">${datosUsuario.preguntasCelulaMal || 0}</td>            
+            <td style="text-align: center;">${datosUsuario.preguntasGeneticaMal || 0}</td>            
+            <td style="text-align: center;">${datosUsuario.preguntasHerenciaMal || 0}</td>
         </tr>
     `;
     }
@@ -24413,11 +24459,11 @@
             const docUsuario = usuariosSnapshot.docs[0];
             const usuarioId = docUsuario.id;
 
-            const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+            const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
             const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
             if (!datosUsuarioSnap.exists()) {
-                console.log('No se encontraron datos del usuario especificado en datosusuario');
+                console.log('No se encontraron datos del usuario especificado en datosUsuario');
                 return;
             }
 
@@ -24430,18 +24476,41 @@
     }
 
     function actualizarTablaEspecificaMetricasSintesis(datosUsuario) {
-        const tbody = document.querySelector("#individual-metricas-sintesis tbody");
-        tbody.innerHTML = `
+        const tbody = document.querySelectorAll("#individual-metricas-sintesis tbody");
+        tbody[0].innerHTML = `
         <tr>
-            <td style="text-align: center;">${datosUsuario.comodinesreplicacion || 0}</td>
-            <td style="text-align: center;">${datosUsuario.comodinestranscripcion || 0}</td>
-            <td style="text-align: center;">${datosUsuario.comodinestraduccion || 0}</td>
-            <td style="text-align: center;">${datosUsuario.jugadasacertadas || 0}</td>
-            <td style="text-align: center;">${datosUsuario.jugadasfalladas || 0}</td>
-            <td style="text-align: center;">${datosUsuario.totaljugadas || 0}</td>
-            <td style="text-align: center;">${datosUsuario.rachasupervivencia || 0}</td>
+            <td style="text-align: center;">${datosUsuario.EstrellasTotalesTierra || 0}/55 <img src="/src/assets/images/png/Icon_Star.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 0px;"></td>
+            <td style="text-align: center;">${datosUsuario.EstrellasTotalesGeologia || 0}/50 <img src="/src/assets/images/png/Icon_Star.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 0px;"></td>
+            <td style="text-align: center;">${datosUsuario.EstrellasTotalesOrigenEvolucion || 0}/35 <img src="/src/assets/images/png/Icon_Star.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 0px;"></td>
+            <td style="text-align: center;">${datosUsuario.EstrellasTotalesCelula || 0}/60 <img src="/src/assets/images/png/Icon_Star.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 0px;"></td>
+            <td style="text-align: center;">${datosUsuario.EstrellasTotalesGenetica || 0}/60 <img src="/src/assets/images/png/Icon_Star.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 0px;"></td>
+            <td style="text-align: center;">${datosUsuario.EstrellasTotalesHerencia || 0}/40 <img src="/src/assets/images/png/Icon_Star.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 0px;"></td>
         </tr>
     `;
+
+
+    tbody[1].innerHTML = `
+            <tr>
+                <td style="text-align: center;">${datosUsuario.TierraQuiz1Nota || 0}/10</td>
+                <td style="text-align: center;">${datosUsuario.GeologiaQuiz1Nota || 0}/10</td>
+                <td style="text-align: center;">${datosUsuario.OrigenEvolucionQuiz1Nota || 0}/10</td>
+                <td style="text-align: center;">${datosUsuario.CelulaQuiz1Nota || 0}/10</td>
+                <td style="text-align: center;">${datosUsuario.GeneticaQuiz1Nota || 0}/10</td>
+                <td style="text-align: center;">${datosUsuario.HerenciaQuiz1Nota || 0}/10</td>
+            </tr>
+        `;
+
+
+        tbody[2].innerHTML = `
+            <tr>
+                <td style="text-align: center;">${datosUsuario.TierraQuiz1Intentos || 0}<img src="/src/assets/images/png/Icon_Target.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 6px;"></td></td>
+                <td style="text-align: center;">${datosUsuario.GeologiaQuiz1Intentos || 0}<img src="/src/assets/images/png/Icon_Target.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 6px;"></td></td>
+                <td style="text-align: center;">${datosUsuario.OrigenEvolucionQuiz1Intentos || 0}<img src="/src/assets/images/png/Icon_Target.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 6px;"></td></td>
+                <td style="text-align: center;">${datosUsuario.CelulaQuiz1Intentos || 0}<img src="/src/assets/images/png/Icon_Target.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 6px;"></td></td>
+                <td style="text-align: center;">${datosUsuario.GeneticaQuiz1Intentos || 0}<img src="/src/assets/images/png/Icon_Target.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 6px;"></td></td>
+                <td style="text-align: center;">${datosUsuario.HerenciaQuiz1Intentos || 0}<img src="/src/assets/images/png/Icon_Target.png" style="width: 20px; height: 20px; margin: 0px 8px 4px 6px;"></td></td>
+            </tr>
+        `;
     }
 
 
@@ -24475,11 +24544,11 @@
             const docUsuario = usuariosSnapshot.docs[0];
             const usuarioId = docUsuario.id;
 
-            const datosUsuarioRef = doc(db, "datosusuario", usuarioId);
+            const datosUsuarioRef = doc(db, "datosUsuario", usuarioId);
             const datosUsuarioSnap = await getDoc(datosUsuarioRef);
 
             if (!datosUsuarioSnap.exists()) {
-                console.log('No se encontraron datos del usuario especificado en datosusuario');
+                console.log('No se encontraron datos del usuario especificado en datosUsuario');
                 return;
             }
 
@@ -24522,17 +24591,28 @@
         const minijuegoCelular = translations['Coming-soon'] || "Próximamente";
         const estiloCelular = "color: grey;";
 
-        const tbody = document.querySelector("#individual-metricas-minijuegos tbody");
-        tbody.innerHTML = `
+        const tbody = document.querySelectorAll("#individual-metricas-minijuegos tbody");
+        tbody[0].innerHTML = `
         <tr>
-            <td style="text-align: center; ${estiloSupervivencia}">${minijuegoSupervivencia}</td>
-            <td style="text-align: center; ${estiloMendel}">${minijuegoMendel}</td>
-            <td style="text-align: center; ${estiloSanguineo}">${minijuegoSanguineo}</td>
-            <td style="text-align: center; ${estiloCromosomas}">${minijuegoCromosomas}</td>
-            <td style="text-align: center; ${estiloEvolucion}">${minijuegoEvolucion}</td>
-            <td style="text-align: center; ${estiloCelular}">${minijuegoCelular}</td>
+            <td style="text-align: center; "><img src="/src/assets/images/png/${datosUsuario.minigameMendelScore}_star.png" style="height: 20px; ;"></td></td></td>
+            <td style="text-align: center; "><img src="/src/assets/images/png/${datosUsuario.minigameSangreScore}_star.png" style="height: 20px; ;"></td></td></td>
+            <td style="text-align: center; "><img src="/src/assets/images/png/${datosUsuario.minigameHerenciaHumanaScore}_star.png" style="height: 20px; ;"></td></td></td>
+            <td style="text-align: center; "><img src="/src/assets/images/png/${datosUsuario.minigameReplicationScore}_star.png" style="height: 20px; ;"></td></td></td>
+            <td style="text-align: center; "><img src="/src/assets/images/png/${datosUsuario.minigameTranscriptionScore}_star.png" style="height: 20px; ;"></td></td></td>
+
         </tr>
     `;
+    
+    tbody[1].innerHTML = `
+    <tr>
+        <td style="text-align: center; ">Proximamente</td>
+        <td style="text-align: center; "><img src="/src/assets/images/png/${datosUsuario.minigameOndasScore}_star.png" style="height: 20px; ;"></td></td></td>
+        <td style="text-align: center; "><img src="/src/assets/images/png/${datosUsuario.minigameGeosferaScore}_star.png" style="height: 20px; ;"></td></td></td>
+        <td style="text-align: center; ">Proximamente</td>
+        <td style="text-align: center; ">Proximamente</td>
+
+    </tr>
+`;
     }
 
 
@@ -25303,15 +25383,15 @@
 
     function getSynthesizerRangeTranslation(mediaRango, translations) {
         let key;
-        if (mediaRango >= 0 && mediaRango <= 20) {
+        if (mediaRango >= 0 && mediaRango <= 4) {
             key = 'Iron-synthesizer';
-        } else if (mediaRango >= 21 && mediaRango <= 40) {
+        } else if (mediaRango >= 5 && mediaRango <= 8) {
             key = 'Bronze-synthesizer';
-        } else if (mediaRango >= 41 && mediaRango <= 60) {
+        } else if (mediaRango >= 9 && mediaRango <= 12) {
             key = 'Silver-synthesizer';
-        } else if (mediaRango >= 61 && mediaRango <= 80) {
+        } else if (mediaRango >= 13 && mediaRango <= 16) {
             key = 'Gold-synthesizer';
-        } else if (mediaRango >= 81) {
+        } else if (mediaRango >= 17) {
             key = 'Platinum-synthesizer';
         } else {
             key = 'Unknown-range';
