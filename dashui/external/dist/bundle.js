@@ -24853,10 +24853,10 @@
     document.addEventListener('DOMContentLoaded', function() {
     	if (window.location.pathname.includes('profile-followers.html')) {
     		const centroeducativoProfe = localStorage.getItem("centroeducativoProfe");
-    		const centroeducativoProfeFormat = centroeducativoProfe.replace(/\s+/g, '-');
+    		const centroeducativoProfeFormat = centroeducativoProfe.replace(/\s+/g, '');
     		const idCentro = parseInt(localStorage.getItem("idCentroProfe"));
     		const idClase = localStorage.getItem("idClaseProfe");
-    		const coleccionMinijuegos = centroeducativoProfeFormat + "-" + idCentro + "-" + idClase;
+    		const coleccionMinijuegos = centroeducativoProfeFormat  + idCentro  + idClase;
     		const docRef = doc(db, "controlAccesoClase", coleccionMinijuegos);
 
     		getDoc(docRef)
@@ -24874,37 +24874,69 @@
     		
     		function setupSwitchesAndLabels(data) {
 
-    			const switchSupervivencia = document.getElementById('flexSwitchCheckDefaultSupervivencia');
-    			const labelSupervivencia = document.getElementById('labelSupervivencia');
-    			switchSupervivencia.checked = data.supervivenciaSeccion;
-    			labelSupervivencia.textContent = data.supervivenciaSeccion ? 'DESBLOQUEADO' : 'BLOQUEADO';
-
+    			// const switchSupervivencia = document.getElementById('flexSwitchCheckDefaultSupervivencia');
+    			// const labelSupervivencia = document.getElementById('labelSupervivencia');
+    			// switchSupervivencia.checked = data.supervivenciaSeccion;
+    			// labelSupervivencia.textContent = data.supervivenciaSeccion ? 'DESBLOQUEADO' : 'BLOQUEADO';
+                
+                //HERENCIA Y ALTERACIONES GENÉTICAS
     			const switchMendel = document.getElementById('flexSwitchCheckDefaultMendel');
     			const labelMendel = document.getElementById('labelMendel');
-    			switchMendel.checked = data.mendelSeccion;
-    			labelMendel.textContent = data.mendelSeccion ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    			switchMendel.checked = data.SeccionMendel;
+    			labelMendel.textContent = data.SeccionMendel ? 'DESBLOQUEADO' : 'BLOQUEADO';
 
     			const switchSanguineo = document.getElementById('flexSwitchCheckDefaultSanguineo');
     			const labelSanguineo = document.getElementById('labelSanguineo');
-    			switchSanguineo.checked = data.gruposSanguineosSeccion;
-    			labelSanguineo.textContent = data.gruposSanguineosSeccion ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    			switchSanguineo.checked = data.SeccionSangre;
+    			labelSanguineo.textContent = data.SeccionSangre ? 'DESBLOQUEADO' : 'BLOQUEADO';
     			
     			const switchCromosomas = document.getElementById('flexSwitchCheckDefaultCromosomas');
     			const labelCromosomas = document.getElementById('labelCromosomas');
-    			switchCromosomas.checked = data.herenciaHumanaSeccion;
-    			labelCromosomas.textContent = data.herenciaHumanaSeccion ? 'DESBLOQUEADO' : 'BLOQUEADO';
-    		}
-    		
-    		if (document.querySelector("#labelSupervivencia")) {
-    			const checkbox = document.getElementById('flexSwitchCheckDefaultSupervivencia');
-    			const label = document.getElementById('labelSupervivencia');
-    			label.textContent = checkbox.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    			switchCromosomas.checked = data.SeccionHerenciaHumana;
+    			labelCromosomas.textContent = data.SeccionHerenciaHumana ? 'DESBLOQUEADO' : 'BLOQUEADO';
 
-    			checkbox.addEventListener('change', function() {
-    				label.textContent = this.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
-    				updateFirestoreMinijuegos("supervivenciaSeccion", this.checked);
-    			});
+                //GEOLOGÍA
+    			const switchOndas = document.getElementById('flexSwitchCheckDefaultOndasSismicas');
+    			const labelGOndas = document.getElementById('labelOndasSismicas');
+    			switchOndas.checked = data.SeccionOndas;
+    			labelGOndas.textContent = data.SeccionOndas ? 'DESBLOQUEADO' : 'BLOQUEADO';
+
+    			const switchTierra = document.getElementById('flexSwitchCheckDefaultViajeTierra');
+    			const labelTierra = document.getElementById('labelViajeTierra');
+    			switchTierra.checked = data.SeccionGeosfera;
+    			labelTierra.textContent = data.SeccionGeosfera ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    			
+    			const switchPlacas = document.getElementById('flexSwitchCheckDefaultTectonicaPlacas');
+    			const labelPlacas = document.getElementById('labelTectonicaPlacas');
+    			switchPlacas.checked = data.SeccionCortesGeologicos;
+    			labelPlacas.textContent = data.SeccionCortesGeologicos ? 'DESBLOQUEADO' : 'BLOQUEADO';
+                
+                //La Tierra en el universo
+    			const switchUniverso = document.getElementById('flexSwitchCheckDefaultTierraUniverso');
+    			const labelUniverso = document.getElementById('labelTierraUniverso');
+    			switchUniverso.checked = data.SeccionMendel;
+    			labelUniverso.textContent = data.SeccionMendel ? 'DESBLOQUEADO' : 'BLOQUEADO';
+
+                //Genetica molecular
+    			const switchRepli = document.getElementById('flexSwitchCheckDefaultReplicandoAdn');
+    			const labelRepli = document.getElementById('labelReplicandoAdn');
+    			switchRepli.checked = data.SeccionOndas;
+    			labelRepli.textContent = data.SeccionOndas ? 'DESBLOQUEADO' : 'BLOQUEADO';
+
+    			const switchTrans = document.getElementById('flexSwitchCheckDefaultTranscripcion');
+    			const labelTrans = document.getElementById('labelTranscipcion');
+    			switchTrans.checked = data.SeccionGeosfera;
+    			labelTrans.textContent = data.SeccionGeosfera ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    			
+    			const switchTraduc = document.getElementById('flexSwitchCheckDefaultTraduccion');
+    			const labelTraduc = document.getElementById('labelTraduccion');
+    			switchTraduc.checked = data.SeccionCortesGeologicos;
+    			labelTraduc.textContent = data.SeccionCortesGeologicos ? 'DESBLOQUEADO' : 'BLOQUEADO';
+                
+                                
     		}
+                
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
     		if (document.querySelector("#labelMendel")) {
     			const checkbox = document.getElementById('flexSwitchCheckDefaultMendel');
@@ -24938,6 +24970,91 @@
     				updateFirestoreMinijuegos("herenciaHumanaSeccion", this.checked);
     			});
     		}
+
+            ///////////////////////////////Geografia
+            if (document.querySelector("#labelOndasSismicas")) {
+    			const checkbox = document.getElementById('flexSwitchCheckDefaultOndasSismicas');
+    			const label = document.getElementById('labelOndasSismicas');
+    			label.textContent = checkbox.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+
+    			checkbox.addEventListener('change', function() {
+    				label.textContent = this.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    				updateFirestoreMinijuegos("SeccionOndas", this.checked);
+    			});
+    		}
+
+    		if (document.querySelector("#labelViajeTierra")) {
+    			const checkbox = document.getElementById('flexSwitchCheckDefaultViajeTierra');
+    			const label = document.getElementById('labelViajeTierra');
+    			label.textContent = checkbox.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+
+    			checkbox.addEventListener('change', function() {
+    				label.textContent = this.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    				updateFirestoreMinijuegos("SeccionGeosfera", this.checked);
+    			});
+    		}
+            
+
+    		if (document.querySelector("#labelTectonicaPlacas")) {
+    			const checkbox = document.getElementById('flexSwitchCheckDefaultTectonicaPlacas');
+    			const label = document.getElementById('labelTectonicaPlacas');
+    			label.textContent = checkbox.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    			
+    			checkbox.addEventListener('change', function() {
+    				label.textContent = this.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    				updateFirestoreMinijuegos("SeccionCortesGeologicos", this.checked);
+    			});
+    		}
+
+            /////////////////////////////////Tierra en el universo
+
+            if (document.querySelector("#labelTierraUniverso")) {
+    			const checkbox = document.getElementById('flexSwitchCheckDefaultTierraUniverso');
+    			const label = document.getElementById('labelTierraUniverso');
+    			label.textContent = checkbox.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    			
+    			checkbox.addEventListener('change', function() {
+    				label.textContent = this.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+    				updateFirestoreMinijuegos("SeccionEspacio", this.checked);
+    			});
+    		}
+
+            ///////////////////////////////Genetica Molecular
+            if (document.querySelector("#labelReplicandoAdn")) {
+                const checkbox = document.getElementById('flexSwitchCheckDefaultReplicandoAdn');
+                const label = document.getElementById('labelReplicandoAdn');
+                label.textContent = checkbox.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+
+                checkbox.addEventListener('change', function() {
+                    label.textContent = this.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+                    updateFirestoreMinijuegos("SeccionReplication", this.checked);
+                });
+            }
+
+            if (document.querySelector("#labelTranscipcion")) {
+                const checkbox = document.getElementById('flexSwitchCheckDefaultTranscripcion');
+                const label = document.getElementById('labelTranscipcion');
+                label.textContent = checkbox.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+
+                checkbox.addEventListener('change', function() {
+                    label.textContent = this.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+                    updateFirestoreMinijuegos("SeccionTranscription", this.checked);
+                });
+            }
+
+
+            if (document.querySelector("#labelTraduccion")) {
+                const checkbox = document.getElementById('flexSwitchCheckDefaultTraduccion');
+                const label = document.getElementById('labelTraduccion');
+                label.textContent = checkbox.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+                
+                checkbox.addEventListener('change', function() {
+                    label.textContent = this.checked ? 'DESBLOQUEADO' : 'BLOQUEADO';
+                    updateFirestoreMinijuegos("SeccionTranslation", this.checked);
+                });
+            }
+
+
 
     		function updateFirestoreMinijuegos(field, value) {
     		const docRef = doc(db, "controlAccesoClase", coleccionMinijuegos);
@@ -25523,6 +25640,227 @@
     window.calcularPromedioNivelActual = calcularPromedioNivelActual;
     window.mostrarTodosLosAlumnosYCalcularMediaRango = mostrarTodosLosAlumnosYCalcularMediaRango;
     window.calcularRangoAlumno = calcularRangoAlumno;
+
+
+    //Botones Info Desafios
+    const botonRefrescar = document.getElementById('info_Mendel');
+    if (botonRefrescar) {
+        botonRefrescar.addEventListener('click', () => {
+
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Leyes de Mendel';
+            body.textContent = 'Aprende sobre genética y descubre los secretos de la herencia con los famosos experimentos de Mendel. ¡Conviértete en genetista como Mendel!';
+            corona.textContent = 'Rompecabezas';
+            pregunta.textContent = '5 preguntas';
+            crono.textContent = '15 minutos';
+
+            modalConfirmacionActualizacion.show();
+
+        });
+    }
+
+    const botonRefrescar1 = document.getElementById('info_Sanguineo');
+    if (botonRefrescar1) {
+        botonRefrescar1.addEventListener('click', () => {
+            
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Grupos sanguíneos';
+            body.textContent = 'Descubre cómo funciona el sitema AB0 y cómo se heredan los diferentes tipos de sangre. ¡Descubre los secretos de nuestra sangre!';
+            corona.textContent = 'Rompecabezas';
+            pregunta.textContent = '5 preguntas';
+            crono.textContent = '15 minutos';
+
+            modalConfirmacionActualizacion.show();
+        });
+    }
+
+    const botonRefrescar3 = document.getElementById('info_Herencia');
+    if (botonRefrescar3) {
+        botonRefrescar3.addEventListener('click', () => {
+            
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Herencia ligada al sexo';
+            body.textContent = 'Explora cómo ciertos rasgos y enfermedades se heredan a través de los cromosomas sexuales, ¿Conseguirás resolver todos los casos familiares?';
+            corona.textContent = 'Rompecabezas';
+            pregunta.textContent = '5 preguntas';
+            crono.textContent = '15 minutos';
+
+            modalConfirmacionActualizacion.show();
+        });
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const botonRefrescar4 = document.getElementById('info_Ondas');
+    if (botonRefrescar4) {
+        botonRefrescar4.addEventListener('click', () => {
+
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Ondas sísmicas';
+            body.textContent = 'Explora y compara las características geológicas de diferentes planetas del sistema solar. ¡Toca aprende de sismología!';
+            corona.textContent = 'Simulador';
+            pregunta.textContent = '5 preguntas';
+            crono.textContent = '10 minutos';
+
+            modalConfirmacionActualizacion.show();
+
+        });
+    }
+
+    const botonRefrescar5 = document.getElementById('info_Viaje');
+    if (botonRefrescar5) {
+        botonRefrescar5.addEventListener('click', () => {
+            
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Viaje hasta el núcleo';
+            body.textContent = 'Embárcate en una avnetrua al centro de la Tierra, sorteando obstáculos y descubriendo sus secretos geológicos. ¿Llegarás hasta el mismísimo núcleo?';
+            corona.textContent = 'Pilotaje';
+            pregunta.textContent = '10 preguntas';
+            crono.textContent = '15 minutos';
+
+            modalConfirmacionActualizacion.show();
+        });
+    }
+
+    const botonRefrescar6 = document.getElementById('info_Cortes');
+    if (botonRefrescar6) {
+        botonRefrescar6.addEventListener('click', () => {
+            
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Recetario de cortes geológicos';
+            body.textContent = 'Aprende sobre cortes geológicos. En esta receta tendrás que reproducir los pasos, añadiendo los ingredientes, capas y realizando los pasos, fenómenos físicos apropiados (pliegue, erosión...). ¡A por esa receta!  ';
+            corona.textContent = 'Simulador';
+            pregunta.textContent = '5 preguntas';
+            crono.textContent = '10 minutos';
+
+            modalConfirmacionActualizacion.show();
+        });
+    }
+
+     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+     const botonRefrescar7 = document.getElementById('info_Aventura');
+     if (botonRefrescar7) {
+         botonRefrescar7.addEventListener('click', () => {
+ 
+             const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+             const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+             const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+             const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+             const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+             const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+ 
+             head.textContent = 'Aventura espacial';
+             body.textContent = 'Averigua los secretos de nuestro sistema solar mientras pones a prueba tus habilidades de pilotaje. ¡Esquiva cuerpos celestes y alcanza todos los planetas del sistema solar!';
+             corona.textContent = 'Pilotaje';
+             pregunta.textContent = '10 preguntas';
+             crono.textContent = '15 minutos';
+ 
+             modalConfirmacionActualizacion.show();
+ 
+         });
+     }
+
+         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const botonRefrescar8 = document.getElementById('info_Replica');
+    if (botonRefrescar8) {
+        botonRefrescar8.addEventListener('click', () => {
+
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Replicando el ADN';
+            body.textContent = '¡Sumergete en el disafío de la replicación del ADN! Explora cómo las células duplican su material genético. ¿Podrás dominar este fascinante proceso?';
+            corona.textContent = 'Rompecabezas';
+            pregunta.textContent = '10 preguntas';
+            crono.textContent = '15 minutos';
+
+            modalConfirmacionActualizacion.show();
+
+        });
+    }
+
+    const botonRefrescar9 = document.getElementById('info_Trans');
+    if (botonRefrescar9) {
+        botonRefrescar9.addEventListener('click', () => {
+            
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Transcripción';
+            body.textContent = '¡Explora el desafío de la transcripción  de ADN a ARN! Descubre cómo las células realizan esta etapa de la expnasión génica. ¿Estas listo para este reto?';
+            corona.textContent = 'Rompecabezas';
+            pregunta.textContent = '10 preguntas';
+            crono.textContent = '15 minutos';
+ 
+            modalConfirmacionActualizacion.show();
+        });
+    }
+
+    const botonRefrescar10 = document.getElementById('info_Traduc');
+    if (botonRefrescar10) {
+        botonRefrescar10.addEventListener('click', () => {
+            
+            const modalConfirmacionActualizacion = new bootstrap.Modal(document.getElementById('modalConfirmacionMendel'));
+            const head = modalConfirmacionActualizacion._element.querySelector('#modalTitle');
+            const body = modalConfirmacionActualizacion._element.querySelector('#modalBody');
+            const corona = modalConfirmacionActualizacion._element.querySelector('#labelCorona');
+            const pregunta = modalConfirmacionActualizacion._element.querySelector('#labelPregunta');
+            const crono = modalConfirmacionActualizacion._element.querySelector('#labelCrono');
+
+            head.textContent = 'Traducción';
+            body.textContent = '¡Acepta el desafío de la traducción de ARN a proteinas! Aprende comoo las células, con ayuda de los ribosomas crean cadenas polipeptídicas en base al código genético. ¿Te atreves a intentarlo? ';
+            corona.textContent = 'Rompecabezas';
+            pregunta.textContent = '10 preguntas';
+            crono.textContent = '15 minutos';
+
+            modalConfirmacionActualizacion.show();
+        });
+    }
 
 })();
 //# sourceMappingURL=bundle.js.map

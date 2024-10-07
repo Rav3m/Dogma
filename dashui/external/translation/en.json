@@ -246,5 +246,6 @@
     "Not-completed": "Not Completed",
     "Coming-soon": "Coming Soon",
     "Control": "Control",
-    "attempts-control": "Attempts"
+    "attempts-control": "Attempts",
+    "Download-lesson":"Download lesson"
 }

@@ -191,7 +191,7 @@
       <div class="app-content-area">
         <!-- Container fluid -->
         <div class="container-fluid">
-          <div class="mx-n6 mt-n6 pt-6 mb-6 cabecera-personalizada">
+          <div class="mx-n6 mt-n6 pt-6 mb-6 cabecera-personalizada" style="background-color: #ffc107;">
             <div class="row">
               <div class="col-lg-12 col-md-12 col-12">
                 <!-- Page header -->
@@ -264,7 +264,17 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="card-body border-bottom">
+                      <div style="display: flex;">
                       <h3 class="mb-4" data-translate="Student-performance">Rendimiento individual</h3>
+                      <div style="position: relative; margin: 7px 0px 0px 15px;">
+                        <img src="/src/assets/images/png/info.svg" alt="Imagen" class="imagen-popup" style="width: 20px;" data-popup="popup-1">
+                      <!-- El pop-up que se mostrará -->
+                          <div class="popup" id="popup-1" style="display: none;">
+                            <p>Estos puntos de experiencia (EXP) corresponden al total acumulado por el estudiante. Recuerda que los estudiantes pueden ganar puntos de experiencia a través de: “Revisar píldoras en Biblioteca”, “Conseguir logros”, “Resolver desafíos” y “Resolver actividades en Zona de Entrenamiento”.</p>
+                          </div>
+                      <!-- La imagen sobre la que queremos mostrar el popup -->
+                      </div> 
+                      </div>
                       <div class="d-flex justify-content-between mb-3">
                         <div style="display: flex;">
 							<span id="TextoSintetizadorAlumno" style="margin-right: 10px;" data-translate="Synthesizer-range-student">
@@ -335,7 +345,17 @@
             <div class="col-lg-6 mb-5">
               <div class="card h-100">
                 <div class="card-header">
-                  <h4 class="mb-0" data-translate="Student-balance">Balance individual</h4>
+                  <div style="display: flex;">
+                    <h4 class="mb-0" data-translate="Student-balance">Balance individual</h4>
+                    <div style="position: relative; margin: 0px 0px 0px 15px;">
+                      <img src="/src/assets/images/png/info.svg" alt="Imagen" class="imagen-popup" style="width: 20px;" data-popup="popup-2">
+                    <!-- El pop-up que se mostrará -->
+                        <div class="popup" id="popup-2" style="display: none;">
+                          <p>NeoDogma evalúa la destreza por competencias de los estudiantes para cada una de las áreas. Tiene en cuenta el resultado de las preguntas respondidas.</p>
+                        </div>
+                    <!-- La imagen sobre la que queremos mostrar el popup -->
+                    </div> 
+                  </div>
                 </div>
                 <div class="card-body">
 
@@ -352,7 +372,17 @@
                 <!-- card body -->
                 <!-- card header -->
                 <div class="card-header ">
+                  <div style="display: flex;">
                   <h4 class="mb-0" data-translate="Categories-range">Categorías de rango</h4>
+                  <div style="position: relative; margin: 0px 0px 0px 15px;">
+                    <img src="/src/assets/images/png/info.svg" alt="Imagen" class="imagen-popup" style="width: 20px;" data-popup="popup-3">
+                  <!-- El pop-up que se mostrará -->
+                      <div class="popup" id="popup-3" style="display: none;">
+                        <p>Aquí puedes consultar qué niveles se corresponden con cada rango.</p>
+                      </div>
+                  <!-- La imagen sobre la que queremos mostrar el popup -->
+                  </div> 
+                </div>
                 </div>
                 <!-- row -->
 
@@ -425,7 +455,17 @@
               <div class="card">
                 <!-- card header -->
                 <div class="card-header metricas-esenciales" style="background: #c0dbca";>
-                  <h4 class="mb-0" data-translate="Essential-metrics">Métricas Esenciales</h4>
+                  <div style="display: flex;">
+                    <h4 class="mb-0" data-translate="Essential-metrics">Métricas Esenciales</h4>
+                    <div style="position: relative; margin: 0px 0px 0px 15px;">
+                      <img src="/src/assets/images/png/info.svg" alt="Imagen" class="imagen-popup" style="width: 20px;" data-popup="popup-4">
+                    <!-- El pop-up que se mostrará -->
+                        <div class="popup" id="popup-4" style="display: none;">
+                          <p>Aquí puedes consultar las principales métricas a nivel individual. Recuerda que si quieres conocer más en profundidad puedes consultar la sección específica.</p>
+                        </div>
+                    <!-- La imagen sobre la que queremos mostrar el popup -->
+                    </div> 
+                  </div>
                 </div>
                 <!-- table -->
                 <div class="card-body">
@@ -462,7 +502,17 @@
               <div class="card">
                 <!-- card header -->
                 <div class="card-header metricas-preguntas"style="background: #ffecc1"; >
-                  <h4 class="mb-0" data-translate="Categorized-metrics">Métricas Preguntas Categorizadas</h4>
+                  <div style="display: flex;">
+                    <h4 class="mb-0" data-translate="Categorized-metrics">Métricas Preguntas Categorizadas</h4>
+                    <div style="position: relative; margin: 0px 0px 0px 15px;">
+                      <img src="/src/assets/images/png/info.svg" alt="Imagen" class="imagen-popup" style="width: 20px;" data-popup="popup-5">
+                    <!-- El pop-up que se mostrará -->
+                        <div class="popup" id="popup-5" style="display: none;">
+                          <p>Pop up: En Quiz, puedes revisar los resultados de los estudiantes por área al resolver preguntas. Se muestran las preguntas acertadas respecto al total de contestadas.</p>
+                        </div>
+                    <!-- La imagen sobre la que queremos mostrar el popup -->
+                    </div> 
+                  </div> 
                 </div>
                 <!-- table -->
                 <div class="card-body">
@@ -510,7 +560,17 @@
               <div class="card">
                 <!-- card header -->
                 <div class="card-header metricas-sintesis" style="background: #d0c9fd";>
-                  <h4 class="mb-0" data-translate="Synthesis-metrics">Zona de Entrenamiento</h4>
+                  <div style="display: flex;">
+                    <h4 class="mb-0" data-translate="Synthesis-metrics">Zona de Entrenamineto</h4>
+                    <div style="position: relative; margin: 0px 0px 0px 15px;">
+                      <img src="/src/assets/images/png/info.svg" alt="Imagen" class="imagen-popup" style="width: 20px;" data-popup="popup-6">
+                    <!-- El pop-up que se mostrará -->
+                        <div class="popup" id="popup-6" style="display: none;">
+                          <p>En la Zona de Entrenamiento los estudiantes disponen de actividades de repaso para cada una de las áreas generales. Deben completar cada actividad con 5 estrellas para alcanzar el total de estrellas del área.</p>
+                        </div>
+                    <!-- La imagen sobre la que queremos mostrar el popup -->
+                    </div> 
+                  </div>
                 </div>
                 <!-- table -->
 
@@ -577,7 +637,17 @@
               <div class="card">
                 <!-- card header -->
                 <div class="card-header metricas-minijuegos" style="background: #fea3c2";>
-                  <h4 class="mb-0" data-translate="Mini-games">Métricas Desafíos</h4>
+                  <div style="display: flex;">
+                    <h4 class="mb-0" data-translate="Mini-games">Métricas Desafíos</h4>
+                    <div style="position: relative; margin: 0px 0px 0px 15px;">
+                      <img src="/src/assets/images/png/info.svg" alt="Imagen" class="imagen-popup" style="width: 20px;" data-popup="popup-7">
+                    <!-- El pop-up que se mostrará -->
+                        <div class="popup" id="popup-7" style="display: none;">
+                          <p>Estos desafíos, que incluyen un tutorial interactivo, actividad y quiz, están disponibles en la sección “Desafíos” para tus estudiantes. Puedes activarlos o desactivarlos desde el panel de control y consultar el plan de lección con competencias y recomendaciones en esa misma sección.</p>
+                        </div>
+                    <!-- La imagen sobre la que queremos mostrar el popup -->
+                    </div> 
+                  </div> 
                 </div>
                 <!-- table -->
                 <div class="card-body">
@@ -700,7 +770,50 @@
 				window.calcularRangoAlumno(nombreAlumno, apellidoAlumno);
 			}
 		});
+
+    const imagenes = document.querySelectorAll('.imagen-popup');
+
+    imagenes.forEach((imagen) => {
+      imagen.addEventListener('mouseover', () => {
+        const popupId = imagen.getAttribute('data-popup');
+        const popup = document.getElementById(popupId);
+        popup.style.display = 'block';
+      });
+
+      imagen.addEventListener('mouseout', () => {
+        const popupId = imagen.getAttribute('data-popup');
+        const popup = document.getElementById(popupId);
+        popup.style.display = 'none';
+      });
+    });
 	</script>
 </body>
+<style>
+  .popup {
+        position: absolute;
+        left: 250px;
+        transform: translate(-50%, -50%);
+        background-color: #d0c9ff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgb(98 75 255 / 70%);
+        display: none;
+        width: 400px;
+        z-index: 9999;
+        color: black;
+      }
+
+      .cerrar-popup {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ccc;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+</style>
 
 </html>
